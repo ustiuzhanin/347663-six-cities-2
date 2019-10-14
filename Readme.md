@@ -1,7 +1,7 @@
 # Личный проект «Шесть городов» [![Build status][travis-image]][travis-url]
 
-* Студент: [Slava Ustiuzhanin](https://up.htmlacademy.ru/react/2/user/347663).
-* Наставник: `Неизвестно`.
+- Студент: [Slava Ustiuzhanin](https://up.htmlacademy.ru/react/2/user/347663).
+- Наставник: [Олег Петров](https://htmlacademy.ru/profile/id42390).
 
 ---
 
