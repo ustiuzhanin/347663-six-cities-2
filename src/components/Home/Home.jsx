@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 export default function Home(props) {
-  const {places} = props;
+  const {places, onCardHeaderClick} = props;
 
   const renderedPlaces = places.map((place, index) => (
     <article key={`${index}${place}`} className='cities__place-card place-card'>
@@ -40,7 +40,9 @@ export default function Home(props) {
           </div>
         </div>
         <h2 className='place-card__name'>
-          <a href='#'>{place}</a>
+          <a href='#' onClick={onCardHeaderClick}>
+            {place}
+          </a>
         </h2>
         <p className='place-card__type'>Private room</p>
       </div>
@@ -197,5 +199,6 @@ export default function Home(props) {
 }
 
 Home.propTypes = {
-  places: PropTypes.arrayOf(PropTypes.string).isRequired
+  places: PropTypes.arrayOf(PropTypes.string).isRequired,
+  onCardHeaderClick: PropTypes.func.isRequired
 };

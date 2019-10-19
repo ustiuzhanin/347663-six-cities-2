@@ -350,6 +350,7 @@ exports[`Home's snapshot 1`] = `
                   >
                     <a
                       href="#"
+                      onClick={[MockFunction]}
                     >
                       house
                     </a>
@@ -444,6 +445,7 @@ exports[`Home's snapshot 1`] = `
                   >
                     <a
                       href="#"
+                      onClick={[MockFunction]}
                     >
                       floor
                     </a>

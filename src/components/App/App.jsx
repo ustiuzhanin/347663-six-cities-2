@@ -8,5 +8,11 @@ export default function App() {
     `Canal View Prinsengracht`,
     `Nice, cozy, warm big bed apartment`
   ];
-  return <Home places={places} />;
+
+  const onCardHeaderClick = (e) => {
+    /* eslint-disable no-console */
+    console.log(e.target);
+  };
+
+  return <Home places={places} onCardHeaderClick={onCardHeaderClick} />;
 }
