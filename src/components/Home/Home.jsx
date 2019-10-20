@@ -198,6 +198,12 @@ export default function Home(props) {
   );
 }
 
+Home.defaultProps = {
+  onCardHeaderClick: () => {
+    // TODO: prints an error if onClick wasn't passed
+  }
+};
+
 Home.propTypes = {
   places: PropTypes.arrayOf(PropTypes.string).isRequired,
   onCardHeaderClick: PropTypes.func.isRequired

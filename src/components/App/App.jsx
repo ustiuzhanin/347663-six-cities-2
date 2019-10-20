@@ -9,9 +9,8 @@ export default function App() {
     `Nice, cozy, warm big bed apartment`
   ];
 
-  const onCardHeaderClick = (e) => {
-    /* eslint-disable no-console */
-    console.log(e.target);
+  const onCardHeaderClick = () => {
+    // TODO: opens the card page/info
   };
 
   return <Home places={places} onCardHeaderClick={onCardHeaderClick} />;
