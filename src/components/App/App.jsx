@@ -8,5 +8,10 @@ export default function App() {
     `Canal View Prinsengracht`,
     `Nice, cozy, warm big bed apartment`
   ];
-  return <Home places={places} />;
+
+  const onCardHeaderClick = () => {
+    // TODO: opens the card page/info
+  };
+
+  return <Home places={places} onCardHeaderClick={onCardHeaderClick} />;
 }
