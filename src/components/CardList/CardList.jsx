@@ -12,12 +12,12 @@ export default class CardList extends Component {
   }
 
   render() {
-    const {cards} = this.props;
+    const {cards, onCardHeaderClick} = this.props;
 
-    const onCardMouseEnter = (activeCard) => {
+    const cardMouseEnterHandler = (activeCard) => {
       this.setState({activeCard});
     };
-    const onCardMouseLeave = () => {
+    const cardMouseLeaveHandler = () => {
       this.setState({activeCard: {}});
     };
 
@@ -27,8 +27,9 @@ export default class CardList extends Component {
           <Card
             key={card.id}
             card={card}
-            onCardMouseEnter={onCardMouseEnter}
-            onCardMouseLeave={onCardMouseLeave}
+            cardMouseEnterHandler={cardMouseEnterHandler}
+            cardMouseLeaveHandler={cardMouseLeaveHandler}
+            onCardHeaderClick={onCardHeaderClick}
           />
         ))}
       </>
@@ -46,5 +47,6 @@ CardList.propTypes = {
         name: PropTypes.string.isRequired,
         type: PropTypes.string.isRequired
       }).isRequired
-  ).isRequired
+  ).isRequired,
+  onCardHeaderClick: PropTypes.func.isRequired
 };

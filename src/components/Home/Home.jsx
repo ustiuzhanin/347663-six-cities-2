@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import CardList from '../CardList/CardList.jsx';
 
 export default function Home(props) {
-  const {places} = props;
+  const {places, onCardHeaderClick} = props;
 
   return (
     <section>
@@ -141,7 +141,10 @@ export default function Home(props) {
                 </select> */}
                 </form>
                 <div className='cities__places-list places__list tabs__content'>
-                  <CardList cards={places} />
+                  <CardList
+                    cards={places}
+                    onCardHeaderClick={onCardHeaderClick}
+                  />
                 </div>
               </section>
               <div className='cities__right-section'>

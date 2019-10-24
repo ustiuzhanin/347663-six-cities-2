@@ -5,7 +5,11 @@ import PropTypes from 'prop-types';
 export default function App(props) {
   const {offers} = props;
 
-  return <Home places={offers} />;
+  const onCardHeaderClick = () => {
+    // TODO: opens the card page/info
+  };
+
+  return <Home places={offers} onCardHeaderClick={onCardHeaderClick} />;
 }
 
 App.propTypes = {

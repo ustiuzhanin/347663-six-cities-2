@@ -2,13 +2,18 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 export default function Card(props) {
-  const {onCardMouseEnter, onCardMouseLeave, card} = props;
+  const {
+    cardMouseEnterHandler,
+    cardMouseLeaveHandler,
+    onCardHeaderClick,
+    card
+  } = props;
   const {price, rating, name, type} = card;
   return (
     <article
       className='cities__place-card place-card'
-      onMouseEnter={() => onCardMouseEnter(props.card)}
-      onMouseLeave={onCardMouseLeave}
+      onMouseEnter={() => cardMouseEnterHandler(props.card)}
+      onMouseLeave={cardMouseLeaveHandler}
     >
       <div className='cities__image-wrapper place-card__image-wrapper'>
         <a href='#'>
@@ -44,7 +49,9 @@ export default function Card(props) {
           </div>
         </div>
         <h2 className='place-card__name'>
-          <a href='#'>{name}</a>
+          <a href='#' onClick={onCardHeaderClick}>
+            {name}
+          </a>
         </h2>
         <p className='place-card__type'>{type}</p>
       </div>
@@ -59,6 +66,7 @@ Card.propTypes = {
     name: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired
   }).isRequired,
-  onCardMouseEnter: PropTypes.func.isRequired,
-  onCardMouseLeave: PropTypes.func.isRequired
+  cardMouseEnterHandler: PropTypes.func.isRequired,
+  cardMouseLeaveHandler: PropTypes.func.isRequired,
+  onCardHeaderClick: PropTypes.func.isRequired
 };
