@@ -9,26 +9,28 @@ export default class CardList extends Component {
     this.state = {
       activeCard: {}
     };
+
+    this.cardMouseEnterHandler = this.cardMouseEnterHandler.bind(this);
+    this.cardMouseLeaveHandler = this.cardMouseLeaveHandler.bind(this);
+  }
+
+  cardMouseEnterHandler(activeCard) {
+    this.setState({activeCard});
+  }
+  cardMouseLeaveHandler() {
+    this.setState({activeCard: {}});
   }
 
   render() {
     const {cards, onCardHeaderClick} = this.props;
-
-    const cardMouseEnterHandler = (activeCard) => {
-      this.setState({activeCard});
-    };
-    const cardMouseLeaveHandler = () => {
-      this.setState({activeCard: {}});
-    };
-
     return (
       <>
         {cards.map((card) => (
           <Card
             key={card.id}
             card={card}
-            cardMouseEnterHandler={cardMouseEnterHandler}
-            cardMouseLeaveHandler={cardMouseLeaveHandler}
+            cardMouseEnterHandler={this.cardMouseEnterHandler}
+            cardMouseLeaveHandler={this.cardMouseLeaveHandler}
             onCardHeaderClick={onCardHeaderClick}
           />
         ))}
