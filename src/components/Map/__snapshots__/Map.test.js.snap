@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Map's snapshot 1`] = `
+exports[`RenderMap's snapshot 1`] = `
 <div
   id="map"
   style={

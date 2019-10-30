@@ -1,6 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import Card from './Card.jsx';
+import Card from './card.jsx';
 
 test(`Card's snapshot`, () => {
   const tree = renderer.create(

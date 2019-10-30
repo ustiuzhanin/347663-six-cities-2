@@ -1,5 +1,5 @@
 import React from 'react';
-import Home from './Home.jsx';
+import Home from './home.jsx';
 import ShallowRenderer from 'react-test-renderer/shallow';
 
 test(`Home's snapshot`, () => {
@@ -13,7 +13,8 @@ test(`Home's snapshot`, () => {
             price: `10`,
             rating: `10`,
             name: `Beautiful`,
-            type: `Private`
+            type: `Private`,
+            location: [52.369553943508, 4.85309666406198]
           }
         ]}
         onCardHeaderClick={jest.fn()}

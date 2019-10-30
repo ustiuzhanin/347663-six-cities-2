@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import CardList from '../CardList/CardList.jsx';
-import Map from '../Map/Map.jsx';
+import CardList from '../card-list/card-list.jsx';
+import RenderMap from '../map/map.jsx';
 
 export default function Home(props) {
   const {places, onCardHeaderClick} = props;
@@ -150,7 +150,7 @@ export default function Home(props) {
               </section>
               <div className='cities__right-section'>
                 <section className='cities__map map'>
-                  <Map cards={places} />
+                  <RenderMap cards={places} />
                 </section>
               </div>
             </div>

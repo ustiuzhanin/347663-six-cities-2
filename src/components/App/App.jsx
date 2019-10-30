@@ -1,5 +1,5 @@
 import React from 'react';
-import Home from '../Home/Home.jsx';
+import Home from '../home/home.jsx';
 import PropTypes from 'prop-types';
 
 export default function App(props) {

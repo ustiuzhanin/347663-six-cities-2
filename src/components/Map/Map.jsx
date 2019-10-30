@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import leaflet from 'leaflet';
 import PropTypes from 'prop-types';
 
-export class Map extends Component {
+export default class RenderMap extends Component {
   componentDidMount() {
     const city = [52.38333, 4.9];
     const zoom = 12;
@@ -39,9 +39,7 @@ export class Map extends Component {
   }
 }
 
-export default Map;
-
-Map.propTypes = {
+RenderMap.propTypes = {
   cards: PropTypes.arrayOf(
       PropTypes.shape({
         location: PropTypes.array.isRequired
