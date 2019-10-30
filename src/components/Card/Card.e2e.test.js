@@ -5,7 +5,42 @@ import Card from './Card.jsx';
 
 Enzyme.configure({adapter: new Adapter()});
 
-it(`check the information that gets passed to the callback`, () => {
+// it(`check the information that gets passed to the callback`, () => {
+//   const mockCard = {
+//     id: 1,
+//     src: `img`,
+//     price: `10`,
+//     rating: `10`,
+//     name: `Beautiful`,
+//     type: `Private`
+//   };
+//   const mouseEnter = jest.fn((cardInfo) => {
+//     expect(cardInfo).toEqual(mockCard);
+//   });
+
+//   const card = shallow(
+//       <Card
+//         card={mockCard}
+//         cardMouseEnterHandler={mouseEnter}
+//         onCardHeaderClick={jest.fn()}
+//         cardMouseLeaveHandler={jest.fn()}
+//       />
+//   );
+
+//   const activeCard = card.find(`.place-card`);
+//   activeCard.simulate(`mouseEnter`, {
+//     card: {
+//       id: 1,
+//       src: `img`,
+//       price: `10`,
+//       rating: `10`,
+//       name: `Beautiful`,
+//       type: `Private`
+//     }
+//   });
+// });
+
+describe(`Card component testing`, () => {
   const mockCard = {
     id: 1,
     src: `img`,
@@ -14,28 +49,49 @@ it(`check the information that gets passed to the callback`, () => {
     name: `Beautiful`,
     type: `Private`
   };
-  const mouseEnter = jest.fn((cardInfo) => {
-    expect(cardInfo).toEqual(mockCard);
+
+  it(`check the information that gets passed to the callback`, () => {
+    const mouseEnter = jest.fn((cardInfo) => {
+      expect(cardInfo).toEqual(mockCard);
+    });
+
+    const card = shallow(
+        <Card
+          card={mockCard}
+          cardMouseEnterHandler={mouseEnter}
+          onCardHeaderClick={jest.fn()}
+          cardMouseLeaveHandler={jest.fn()}
+        />
+    );
+
+    const activeCard = card.find(`.place-card`);
+    activeCard.simulate(`mouseEnter`, {
+      card: {
+        id: 1,
+        src: `img`,
+        price: `10`,
+        rating: `10`,
+        name: `Beautiful`,
+        type: `Private`
+      }
+    });
   });
 
-  const card = shallow(
-      <Card
-        card={mockCard}
-        cardMouseEnterHandler={mouseEnter}
-        onCardHeaderClick={jest.fn()}
-        cardMouseLeaveHandler={jest.fn()}
-      />
-  );
+  it(`click on card headers`, () => {
+    const clickHandler = jest.fn();
+    const home = shallow(
+        <Card
+          card={mockCard}
+          cardMouseEnterHandler={jest.fn()}
+          onCardHeaderClick={clickHandler}
+          cardMouseLeaveHandler={jest.fn()}
+        />
+    );
 
-  const activeCard = card.find(`.place-card`);
-  activeCard.simulate(`mouseEnter`, {
-    card: {
-      id: 1,
-      src: `img`,
-      price: `10`,
-      rating: `10`,
-      name: `Beautiful`,
-      type: `Private`
-    }
+    const header = home.find(`.place-card__name a`);
+
+    header.at(0).simulate(`click`);
+
+    expect(clickHandler).toHaveBeenCalledTimes(1);
   });
 });

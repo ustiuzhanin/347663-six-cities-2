@@ -1,24 +1,24 @@
 import React from 'react';
 import App from './App.jsx';
-import renderer from 'react-test-renderer';
+import ShallowRenderer from 'react-test-renderer/shallow';
 
 test(`App's snapshot`, () => {
-  const tree = renderer
-    .create(
-        <App
-          offers={[
-            {
-              id: 1,
-              src: `img`,
-              price: `10`,
-              rating: `10`,
-              name: `Beautiful`,
-              type: `Private`
-            }
-          ]}
-        />
-    )
-    .toJSON();
+  const renderer = new ShallowRenderer();
+  renderer.render(
+      <App
+        offers={[
+          {
+            id: 1,
+            src: `img`,
+            price: `10`,
+            rating: `10`,
+            name: `Beautiful`,
+            type: `Private`
+          }
+        ]}
+      />
+  );
+  const result = renderer.getRenderOutput();
 
-  expect(tree).toMatchSnapshot();
+  expect(result).toMatchSnapshot();
 });

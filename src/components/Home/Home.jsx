@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import CardList from '../CardList/CardList.jsx';
+import Map from '../Map/Map.jsx';
 
 export default function Home(props) {
   const {places, onCardHeaderClick} = props;
@@ -148,7 +149,9 @@ export default function Home(props) {
                 </div>
               </section>
               <div className='cities__right-section'>
-                <section className='cities__map map'></section>
+                <section className='cities__map map'>
+                  <Map cards={places} />
+                </section>
               </div>
             </div>
           </div>
