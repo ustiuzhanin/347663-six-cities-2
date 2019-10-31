@@ -4,6 +4,7 @@ import ShallowRenderer from 'react-test-renderer/shallow';
 
 test(`Home's snapshot`, () => {
   const renderer = new ShallowRenderer();
+
   renderer.render(
       <Home
         places={[
