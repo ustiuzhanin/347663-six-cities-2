@@ -7,15 +7,20 @@ test(`Home's snapshot`, () => {
 
   renderer.render(
       <Home
-        places={[
+        offersData={[
           {
-            id: 1,
-            src: `img`,
-            price: `10`,
-            rating: `10`,
-            name: `Beautiful`,
-            type: `Private`,
-            location: [52.369553943508, 4.85309666406198]
+            coords: [52.38333, 4.9],
+            offers: [
+              {
+                id: 1,
+                src: `img/room.jpg`,
+                price: `80`,
+                rating: `70`,
+                name: `Beautiful & luxurious apartment at great location`,
+                type: `Private room`,
+                location: [52.3909553943508, 4.85309666406198]
+              }
+            ]
           }
         ]}
         onCardHeaderClick={jest.fn()}

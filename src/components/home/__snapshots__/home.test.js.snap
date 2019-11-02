@@ -273,14 +273,14 @@ exports[`Home's snapshot 1`] = `
                     Object {
                       "id": 1,
                       "location": Array [
-                        52.369553943508,
+                        52.3909553943508,
                         4.85309666406198,
                       ],
-                      "name": "Beautiful",
-                      "price": "10",
-                      "rating": "10",
-                      "src": "img",
-                      "type": "Private",
+                      "name": "Beautiful & luxurious apartment at great location",
+                      "price": "80",
+                      "rating": "70",
+                      "src": "img/room.jpg",
+                      "type": "Private room",
                     },
                   ]
                 }
@@ -295,27 +295,27 @@ exports[`Home's snapshot 1`] = `
               className="cities__map map"
             >
               <RenderMap
-                cards={
-                  Array [
-                    Object {
-                      "id": 1,
-                      "location": Array [
-                        52.369553943508,
-                        4.85309666406198,
-                      ],
-                      "name": "Beautiful",
-                      "price": "10",
-                      "rating": "10",
-                      "src": "img",
-                      "type": "Private",
-                    },
-                  ]
-                }
-                cityCoords={
-                  Array [
-                    52.38333,
-                    4.9,
-                  ]
+                activeCity={
+                  Object {
+                    "coords": Array [
+                      52.38333,
+                      4.9,
+                    ],
+                    "offers": Array [
+                      Object {
+                        "id": 1,
+                        "location": Array [
+                          52.3909553943508,
+                          4.85309666406198,
+                        ],
+                        "name": "Beautiful & luxurious apartment at great location",
+                        "price": "80",
+                        "rating": "70",
+                        "src": "img/room.jpg",
+                        "type": "Private room",
+                      },
+                    ],
+                  }
                 }
               />
             </section>

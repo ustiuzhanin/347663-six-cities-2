@@ -5,7 +5,8 @@ import PropTypes from 'prop-types';
 
 export default class RenderMap extends Component {
   componentDidMount() {
-    const city = this.props.cityCoords;
+    const {activeCity} = this.props;
+    const city = activeCity.coords;
     const zoom = mapSettings.zoom;
     const icon = leaflet.icon({
       iconUrl: mapSettings.icon.url,
@@ -29,9 +30,7 @@ export default class RenderMap extends Component {
       )
       .addTo(map);
 
-    const {cards} = this.props;
-
-    cards.map(({location}) => {
+    activeCity.offers.map(({location}) => {
       leaflet.marker(location, {icon}).addTo(map);
     });
   }
@@ -41,10 +40,12 @@ export default class RenderMap extends Component {
 }
 
 RenderMap.propTypes = {
-  cards: PropTypes.arrayOf(
-      PropTypes.shape({
-        location: PropTypes.array.isRequired
-      }).isRequired
-  ).isRequired,
-  cityCoords: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired
+  activeCity: PropTypes.shape({
+    coords: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
+    offers: PropTypes.arrayOf(
+        PropTypes.shape({
+          location: PropTypes.array.isRequired
+        }).isRequired
+    ).isRequired
+  }).isRequired
 };

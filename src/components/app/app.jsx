@@ -9,18 +9,24 @@ export default function App(props) {
     // TODO: opens the card page/info
   };
 
-  return <Home places={offers} onCardHeaderClick={onCardHeaderClick} />;
+  return <Home offersData={offers} onCardHeaderClick={onCardHeaderClick} />;
 }
 
 App.propTypes = {
   offers: PropTypes.arrayOf(
       PropTypes.shape({
-        id: PropTypes.number.isRequired,
-        src: PropTypes.string.isRequired,
-        price: PropTypes.string.isRequired,
-        rating: PropTypes.string.isRequired,
-        name: PropTypes.string.isRequired,
-        type: PropTypes.string.isRequired
+        coords: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
+        offers: PropTypes.arrayOf(
+            PropTypes.shape({
+              id: PropTypes.number.isRequired,
+              src: PropTypes.string.isRequired,
+              price: PropTypes.string.isRequired,
+              rating: PropTypes.string.isRequired,
+              name: PropTypes.string.isRequired,
+              type: PropTypes.string.isRequired,
+              location: PropTypes.array.isRequired
+            }).isRequired
+        ).isRequired
       }).isRequired
   ).isRequired
 };
