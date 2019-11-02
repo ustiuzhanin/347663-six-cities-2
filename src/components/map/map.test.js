@@ -11,6 +11,7 @@ it(`RenderMap's snapshot`, () => {
             location: [52.369553943508, 4.85309666406198]
           }
         ]}
+        cityCoords={[52.38333, 4.9]}
       />
   );
 

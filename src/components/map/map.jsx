@@ -1,14 +1,15 @@
 import React, {Component} from 'react';
+import {mapSettings} from '../../mocks/map-settings';
 import leaflet from 'leaflet';
 import PropTypes from 'prop-types';
 
 export default class RenderMap extends Component {
   componentDidMount() {
-    const city = [52.38333, 4.9];
-    const zoom = 12;
+    const city = this.props.cityCoords;
+    const zoom = mapSettings.zoom;
     const icon = leaflet.icon({
-      iconUrl: `/img/pin.svg`,
-      iconSize: [30, 30]
+      iconUrl: mapSettings.icon.url,
+      iconSize: mapSettings.icon.size
     });
 
     const map = leaflet.map(`map`, {
@@ -44,5 +45,6 @@ RenderMap.propTypes = {
       PropTypes.shape({
         location: PropTypes.array.isRequired
       }).isRequired
-  ).isRequired
+  ).isRequired,
+  cityCoords: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired
 };

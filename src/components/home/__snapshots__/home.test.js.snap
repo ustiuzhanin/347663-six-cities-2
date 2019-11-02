@@ -311,6 +311,12 @@ exports[`Home's snapshot 1`] = `
                     },
                   ]
                 }
+                cityCoords={
+                  Array [
+                    52.38333,
+                    4.9,
+                  ]
+                }
               />
             </section>
           </div>
