@@ -1,12 +1,12 @@
 import React from 'react';
-import Home from './Home.jsx';
 import renderer from 'react-test-renderer';
+import CardList from './card-list.jsx';
 
-test(`Home's snapshot`, () => {
+test(`CardList's snapshot`, () => {
   const tree = renderer
     .create(
-        <Home
-          places={[
+        <CardList
+          cards={[
             {
               id: 1,
               src: `img`,

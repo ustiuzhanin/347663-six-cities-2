@@ -9,6 +9,7 @@ export default function Card(props) {
     card
   } = props;
   const {price, rating, name, type} = card;
+
   return (
     <article
       className='cities__place-card place-card'

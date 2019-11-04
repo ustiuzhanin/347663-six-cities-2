@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './components/App/App.jsx';
+import App from './components/app/app.jsx';
 import {offers} from './mocks/offers';
 
 const init = (placeOffers) => {

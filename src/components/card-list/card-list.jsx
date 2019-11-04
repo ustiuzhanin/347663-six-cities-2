@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import Card from '../Card/Card.jsx';
+import Card from '../card/card.jsx';
 import PropTypes from 'prop-types';
 
 export default class CardList extends Component {

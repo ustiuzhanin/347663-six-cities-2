@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import CardList from '../CardList/CardList.jsx';
+import CardList from '../card-list/card-list.jsx';
+import RenderMap from '../map/map.jsx';
 
 export default function Home(props) {
-  const {places, onCardHeaderClick} = props;
+  const {offersData, onCardHeaderClick} = props;
 
   return (
     <section>
@@ -134,21 +135,23 @@ export default function Home(props) {
                   </ul>
 
                   {/* <select className="places__sorting-type" id="places-sorting">
-                  <option className="places__option" value="popular" selected="">Popular</option>
-                  <option className="places__option" value="to-high">Price: low to high</option>
-                  <option className="places__option" value="to-low">Price: high to low</option>
-                  <option className="places__option" value="top-rated">Top rated first</option>
-                </select> */}
+                    <option className="places__option" value="popular" selected="">Popular</option>
+                    <option className="places__option" value="to-high">Price: low to high</option>
+                    <option className="places__option" value="to-low">Price: high to low</option>
+                    <option className="places__option" value="top-rated">Top rated first</option>
+                  </select> */}
                 </form>
                 <div className='cities__places-list places__list tabs__content'>
                   <CardList
-                    cards={places}
+                    cards={offersData[0].offers}
                     onCardHeaderClick={onCardHeaderClick}
                   />
                 </div>
               </section>
               <div className='cities__right-section'>
-                <section className='cities__map map'></section>
+                <section className='cities__map map'>
+                  <RenderMap activeCity={offersData[0]} />
+                </section>
               </div>
             </div>
           </div>
@@ -165,14 +168,20 @@ Home.defaultProps = {
 };
 
 Home.propTypes = {
-  places: PropTypes.arrayOf(
+  offersData: PropTypes.arrayOf(
       PropTypes.shape({
-        id: PropTypes.number.isRequired,
-        src: PropTypes.string.isRequired,
-        price: PropTypes.string.isRequired,
-        rating: PropTypes.string.isRequired,
-        name: PropTypes.string.isRequired,
-        type: PropTypes.string.isRequired
+        coords: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
+        offers: PropTypes.arrayOf(
+            PropTypes.shape({
+              id: PropTypes.number.isRequired,
+              src: PropTypes.string.isRequired,
+              price: PropTypes.string.isRequired,
+              rating: PropTypes.string.isRequired,
+              name: PropTypes.string.isRequired,
+              type: PropTypes.string.isRequired,
+              location: PropTypes.array.isRequired
+            }).isRequired
+        ).isRequired
       }).isRequired
   ).isRequired,
   onCardHeaderClick: PropTypes.func.isRequired

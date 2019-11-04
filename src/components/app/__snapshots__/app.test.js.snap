@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App's snapshot 1`] = `
+<Home
+  offersData={
+    Array [
+      Object {
+        "coords": Array [
+          52.38333,
+          4.9,
+        ],
+        "offers": Array [
+          Object {
+            "id": 1,
+            "location": Array [
+              52.3909553943508,
+              4.85309666406198,
+            ],
+            "name": "Beautiful & luxurious apartment at great location",
+            "price": "80",
+            "rating": "70",
+            "src": "img/room.jpg",
+            "type": "Private room",
+          },
+        ],
+      },
+    ]
+  }
+  onCardHeaderClick={[Function]}
+/>
+`;
