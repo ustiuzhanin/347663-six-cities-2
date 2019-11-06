@@ -9,41 +9,8 @@ import RenderMap from '../map/map.jsx';
 import CityList from '../city-list/city-list.jsx';
 
 class Home extends PureComponent {
-  componentDidMount() {
-    const {offersData, activeCity} = this.props;
-    const activeCityOffers = [];
-
-    offersData.map((offer) => {
-      const {city} = offer;
-
-      if (city.name === activeCity) {
-        activeCityOffers.push(offer);
-      }
-    });
-
-    this.props.addActiveCityOffers(activeCityOffers);
-  }
-
-  componentDidUpdate(prevProps) {
-    const {offersData, activeCity} = this.props;
-
-    if (prevProps.activeCity !== activeCity) {
-      let activeCityOffers = [];
-
-      offersData.map((offer) => {
-        const {city} = offer;
-
-        if (city.name === activeCity) {
-          activeCityOffers = [...activeCityOffers, offer];
-        }
-      });
-
-      this.props.addActiveCityOffers(activeCityOffers);
-    }
-  }
-
   render() {
-    const {onCardHeaderClick, activeCity} = this.props;
+    const {onCardHeaderClick} = this.props;
 
     return (
       <section>
@@ -115,55 +82,10 @@ class Home extends PureComponent {
             </div>
             <div className='cities'>
               <div className='cities__places-container container'>
-                <section className='cities__places places'>
-                  <h2 className='visually-hidden'>Places</h2>
-                  <b className='places__found'>
-                    312 places to stay in Amsterdam
-                  </b>
-                  <form className='places__sorting' action='#' method='get'>
-                    <span className='places__sorting-caption'>Sort by</span>
-                    <span className='places__sorting-type' tabIndex='0'>
-                      Popular
-                      <svg
-                        className='places__sorting-arrow'
-                        width='7'
-                        height='4'
-                      >
-                        <use xlinkHref='#icon-arrow-select'></use>
-                      </svg>
-                    </span>
-                    <ul className='places__options places__options--custom places__options--opened'>
-                      <li
-                        className='places__option places__option--active'
-                        tabIndex='0'
-                      >
-                        Popular
-                      </li>
-                      <li className='places__option' tabIndex='0'>
-                        Price: low to high
-                      </li>
-                      <li className='places__option' tabIndex='0'>
-                        Price: high to low
-                      </li>
-                      <li className='places__option' tabIndex='0'>
-                        Top rated first
-                      </li>
-                    </ul>
-
-                    {/* <select className="places__sorting-type" id="places-sorting">
-                    <option className="places__option" value="popular" selected="">Popular</option>
-                    <option className="places__option" value="to-high">Price: low to high</option>
-                    <option className="places__option" value="to-low">Price: high to low</option>
-                    <option className="places__option" value="top-rated">Top rated first</option>
-                  </select> */}
-                  </form>
-                  <div className='cities__places-list places__list tabs__content'>
-                    <CardList
-                      cards={this.props.listOfOffers}
-                      onCardHeaderClick={onCardHeaderClick}
-                    />
-                  </div>
-                </section>
+                <CardList
+                  offers={this.props.offersData}
+                  onCardHeaderClick={onCardHeaderClick}
+                />
                 <div className='cities__right-section'>
                   <section className='cities__map map'>
                     {/* <RenderMap activeCity={offersData[0]} /> */}
@@ -206,7 +128,6 @@ Home.propTypes = {
 
 const mapStateToProps = (state, ownProps) =>
   Object.assign({}, ownProps, {
-    activeCity: state.activeCity,
     listOfOffers: state.listOfOffers,
     listOfCities: state.listOfCities
   });
