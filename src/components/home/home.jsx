@@ -6,25 +6,21 @@ import {ActionsCreator} from '../../reducer';
 import CardList from '../card-list/card-list.jsx';
 import RenderMap from '../map/map.jsx';
 
+import CityList from '../city-list/city-list.jsx';
+
 class Home extends PureComponent {
   componentDidMount() {
     const {offersData, activeCity} = this.props;
-    const cityList = [];
     const activeCityOffers = [];
 
     offersData.map((offer) => {
       const {city} = offer;
-
-      if (!cityList.includes(city.name)) {
-        cityList.push(city.name);
-      }
 
       if (city.name === activeCity) {
         activeCityOffers.push(offer);
       }
     });
 
-    this.props.createListOfCities(cityList);
     this.props.addActiveCityOffers(activeCityOffers);
   }
 
@@ -113,28 +109,7 @@ class Home extends PureComponent {
             <div className='tabs'>
               <section className='locations container'>
                 <ul className='locations__list tabs__list'>
-                  {this.props.listOfCities.map((city, i) => {
-                    return (
-                      <li className='locations__item' key={`${city}${i}`}>
-                        <a
-                          className={`locations__item-link tabs__item ${city ===
-                            activeCity && `tabs__item--active`}`}
-                          href='#'
-                          id={city}
-                          onClick={(evt) => {
-                            this.props.onCityLinkClick(evt.currentTarget.id);
-                            if (
-                              this.props.activeCity !== evt.currentTarget.id
-                            ) {
-                              this.props.resetOffersList();
-                            }
-                          }}
-                        >
-                          <span>{city}</span>
-                        </a>
-                      </li>
-                    );
-                  })}
+                  <CityList offers={this.props.offersData} />
                 </ul>
               </section>
             </div>
@@ -237,17 +212,8 @@ const mapStateToProps = (state, ownProps) =>
   });
 
 const mapDispatchToProps = (dispatch) => ({
-  onCityLinkClick: (activeCityId) => {
-    dispatch(ActionsCreator.changeCity(activeCityId));
-  },
-  createListOfCities: (listOfCities) => {
-    dispatch(ActionsCreator.createListOfCities(listOfCities));
-  },
   addActiveCityOffers: (activeOffers) => {
     dispatch(ActionsCreator.addActiveCityOffers(activeOffers));
-  },
-  resetOffersList: () => {
-    dispatch(ActionsCreator.resetOffersList());
   }
 });
 
