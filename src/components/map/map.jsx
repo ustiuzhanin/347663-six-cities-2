@@ -10,6 +10,10 @@ class RenderMap extends Component {
   componentDidUpdate() {
     const {listOfOffers} = this.props;
 
+    if (listOfOffers.length <= 0) {
+      return;
+    }
+
     let container = leaflet.DomUtil.get(`map`);
     if (container !== null) {
       /* eslint-disable camelcase*/
@@ -66,13 +70,7 @@ RenderMap.propTypes = {
             zoom: PropTypes.number.isRequired
           }).isRequired
         }).isRequired,
-
         id: PropTypes.number.isRequired,
-        src: PropTypes.string.isRequired,
-        price: PropTypes.string.isRequired,
-        rating: PropTypes.string.isRequired,
-        name: PropTypes.string.isRequired,
-        type: PropTypes.string.isRequired,
         location: PropTypes.shape({
           latitude: PropTypes.number.isRequired,
           longitude: PropTypes.number.isRequired,
@@ -98,6 +96,8 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(ActionsCreator.resetOffersList());
   }
 });
+
+export {RenderMap};
 
 export default connect(
     mapStateToProps,

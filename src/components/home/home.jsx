@@ -1,8 +1,6 @@
 import React, {PureComponent} from 'react';
-import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 
-import {ActionsCreator} from '../../reducer';
 import CardList from '../card-list/card-list.jsx';
 import RenderMap from '../map/map.jsx';
 
@@ -109,36 +107,27 @@ Home.defaultProps = {
 Home.propTypes = {
   offersData: PropTypes.arrayOf(
       PropTypes.shape({
-        coords: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
-        offers: PropTypes.arrayOf(
-            PropTypes.shape({
-              id: PropTypes.number.isRequired,
-              src: PropTypes.string.isRequired,
-              price: PropTypes.string.isRequired,
-              rating: PropTypes.string.isRequired,
-              name: PropTypes.string.isRequired,
-              type: PropTypes.string.isRequired,
-              location: PropTypes.array.isRequired
-            }).isRequired
-        ).isRequired
+        city: PropTypes.shape({
+          location: PropTypes.shape({
+            latitude: PropTypes.number.isRequired,
+            longitude: PropTypes.number.isRequired,
+            zoom: PropTypes.number.isRequired
+          }).isRequired
+        }).isRequired,
+
+        id: PropTypes.number.isRequired,
+        price: PropTypes.number.isRequired,
+        rating: PropTypes.number.isRequired,
+        title: PropTypes.string.isRequired,
+        type: PropTypes.string.isRequired,
+        location: PropTypes.shape({
+          latitude: PropTypes.number.isRequired,
+          longitude: PropTypes.number.isRequired,
+          zoom: PropTypes.number.isRequired
+        }).isRequired
       }).isRequired
   ).isRequired,
   onCardHeaderClick: PropTypes.func.isRequired
 };
 
-const mapStateToProps = (state, ownProps) =>
-  Object.assign({}, ownProps, {
-    listOfOffers: state.listOfOffers,
-    listOfCities: state.listOfCities
-  });
-
-const mapDispatchToProps = (dispatch) => ({
-  addActiveCityOffers: (activeOffers) => {
-    dispatch(ActionsCreator.addActiveCityOffers(activeOffers));
-  }
-});
-
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(Home);
+export default Home;

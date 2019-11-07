@@ -76,6 +76,8 @@ const mapDispatchToProps = (dispatch) => ({
   }
 });
 
+export {CityList};
+
 export default connect(
     mapStateToProps,
     mapDispatchToProps

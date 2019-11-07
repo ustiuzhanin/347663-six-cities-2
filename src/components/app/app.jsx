@@ -15,18 +15,24 @@ export default function App(props) {
 App.propTypes = {
   offers: PropTypes.arrayOf(
       PropTypes.shape({
-        coords: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
-        offers: PropTypes.arrayOf(
-            PropTypes.shape({
-              id: PropTypes.number.isRequired,
-              src: PropTypes.string.isRequired,
-              price: PropTypes.string.isRequired,
-              rating: PropTypes.string.isRequired,
-              name: PropTypes.string.isRequired,
-              type: PropTypes.string.isRequired,
-              location: PropTypes.array.isRequired
-            }).isRequired
-        ).isRequired
+        city: PropTypes.shape({
+          location: PropTypes.shape({
+            latitude: PropTypes.number.isRequired,
+            longitude: PropTypes.number.isRequired,
+            zoom: PropTypes.number.isRequired
+          }).isRequired
+        }).isRequired,
+
+        id: PropTypes.number.isRequired,
+        price: PropTypes.number.isRequired,
+        rating: PropTypes.number.isRequired,
+        title: PropTypes.string.isRequired,
+        type: PropTypes.string.isRequired,
+        location: PropTypes.shape({
+          latitude: PropTypes.number.isRequired,
+          longitude: PropTypes.number.isRequired,
+          zoom: PropTypes.number.isRequired
+        }).isRequired
       }).isRequired
   ).isRequired
 };

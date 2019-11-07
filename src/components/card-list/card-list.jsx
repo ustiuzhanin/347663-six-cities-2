@@ -148,6 +148,8 @@ const mapDispatchToProps = (dispatch) => ({
   }
 });
 
+export {CardList};
+
 export default connect(
     mapStateToProps,
     mapDispatchToProps

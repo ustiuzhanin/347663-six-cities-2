@@ -9,7 +9,7 @@ import {reducer} from './reducer';
 
 const init = (placeOffers) => {
   const store = createStore(reducer);
-  console.log(offers);
+
   ReactDOM.render(
       <Provider store={store}>
         <App offers={placeOffers} />
