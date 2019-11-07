@@ -88,7 +88,7 @@ class Home extends PureComponent {
                 />
                 <div className='cities__right-section'>
                   <section className='cities__map map'>
-                    {/* <RenderMap activeCity={offersData[0]} /> */}
+                    <RenderMap />
                   </section>
                 </div>
               </div>
