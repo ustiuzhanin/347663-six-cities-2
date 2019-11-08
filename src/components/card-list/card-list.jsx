@@ -23,7 +23,7 @@ class CardList extends Component {
     const {activeCity, offers, addActiveCityOffers} = this.props;
     const activeCityOffers = [];
 
-    offers.map((offer) => {
+    offers.forEach((offer) => {
       const {city} = offer;
 
       if (city.name === activeCity) {
@@ -91,12 +91,20 @@ class CardList extends Component {
             </li>
           </ul>
 
-          {/* <select className="places__sorting-type" id="places-sorting">
-                    <option className="places__option" value="popular" selected="">Popular</option>
-                    <option className="places__option" value="to-high">Price: low to high</option>
-                    <option className="places__option" value="to-low">Price: high to low</option>
-                    <option className="places__option" value="top-rated">Top rated first</option>
-                  </select> */}
+          {/* <select className='places__sorting-type' id='places-sorting'>
+            <option className='places__option' value='popular' selected=''>
+              Popular
+            </option>
+            <option className='places__option' value='to-high'>
+              Price: low to high
+            </option>
+            <option className='places__option' value='to-low'>
+              Price: high to low
+            </option>
+            <option className='places__option' value='top-rated'>
+              Top rated first
+            </option>
+          </select> */}
         </form>
         <div className='cities__places-list places__list tabs__content'>
           {listOfOffers.map((card) => (

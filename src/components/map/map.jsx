@@ -7,18 +7,50 @@ import leaflet from 'leaflet';
 import PropTypes from 'prop-types';
 
 class RenderMap extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      map: null,
+      icon: null
+    };
+  }
+
+  componentDidMount() {
+    const setTileLayer = () => {
+      leaflet
+        .tileLayer(
+            `https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`,
+            {
+              attribution: `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>`
+            }
+        )
+        .addTo(this.state.map);
+    };
+
+    this.setState(
+        {
+          map: leaflet.map(`map`, {
+            center: mapSettings.defaultCity,
+            zoom: mapSettings.defaultZoom,
+            zoomControl: false,
+            marker: true
+          }),
+          icon: leaflet.icon({
+            iconUrl: mapSettings.icon.url,
+            iconSize: mapSettings.icon.size
+          })
+        },
+        () => setTileLayer()
+    );
+  }
+
   componentDidUpdate() {
     const {listOfOffers} = this.props;
+    const {map, icon} = this.state;
 
     if (listOfOffers.length <= 0) {
       return;
-    }
-
-    let container = leaflet.DomUtil.get(`map`);
-    if (container !== null) {
-      /* eslint-disable camelcase*/
-      container._leaflet_id = null;
-      /* eslint-enable camelcase*/
     }
 
     const city = [
@@ -26,27 +58,8 @@ class RenderMap extends Component {
       listOfOffers[0].city.location.longitude
     ];
     const zoom = listOfOffers[0].city.location.zoom;
-    const icon = leaflet.icon({
-      iconUrl: mapSettings.icon.url,
-      iconSize: mapSettings.icon.size
-    });
 
-    const map = leaflet.map(`map`, {
-      center: city,
-      zoom,
-      zoomControl: false,
-      marker: true
-    });
     map.setView(city, zoom);
-
-    leaflet
-      .tileLayer(
-          `https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`,
-          {
-            attribution: `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>`
-          }
-      )
-      .addTo(map);
 
     listOfOffers.map(({location}) => {
       leaflet

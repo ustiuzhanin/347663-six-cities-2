@@ -4,11 +4,17 @@ import {connect} from 'react-redux';
 import {ActionsCreator} from '../../reducer';
 
 class CityList extends PureComponent {
+  constructor(props) {
+    super(props);
+
+    this.handleCityLinkClick = this.handleCityLinkClick.bind(this);
+  }
+
   componentDidMount() {
     const {offers} = this.props;
 
     const listOfCities = [];
-    offers.map(({city}) => {
+    offers.forEach(({city}) => {
       if (!listOfCities.includes(city.name)) {
         listOfCities.push(city.name);
       }
@@ -17,29 +23,35 @@ class CityList extends PureComponent {
     this.props.createListOfCities(listOfCities);
   }
 
+  handleCityLinkClick(evt) {
+    const {activeCity, onCityLinkClick, resetOffersList} = this.props;
+
+    onCityLinkClick(evt.currentTarget.id);
+    if (activeCity !== evt.currentTarget.id) {
+      resetOffersList();
+    }
+  }
+
+  cityList(list, currentActiveCity) {
+    return list.map((city, i) => (
+      <li className='locations__item' key={`${city}${i}`}>
+        <a
+          className={`locations__item-link tabs__item ${city ===
+            currentActiveCity && `tabs__item--active`}`}
+          href='#'
+          id={city}
+          onClick={this.handleCityLinkClick}
+        >
+          <span>{city}</span>
+        </a>
+      </li>
+    ));
+  }
+
   render() {
     const {listOfCities, activeCity} = this.props;
-    const cityList = listOfCities.map((city, i) => {
-      return (
-        <li className='locations__item' key={`${city}${i}`}>
-          <a
-            className={`locations__item-link tabs__item ${city === activeCity &&
-              `tabs__item--active`}`}
-            href='#'
-            id={city}
-            onClick={(evt) => {
-              this.props.onCityLinkClick(evt.currentTarget.id);
-              if (activeCity !== evt.currentTarget.id) {
-                this.props.resetOffersList();
-              }
-            }}
-          >
-            <span>{city}</span>
-          </a>
-        </li>
-      );
-    });
-    return cityList;
+
+    return this.cityList(listOfCities, activeCity);
   }
 }
 

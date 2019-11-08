@@ -12,6 +12,8 @@ export default function Card(props) {
   } = props;
   const {price, rating, title, type, preview_image} = card;
 
+  const ratingToPercent = (stars) => (stars / 5) * 100;
+
   return (
     <article
       className='cities__place-card place-card'
@@ -47,7 +49,7 @@ export default function Card(props) {
         </div>
         <div className='place-card__rating rating'>
           <div className='place-card__stars rating__stars'>
-            <span style={{width: `${(rating / 5) * 100}%`}}></span>
+            <span style={{width: `${ratingToPercent(rating)}%`}}></span>
             <span className='visually-hidden'>Rating</span>
           </div>
         </div>
