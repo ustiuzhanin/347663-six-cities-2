@@ -23,7 +23,7 @@ class CardList extends Component {
     const {activeCity, offers, addActiveCityOffers} = this.props;
     const activeCityOffers = [];
 
-    offers.forEach((offer) => {
+    offers.filter((offer) => {
       const {city} = offer;
 
       if (city.name === activeCity) {
@@ -40,11 +40,11 @@ class CardList extends Component {
     if (prevProps.activeCity !== activeCity) {
       let activeCityOffers = [];
 
-      offers.map((offer) => {
+      offers.filter((offer) => {
         const {city} = offer;
 
         if (city.name === activeCity) {
-          activeCityOffers = [...activeCityOffers, offer];
+          activeCityOffers.push(offer);
         }
       });
 

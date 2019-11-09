@@ -61,7 +61,7 @@ class RenderMap extends Component {
 
     map.setView(city, zoom);
 
-    listOfOffers.map(({location}) => {
+    listOfOffers.forEach(({location}) => {
       leaflet
         .marker([location.latitude, location.longitude], {icon})
         .addTo(map);

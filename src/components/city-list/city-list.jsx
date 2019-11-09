@@ -14,7 +14,7 @@ class CityList extends PureComponent {
     const {offers} = this.props;
 
     const listOfCities = [];
-    offers.forEach(({city}) => {
+    offers.filter(({city}) => {
       if (!listOfCities.includes(city.name)) {
         listOfCities.push(city.name);
       }
