@@ -16,7 +16,7 @@ exports[`Card's snapshot 1`] = `
         alt="Place image"
         className="place-card__image"
         height="200"
-        src="img/room.jpg"
+        src="https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/9.jpg"
         width="260"
       />
     </a>
@@ -34,7 +34,7 @@ exports[`Card's snapshot 1`] = `
           className="place-card__price-value"
         >
           €
-          10
+          101
         </b>
         <span
           className="place-card__price-text"
@@ -71,7 +71,7 @@ exports[`Card's snapshot 1`] = `
         <span
           style={
             Object {
-              "width": "10%",
+              "width": "62%",
             }
           }
         />
@@ -89,13 +89,13 @@ exports[`Card's snapshot 1`] = `
         href="#"
         onClick={[MockFunction]}
       >
-        Beautiful
+        Canal View Prinsengracht
       </a>
     </h2>
     <p
       className="place-card__type"
     >
-      Private
+      room
     </p>
   </div>
 </article>

@@ -117,77 +117,64 @@ exports[`Home's snapshot 1`] = `
           <ul
             className="locations__list tabs__list"
           >
-            <li
-              className="locations__item"
-            >
-              <a
-                className="locations__item-link tabs__item"
-                href="#"
-              >
-                <span>
-                  Paris
-                </span>
-              </a>
-            </li>
-            <li
-              className="locations__item"
-            >
-              <a
-                className="locations__item-link tabs__item"
-                href="#"
-              >
-                <span>
-                  Cologne
-                </span>
-              </a>
-            </li>
-            <li
-              className="locations__item"
-            >
-              <a
-                className="locations__item-link tabs__item"
-                href="#"
-              >
-                <span>
-                  Brussels
-                </span>
-              </a>
-            </li>
-            <li
-              className="locations__item"
-            >
-              <a
-                className="locations__item-link tabs__item tabs__item--active"
-              >
-                <span>
-                  Amsterdam
-                </span>
-              </a>
-            </li>
-            <li
-              className="locations__item"
-            >
-              <a
-                className="locations__item-link tabs__item"
-                href="#"
-              >
-                <span>
-                  Hamburg
-                </span>
-              </a>
-            </li>
-            <li
-              className="locations__item"
-            >
-              <a
-                className="locations__item-link tabs__item"
-                href="#"
-              >
-                <span>
-                  Dusseldorf
-                </span>
-              </a>
-            </li>
+            <Memo(Connect(CityList))
+              offers={
+                Array [
+                  Object {
+                    "bedrooms": 1,
+                    "city": Object {
+                      "location": Object {
+                        "latitude": 51.225402,
+                        "longitude": 6.776314,
+                        "zoom": 13,
+                      },
+                      "name": "Dusseldorf",
+                    },
+                    "description": "This is a place for dreamers to reset, reflect, and create. Designed with a 'slow' pace in mind, our hope is that you enjoy every part of your stay; from making local coffee by drip in the morning, choosing the perfect record to put on as the sun sets.",
+                    "goods": Array [
+                      "Breakfast",
+                      "Laptop friendly workspace",
+                    ],
+                    "host": Object {
+                      "avatar_url": "img/avatar-angelina.jpg",
+                      "id": 25,
+                      "is_pro": true,
+                      "name": "Angelina",
+                    },
+                    "id": 1,
+                    "images": Array [
+                      "https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/5.jpg",
+                      "https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/19.jpg",
+                      "https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/1.jpg",
+                      "https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/2.jpg",
+                      "https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/10.jpg",
+                      "https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/13.jpg",
+                      "https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/20.jpg",
+                      "https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/14.jpg",
+                      "https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/4.jpg",
+                      "https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/7.jpg",
+                      "https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/8.jpg",
+                      "https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/9.jpg",
+                      "https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/11.jpg",
+                      "https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/16.jpg",
+                    ],
+                    "is_favorite": false,
+                    "is_premium": false,
+                    "location": Object {
+                      "latitude": 51.248402000000006,
+                      "longitude": 6.763314,
+                      "zoom": 16,
+                    },
+                    "max_adults": 2,
+                    "preview_image": "https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/9.jpg",
+                    "price": 101,
+                    "rating": 3.1,
+                    "title": "Canal View Prinsengracht",
+                    "type": "room",
+                  },
+                ]
+              }
+            />
           </ul>
         </section>
       </div>
@@ -197,127 +184,72 @@ exports[`Home's snapshot 1`] = `
         <div
           className="cities__places-container container"
         >
-          <section
-            className="cities__places places"
-          >
-            <h2
-              className="visually-hidden"
-            >
-              Places
-            </h2>
-            <b
-              className="places__found"
-            >
-              312 places to stay in Amsterdam
-            </b>
-            <form
-              action="#"
-              className="places__sorting"
-              method="get"
-            >
-              <span
-                className="places__sorting-caption"
-              >
-                Sort by
-              </span>
-              <span
-                className="places__sorting-type"
-                tabIndex="0"
-              >
-                Popular
-                <svg
-                  className="places__sorting-arrow"
-                  height="4"
-                  width="7"
-                >
-                  <use
-                    xlinkHref="#icon-arrow-select"
-                  />
-                </svg>
-              </span>
-              <ul
-                className="places__options places__options--custom places__options--opened"
-              >
-                <li
-                  className="places__option places__option--active"
-                  tabIndex="0"
-                >
-                  Popular
-                </li>
-                <li
-                  className="places__option"
-                  tabIndex="0"
-                >
-                  Price: low to high
-                </li>
-                <li
-                  className="places__option"
-                  tabIndex="0"
-                >
-                  Price: high to low
-                </li>
-                <li
-                  className="places__option"
-                  tabIndex="0"
-                >
-                  Top rated first
-                </li>
-              </ul>
-            </form>
-            <div
-              className="cities__places-list places__list tabs__content"
-            >
-              <CardList
-                cards={
-                  Array [
-                    Object {
-                      "id": 1,
-                      "location": Array [
-                        52.3909553943508,
-                        4.85309666406198,
-                      ],
-                      "name": "Beautiful & luxurious apartment at great location",
-                      "price": "80",
-                      "rating": "70",
-                      "src": "img/room.jpg",
-                      "type": "Private room",
+          <Memo(Connect(CardList))
+            offers={
+              Array [
+                Object {
+                  "bedrooms": 1,
+                  "city": Object {
+                    "location": Object {
+                      "latitude": 51.225402,
+                      "longitude": 6.776314,
+                      "zoom": 13,
                     },
-                  ]
-                }
-                onCardHeaderClick={[MockFunction]}
-              />
-            </div>
-          </section>
+                    "name": "Dusseldorf",
+                  },
+                  "description": "This is a place for dreamers to reset, reflect, and create. Designed with a 'slow' pace in mind, our hope is that you enjoy every part of your stay; from making local coffee by drip in the morning, choosing the perfect record to put on as the sun sets.",
+                  "goods": Array [
+                    "Breakfast",
+                    "Laptop friendly workspace",
+                  ],
+                  "host": Object {
+                    "avatar_url": "img/avatar-angelina.jpg",
+                    "id": 25,
+                    "is_pro": true,
+                    "name": "Angelina",
+                  },
+                  "id": 1,
+                  "images": Array [
+                    "https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/5.jpg",
+                    "https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/19.jpg",
+                    "https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/1.jpg",
+                    "https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/2.jpg",
+                    "https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/10.jpg",
+                    "https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/13.jpg",
+                    "https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/20.jpg",
+                    "https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/14.jpg",
+                    "https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/4.jpg",
+                    "https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/7.jpg",
+                    "https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/8.jpg",
+                    "https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/9.jpg",
+                    "https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/11.jpg",
+                    "https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/16.jpg",
+                  ],
+                  "is_favorite": false,
+                  "is_premium": false,
+                  "location": Object {
+                    "latitude": 51.248402000000006,
+                    "longitude": 6.763314,
+                    "zoom": 16,
+                  },
+                  "max_adults": 2,
+                  "preview_image": "https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/9.jpg",
+                  "price": 101,
+                  "rating": 3.1,
+                  "title": "Canal View Prinsengracht",
+                  "type": "room",
+                },
+              ]
+            }
+            onCardHeaderClick={[MockFunction]}
+          />
           <div
             className="cities__right-section"
           >
             <section
               className="cities__map map"
             >
-              <RenderMap
-                activeCity={
-                  Object {
-                    "coords": Array [
-                      52.38333,
-                      4.9,
-                    ],
-                    "offers": Array [
-                      Object {
-                        "id": 1,
-                        "location": Array [
-                          52.3909553943508,
-                          4.85309666406198,
-                        ],
-                        "name": "Beautiful & luxurious apartment at great location",
-                        "price": "80",
-                        "rating": "70",
-                        "src": "img/room.jpg",
-                        "type": "Private room",
-                      },
-                    ],
-                  }
-                }
-              />
+              <Memo(Connect(RenderMap)) />
             </section>
           </div>
         </div>

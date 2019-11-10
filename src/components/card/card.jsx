@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+/* eslint-disable camelcase*/
+
 export default function Card(props) {
   const {
     cardMouseEnterHandler,
@@ -8,7 +10,9 @@ export default function Card(props) {
     onCardHeaderClick,
     card
   } = props;
-  const {price, rating, name, type} = card;
+  const {price, rating, title, type, preview_image} = card;
+
+  const ratingToPercent = (stars) => (stars / 5) * 100;
 
   return (
     <article
@@ -20,7 +24,7 @@ export default function Card(props) {
         <a href='#'>
           <img
             className='place-card__image'
-            src='img/room.jpg'
+            src={preview_image}
             width='260'
             height='200'
             alt='Place image'
@@ -45,13 +49,13 @@ export default function Card(props) {
         </div>
         <div className='place-card__rating rating'>
           <div className='place-card__stars rating__stars'>
-            <span style={{width: `${rating}%`}}></span>
+            <span style={{width: `${ratingToPercent(rating)}%`}}></span>
             <span className='visually-hidden'>Rating</span>
           </div>
         </div>
         <h2 className='place-card__name'>
           <a href='#' onClick={onCardHeaderClick}>
-            {name}
+            {title}
           </a>
         </h2>
         <p className='place-card__type'>{type}</p>
@@ -62,12 +66,15 @@ export default function Card(props) {
 
 Card.propTypes = {
   card: PropTypes.shape({
-    price: PropTypes.string.isRequired,
-    rating: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    type: PropTypes.string.isRequired
+    price: PropTypes.number.isRequired,
+    rating: PropTypes.number.isRequired,
+    title: PropTypes.string.isRequired,
+    type: PropTypes.string.isRequired,
+    preview_image: PropTypes.string.isRequired
   }).isRequired,
   cardMouseEnterHandler: PropTypes.func.isRequired,
   cardMouseLeaveHandler: PropTypes.func.isRequired,
   onCardHeaderClick: PropTypes.func.isRequired
 };
+
+/* eslint-enable camelcase*/

@@ -1,10 +1,10 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
-import {CardList} from './card-list.jsx';
+import {CityList} from './city-list';
+import ShallowRenderer from 'react-test-renderer/shallow';
 
-test(`CardList's snapshot`, () => {
+test(`CityList's snapshot`, () => {
   /* eslint-disable camelcase*/
-  const mockCards = [
+  const mockOffers = [
     {
       city: {
         name: `Dusseldorf`,
@@ -53,17 +53,19 @@ test(`CardList's snapshot`, () => {
   ];
   /* eslint-enable camelcase*/
 
-  const tree = renderer
-    .create(
-        <CardList
-          offers={mockCards}
-          listOfOffers={mockCards}
-          onCardHeaderClick={jest.fn()}
-          addActiveCityOffers={jest.fn()}
-          activeCity={`Amsterdam`}
-        />
-    )
-    .toJSON();
+  const renderer = new ShallowRenderer();
 
-  expect(tree).toMatchSnapshot();
+  renderer.render(
+      <CityList
+        offers={mockOffers}
+        activeCity={`Amsterdam`}
+        listOfCities={[`Amsterdam`, `Paris`, `Hamburg`]}
+        onCityLinkClick={jest.fn()}
+        createListOfCities={jest.fn()}
+        resetOffersList={jest.fn()}
+      />
+  );
+  const result = renderer.getRenderOutput();
+
+  expect(result).toMatchSnapshot();
 });
