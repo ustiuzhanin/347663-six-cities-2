@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import withActiveItem from '../../hoc/withActiveItem.jsx';
+import withActiveItem from '../../hoc/with-active-item/with-active-item.jsx';
 
 import CardList from '../card-list/card-list.jsx';
 import RenderMap from '../map/map.jsx';
