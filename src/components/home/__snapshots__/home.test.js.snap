@@ -184,7 +184,7 @@ exports[`Home's snapshot 1`] = `
         <div
           className="cities__places-container container"
         >
-          <Memo(Connect(CardList))
+          <WithActiveItem
             offers={
               Array [
                 Object {
@@ -241,7 +241,7 @@ exports[`Home's snapshot 1`] = `
                 },
               ]
             }
-            onCardHeaderClick={[MockFunction]}
+            onCardHeaderClick={[Function]}
           />
           <div
             className="cities__right-section"

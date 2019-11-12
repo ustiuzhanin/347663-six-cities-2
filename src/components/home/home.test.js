@@ -55,9 +55,7 @@ test(`Home's snapshot`, () => {
 
   const renderer = new ShallowRenderer();
 
-  renderer.render(
-      <Home offersData={mockOffers} onCardHeaderClick={jest.fn()} />
-  );
+  renderer.render(<Home offersData={mockOffers} />);
   const result = renderer.getRenderOutput();
 
   expect(result).toMatchSnapshot();

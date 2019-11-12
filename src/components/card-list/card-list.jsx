@@ -8,17 +8,6 @@ import Card from '../card/card.jsx';
 /* eslint-disable camelcase*/
 
 class CardList extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      activeCard: {}
-    };
-
-    this.cardMouseEnterHandler = this.cardMouseEnterHandler.bind(this);
-    this.cardMouseLeaveHandler = this.cardMouseLeaveHandler.bind(this);
-  }
-
   componentDidMount() {
     const {activeCity, offers, addActiveCityOffers} = this.props;
     const activeCityOffers = [];
@@ -52,15 +41,14 @@ class CardList extends Component {
     }
   }
 
-  cardMouseEnterHandler(activeCard) {
-    this.setState({activeCard});
-  }
-  cardMouseLeaveHandler() {
-    this.setState({activeCard: {}});
-  }
-
   render() {
-    const {listOfOffers, onCardHeaderClick, activeCity} = this.props;
+    const {
+      listOfOffers,
+      onCardHeaderClick,
+      activeCity,
+      cardMouseEnterHandler,
+      cardMouseLeaveHandler
+    } = this.props;
 
     return (
       <section className='cities__places places'>
@@ -111,8 +99,8 @@ class CardList extends Component {
             <Card
               key={card.id}
               card={card}
-              cardMouseEnterHandler={this.cardMouseEnterHandler}
-              cardMouseLeaveHandler={this.cardMouseLeaveHandler}
+              cardMouseEnterHandler={cardMouseEnterHandler}
+              cardMouseLeaveHandler={cardMouseLeaveHandler}
               onCardHeaderClick={onCardHeaderClick}
             />
           ))}
@@ -141,7 +129,9 @@ CardList.propTypes = {
   ).isRequired,
   activeCity: PropTypes.string.isRequired,
   addActiveCityOffers: PropTypes.func.isRequired,
-  onCardHeaderClick: PropTypes.func.isRequired
+  onCardHeaderClick: PropTypes.func.isRequired,
+  cardMouseEnterHandler: PropTypes.func.isRequired,
+  cardMouseLeaveHandler: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state, ownProps) =>

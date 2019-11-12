@@ -10,10 +10,8 @@ class RenderMap extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      map: null,
-      icon: null
-    };
+    this.map = null;
+    this.icon = null;
   }
 
   componentDidMount() {
@@ -25,29 +23,26 @@ class RenderMap extends Component {
               attribution: `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>`
             }
         )
-        .addTo(this.state.map);
+        .addTo(this.map);
     };
 
-    this.setState(
-        {
-          map: leaflet.map(`map`, {
-            center: mapSettings.defaultCity,
-            zoom: mapSettings.defaultZoom,
-            zoomControl: false,
-            marker: true
-          }),
-          icon: leaflet.icon({
-            iconUrl: mapSettings.icon.url,
-            iconSize: mapSettings.icon.size
-          })
-        },
-        () => setTileLayer()
-    );
+    this.map = leaflet.map(`map`, {
+      center: mapSettings.defaultCity,
+      zoom: mapSettings.defaultZoom,
+      zoomControl: false,
+      marker: true
+    });
+    this.icon = leaflet.icon({
+      iconUrl: mapSettings.icon.url,
+      iconSize: mapSettings.icon.size
+    });
+
+    setTileLayer();
   }
 
   componentDidUpdate() {
     const {listOfOffers} = this.props;
-    const {map, icon} = this.state;
+    const {map, icon} = this;
 
     if (listOfOffers.length <= 0) {
       return;

@@ -61,6 +61,8 @@ test(`CardList's snapshot`, () => {
           onCardHeaderClick={jest.fn()}
           addActiveCityOffers={jest.fn()}
           activeCity={`Amsterdam`}
+          cardMouseEnterHandler={jest.fn()}
+          cardMouseLeaveHandler={jest.fn()}
         />
     )
     .toJSON();
