@@ -1,72 +1,58 @@
-import React, {Component} from 'react';
-import {mapSettings} from '../../mocks/map-settings';
+import React, {useEffect, useRef} from "react";
+import {mapSettings} from "../../mocks/map-settings";
 
-import {connect} from 'react-redux';
-import {ActionsCreator} from '../../reducer';
-import leaflet from 'leaflet';
-import PropTypes from 'prop-types';
+import {connect} from "react-redux";
+import {ActionsCreator} from "../../reducer";
+import L from "leaflet";
+import PropTypes from "prop-types";
 
-class RenderMap extends Component {
-  constructor(props) {
-    super(props);
+const RenderMap = (props) => {
+  const {listOfOffers} = props;
 
-    this.map = null;
-    this.icon = null;
-  }
+  const mapRef = useRef(null);
+  const markerRef = useRef(null);
 
-  componentDidMount() {
-    const setTileLayer = () => {
-      leaflet
-        .tileLayer(
+  useEffect(() => {
+    mapRef.current = L.map(`map`, {
+      center: mapSettings.defaultCity,
+      zoom: mapSettings.defaultZoom,
+      zoomControl: false,
+      marker: true,
+      layers: [
+        L.tileLayer(
             `https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`,
             {
               attribution: `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>`
             }
         )
-        .addTo(this.map);
-    };
-
-    this.map = leaflet.map(`map`, {
-      center: mapSettings.defaultCity,
-      zoom: mapSettings.defaultZoom,
-      zoomControl: false,
-      marker: true
+      ]
     });
-    this.icon = leaflet.icon({
+
+    markerRef.current = {
       iconUrl: mapSettings.icon.url,
       iconSize: mapSettings.icon.size
-    });
+    };
+  }, []);
 
-    setTileLayer();
-  }
+  useEffect(() => {
+    if (listOfOffers.length > 0) {
+      const city = [
+        listOfOffers[0].city.location.latitude,
+        listOfOffers[0].city.location.longitude
+      ];
+      const zoom = listOfOffers[0].city.location.zoom;
+      mapRef.current.setView(city, zoom);
 
-  componentDidUpdate() {
-    const {listOfOffers} = this.props;
-    const {map, icon} = this;
-
-    if (listOfOffers.length <= 0) {
-      return;
+      listOfOffers.forEach(({location}) => {
+        L.marker([location.latitude, location.longitude], {}).addTo(
+            mapRef.current
+        );
+      });
     }
+  }, [listOfOffers]);
 
-    const city = [
-      listOfOffers[0].city.location.latitude,
-      listOfOffers[0].city.location.longitude
-    ];
-    const zoom = listOfOffers[0].city.location.zoom;
-
-    map.setView(city, zoom);
-
-    listOfOffers.forEach(({location}) => {
-      leaflet
-        .marker([location.latitude, location.longitude], {icon})
-        .addTo(map);
-    });
-  }
-
-  render() {
-    return <div id='map' style={{height: `100%`}}></div>;
-  }
-}
+  return <div id="map" style={{height: `100%`}}></div>;
+};
 
 RenderMap.propTypes = {
   listOfOffers: PropTypes.arrayOf(
@@ -107,7 +93,4 @@ const mapDispatchToProps = (dispatch) => ({
 
 export {RenderMap};
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(RenderMap);
+export default connect(mapStateToProps, mapDispatchToProps)(RenderMap);

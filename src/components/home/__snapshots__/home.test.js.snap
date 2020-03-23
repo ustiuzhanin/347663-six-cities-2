@@ -2,9 +2,6 @@
 
 exports[`Home's snapshot 1`] = `
 <section>
-  <h1>
-    Home Page
-  </h1>
   <div
     style={
       Object {
@@ -241,7 +238,6 @@ exports[`Home's snapshot 1`] = `
                 },
               ]
             }
-            onCardHeaderClick={[Function]}
           />
           <div
             className="cities__right-section"

@@ -1,6 +1,6 @@
-import React from 'react';
-import Home from '../home/home.jsx';
-import PropTypes from 'prop-types';
+import React from "react";
+import Home from "../home/home.jsx";
+import PropTypes from "prop-types";
 
 export default function App(props) {
   const {offers} = props;
