@@ -1,17 +1,11 @@
-import React, {PureComponent} from 'react';
-import PropTypes from 'prop-types';
-import {connect} from 'react-redux';
-import {ActionsCreator} from '../../reducer';
+import React, {useEffect} from "react";
+import PropTypes from "prop-types";
+import {connect} from "react-redux";
+import {ActionsCreator} from "../../reducer";
 
-class CityList extends PureComponent {
-  constructor(props) {
-    super(props);
-
-    this.handleCityLinkClick = this.handleCityLinkClick.bind(this);
-  }
-
-  componentDidMount() {
-    const {offers} = this.props;
+const CityList = (props) => {
+  useEffect(() => {
+    const {offers, createListOfCities} = props;
 
     const listOfCities = [];
     offers.filter(({city}) => {
@@ -20,40 +14,38 @@ class CityList extends PureComponent {
       }
     });
 
-    this.props.createListOfCities(listOfCities);
-  }
+    createListOfCities(listOfCities);
+  }, []);
 
-  handleCityLinkClick(evt) {
-    const {activeCity, onCityLinkClick, resetOffersList} = this.props;
+  const handleCityLinkClick = (evt) => {
+    const {activeCity, onCityLinkClick, resetOffersList} = props;
 
     onCityLinkClick(evt.currentTarget.id);
     if (activeCity !== evt.currentTarget.id) {
       resetOffersList();
     }
-  }
+  };
 
-  cityList(list, currentActiveCity) {
+  const cityList = (list, currentActiveCity) => {
     return list.map((city, i) => (
-      <li className='locations__item' key={`${city}${i}`}>
+      <li className="locations__item" key={`${city}${i}`}>
         <a
           className={`locations__item-link tabs__item ${city ===
             currentActiveCity && `tabs__item--active`}`}
-          href='#'
+          href="#"
           id={city}
-          onClick={this.handleCityLinkClick}
+          onClick={handleCityLinkClick}
         >
           <span>{city}</span>
         </a>
       </li>
     ));
-  }
+  };
 
-  render() {
-    const {listOfCities, activeCity} = this.props;
+  const {listOfCities, activeCity} = props;
 
-    return this.cityList(listOfCities, activeCity);
-  }
-}
+  return cityList(listOfCities, activeCity);
+};
 
 CityList.propTypes = {
   offers: PropTypes.arrayOf(
@@ -90,7 +82,4 @@ const mapDispatchToProps = (dispatch) => ({
 
 export {CityList};
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(CityList);
+export default connect(mapStateToProps, mapDispatchToProps)(CityList);
