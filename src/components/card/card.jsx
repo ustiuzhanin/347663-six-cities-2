@@ -1,16 +1,23 @@
-import React from 'react';
+import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 
 /* eslint-disable camelcase*/
 
 export default function Card(props) {
-  const {
-    cardMouseEnterHandler,
-    cardMouseLeaveHandler,
-    onCardHeaderClick,
-    card
-  } = props;
+  const {onCardHeaderClick, card} = props;
   const {price, rating, title, type, preview_image} = card;
+
+  const [activeCard, setActiveCard] = useState(null);
+  // eslint-disable-next-line
+  console.log(activeCard);
+
+  const cardMouseEnterHandler = (cardItem) => {
+    setActiveCard(cardItem);
+  };
+
+  const cardMouseLeaveHandler = () => {
+    setActiveCard(null);
+  };
 
   const ratingToPercent = (stars) => (stars / 5) * 100;
 
@@ -72,8 +79,6 @@ Card.propTypes = {
     type: PropTypes.string.isRequired,
     preview_image: PropTypes.string.isRequired
   }).isRequired,
-  cardMouseEnterHandler: PropTypes.func.isRequired,
-  cardMouseLeaveHandler: PropTypes.func.isRequired,
   onCardHeaderClick: PropTypes.func.isRequired
 };
 

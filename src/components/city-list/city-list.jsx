@@ -1,7 +1,7 @@
-import React, {useEffect} from "react";
-import PropTypes from "prop-types";
-import {connect} from "react-redux";
-import {ActionsCreator} from "../../reducer";
+import React, {useEffect} from 'react';
+import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
+import {ActionsCreator} from '../../reducer';
 
 const CityList = (props) => {
   useEffect(() => {
@@ -28,11 +28,11 @@ const CityList = (props) => {
 
   const cityList = (list, currentActiveCity) => {
     return list.map((city, i) => (
-      <li className="locations__item" key={`${city}${i}`}>
+      <li className='locations__item' key={`${city}${i}`}>
         <a
           className={`locations__item-link tabs__item ${city ===
             currentActiveCity && `tabs__item--active`}`}
-          href="#"
+          href='#'
           id={city}
           onClick={handleCityLinkClick}
         >
@@ -49,11 +49,11 @@ const CityList = (props) => {
 
 CityList.propTypes = {
   offers: PropTypes.arrayOf(
-      PropTypes.shape({
-        city: PropTypes.shape({
-          name: PropTypes.string.isRequired
-        }).isRequired
+    PropTypes.shape({
+      city: PropTypes.shape({
+        name: PropTypes.string.isRequired
       }).isRequired
+    }).isRequired
   ).isRequired,
   listOfCities: PropTypes.array.isRequired,
   activeCity: PropTypes.string.isRequired,

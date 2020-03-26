@@ -4,7 +4,7 @@ env:
   commonjs: true
   jest: true
 
-extends: ['htmlacademy/es6', 'plugin:react/recommended']
+extends: ['htmlacademy/es6', 'plugin:react/recommended', 'prettier']
 
 parserOptions:
   ecmaFeatures:
@@ -17,3 +17,5 @@ plugins: ['react']
 settings:
   react:
     version: '16'
+# rules:
+#   prettier/prettier: 'error'

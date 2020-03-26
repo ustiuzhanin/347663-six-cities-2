@@ -55,15 +55,13 @@ test(`CardList's snapshot`, () => {
 
   const tree = renderer
     .create(
-        <CardList
-          offers={mockCards}
-          listOfOffers={mockCards}
-          onCardHeaderClick={jest.fn()}
-          addActiveCityOffers={jest.fn()}
-          activeCity={`Amsterdam`}
-          cardMouseEnterHandler={jest.fn()}
-          cardMouseLeaveHandler={jest.fn()}
-        />
+      <CardList
+        offers={mockCards}
+        listOfOffers={mockCards}
+        onCardHeaderClick={jest.fn()}
+        addActiveCityOffers={jest.fn()}
+        activeCity={`Amsterdam`}
+      />
     )
     .toJSON();
 

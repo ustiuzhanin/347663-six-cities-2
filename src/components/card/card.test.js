@@ -51,12 +51,7 @@ test(`Card's snapshot`, () => {
   };
   /* eslint-enable camelcase*/
   const tree = renderer.create(
-      <Card
-        card={mockCard}
-        cardMouseEnterHandler={jest.fn()}
-        onCardHeaderClick={jest.fn()}
-        cardMouseLeaveHandler={jest.fn()}
-      />
+    <Card card={mockCard} onCardHeaderClick={jest.fn()} />
   );
 
   expect(tree).toMatchSnapshot();

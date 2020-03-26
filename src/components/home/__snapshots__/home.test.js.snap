@@ -181,7 +181,7 @@ exports[`Home's snapshot 1`] = `
         <div
           className="cities__places-container container"
         >
-          <WithActiveItem
+          <Memo(Connect(CardList))
             offers={
               Array [
                 Object {
