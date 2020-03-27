@@ -5,20 +5,21 @@ describe(`reducer works correctly`, () => {
     expect(reducer(undefined, {})).toEqual({
       activeCity: `Amsterdam`,
       listOfOffers: [],
-      listOfCities: []
+      listOfCities: [],
+      data: []
     });
   });
 
   it(`change active city`, () => {
     expect(
-        reducer(
-            {
-              activeCity: `Amsterdam`,
-              listOfOffers: [],
-              listOfCities: []
-            },
-            {type: `CHANGE_CITY`, payload: `Paris`}
-        )
+      reducer(
+        {
+          activeCity: `Amsterdam`,
+          listOfOffers: [],
+          listOfCities: []
+        },
+        {type: `CHANGE_CITY`, payload: `Paris`}
+      )
     ).toEqual({
       activeCity: `Paris`,
       listOfOffers: [],
@@ -28,14 +29,14 @@ describe(`reducer works correctly`, () => {
 
   it(`creates a list of cities`, () => {
     expect(
-        reducer(
-            {
-              activeCity: `Amsterdam`,
-              listOfOffers: [],
-              listOfCities: []
-            },
-            {type: `CREATE_LIST_OF_CITIES`, payload: [`Paris`, `NYC`, `Moscow`]}
-        )
+      reducer(
+        {
+          activeCity: `Amsterdam`,
+          listOfOffers: [],
+          listOfCities: []
+        },
+        {type: `CREATE_LIST_OF_CITIES`, payload: [`Paris`, `NYC`, `Moscow`]}
+      )
     ).toEqual({
       activeCity: `Amsterdam`,
       listOfOffers: [],
@@ -45,14 +46,14 @@ describe(`reducer works correctly`, () => {
 
   it(`add offers to the list`, () => {
     expect(
-        reducer(
-            {
-              activeCity: `Amsterdam`,
-              listOfOffers: [],
-              listOfCities: []
-            },
-            {type: `ADD_OFFERS`, payload: [{}, {}, {}]}
-        )
+      reducer(
+        {
+          activeCity: `Amsterdam`,
+          listOfOffers: [],
+          listOfCities: []
+        },
+        {type: `ADD_OFFERS`, payload: [{}, {}, {}]}
+      )
     ).toEqual({
       activeCity: `Amsterdam`,
       listOfOffers: [{}, {}, {}],
@@ -60,14 +61,14 @@ describe(`reducer works correctly`, () => {
     });
 
     expect(
-        reducer(
-            {
-              activeCity: `Amsterdam`,
-              listOfOffers: [],
-              listOfCities: []
-            },
-            {type: `RESET_OFFERS_LIST`}
-        )
+      reducer(
+        {
+          activeCity: `Amsterdam`,
+          listOfOffers: [],
+          listOfCities: []
+        },
+        {type: `RESET_OFFERS_LIST`}
+      )
     ).toEqual({
       activeCity: `Amsterdam`,
       listOfOffers: [],
@@ -93,7 +94,7 @@ describe(`action creators works correctly`, () => {
 
   it(`addActiveCityOffers returns correct value`, () => {
     expect(
-        ActionsCreator.addActiveCityOffers([{city: `SPB`}, {city: `MSC`}])
+      ActionsCreator.addActiveCityOffers([{city: `SPB`}, {city: `MSC`}])
     ).toEqual({
       type: `ADD_OFFERS`,
       payload: [{city: `SPB`}, {city: `MSC`}]

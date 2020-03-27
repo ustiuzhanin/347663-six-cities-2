@@ -21,10 +21,25 @@ const ActionsCreator = {
       type: `ADD_OFFERS`,
       payload: offers
     };
+  },
+  loadData: (data) => {
+    return {
+      type: 'LOAD_DATA',
+      payload: data
+    };
+  }
+};
+
+const Operations = {
+  loadData: () => (dispatch, getState, api) => {
+    return api.get(`/hotels`).then((response) => {
+      dispatch(ActionsCreator.loadData(response.data));
+    });
   }
 };
 
 const initialState = {
+  data: [],
   activeCity: `Amsterdam`,
   listOfOffers: [],
   listOfCities: []
@@ -49,8 +64,12 @@ const reducer = (state = initialState, action) => {
       return Object.assign({}, state, {
         listOfOffers: [...state.listOfOffers, ...action.payload]
       });
+    case 'LOAD_DATA':
+      return Object.assign({}, state, {
+        data: action.payload
+      });
   }
   return state;
 };
 
-export {ActionsCreator, reducer};
+export {ActionsCreator, reducer, Operations};

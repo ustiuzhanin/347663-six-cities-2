@@ -4,14 +4,14 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import thunk from 'redux-thunk';
 import {compose} from 'recompose';
-import configureAPI from './api';
+import createAPI from './api';
+import {Operations} from './reducer';
 
 import App from './components/app/app.jsx';
-import {offers} from './mocks/offers';
 import {reducer} from './reducer';
 
-const init = (placeOffers) => {
-  const api = configureAPI((...args) => store.dispatch(...args));
+const init = () => {
+  const api = createAPI((...args) => store.dispatch(...args));
 
   const store = createStore(
     reducer,
@@ -23,12 +23,14 @@ const init = (placeOffers) => {
     )
   );
 
+  store.dispatch(Operations.loadData());
+
   ReactDOM.render(
     <Provider store={store}>
-      <App offers={placeOffers} />
+      <App />
     </Provider>,
     document.getElementById(`root`)
   );
 };
 
-init(offers);
+init();

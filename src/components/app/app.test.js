@@ -1,5 +1,5 @@
 import React from 'react';
-import App from './app.jsx';
+import {App} from './app.jsx';
 import ShallowRenderer from 'react-test-renderer/shallow';
 
 test(`App's snapshot`, () => {
