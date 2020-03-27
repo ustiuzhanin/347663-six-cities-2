@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {ActionsCreator} from '../../reducer';
+import {ActionCreator} from '../../reducer/city-list/city-list';
 
 const CityList = (props) => {
   useEffect(() => {
@@ -18,12 +18,9 @@ const CityList = (props) => {
   }, []);
 
   const handleCityLinkClick = (evt) => {
-    const {activeCity, onCityLinkClick, resetOffersList} = props;
+    const {onCityLinkClick} = props;
 
     onCityLinkClick(evt.currentTarget.id);
-    if (activeCity !== evt.currentTarget.id) {
-      resetOffersList();
-    }
   };
 
   const cityList = (list, currentActiveCity) => {
@@ -58,25 +55,21 @@ CityList.propTypes = {
   listOfCities: PropTypes.array.isRequired,
   activeCity: PropTypes.string.isRequired,
   onCityLinkClick: PropTypes.func.isRequired,
-  createListOfCities: PropTypes.func.isRequired,
-  resetOffersList: PropTypes.func.isRequired
+  createListOfCities: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state, ownProps) =>
   Object.assign({}, ownProps, {
-    activeCity: state.activeCity,
-    listOfCities: state.listOfCities
+    activeCity: state.cityList.activeCity,
+    listOfCities: state.cityList.listOfCities
   });
 
 const mapDispatchToProps = (dispatch) => ({
   onCityLinkClick: (activeCityId) => {
-    dispatch(ActionsCreator.changeCity(activeCityId));
+    dispatch(ActionCreator.changeCity(activeCityId));
   },
   createListOfCities: (listOfCities) => {
-    dispatch(ActionsCreator.createListOfCities(listOfCities));
-  },
-  resetOffersList: () => {
-    dispatch(ActionsCreator.resetOffersList());
+    dispatch(ActionCreator.createListOfCities(listOfCities));
   }
 });
 

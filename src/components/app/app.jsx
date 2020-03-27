@@ -48,7 +48,7 @@ App.propTypes = {
 
 const mapStateToProps = (state) =>
   Object.assign({}, null, {
-    offers: state.data
+    offers: state.data.data
   });
 
 export {App};

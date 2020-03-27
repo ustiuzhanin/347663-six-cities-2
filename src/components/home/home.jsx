@@ -1,12 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-// import withActiveItem from "../../hoc/with-active-item/with-active-item.jsx";
 
 import CardList from '../card-list/card-list.jsx';
 import RenderMap from '../map/map.jsx';
 import CityList from '../city-list/city-list.jsx';
-
-// const WithActiveItem = withActiveItem(CardList);
 
 const Home = (props) => {
   const {offersData} = props;

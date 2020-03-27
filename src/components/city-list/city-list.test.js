@@ -56,14 +56,13 @@ test(`CityList's snapshot`, () => {
   const renderer = new ShallowRenderer();
 
   renderer.render(
-      <CityList
-        offers={mockOffers}
-        activeCity={`Amsterdam`}
-        listOfCities={[`Amsterdam`, `Paris`, `Hamburg`]}
-        onCityLinkClick={jest.fn()}
-        createListOfCities={jest.fn()}
-        resetOffersList={jest.fn()}
-      />
+    <CityList
+      offers={mockOffers}
+      activeCity={`Amsterdam`}
+      listOfCities={[`Amsterdam`, `Paris`, `Hamburg`]}
+      onCityLinkClick={jest.fn()}
+      createListOfCities={jest.fn()}
+    />
   );
   const result = renderer.getRenderOutput();
 

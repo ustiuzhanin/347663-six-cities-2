@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import {connect} from 'react-redux';
-import {ActionsCreator} from '../../reducer';
+import {ActionCreator} from '../../reducer/offers/offers';
 import PropTypes from 'prop-types';
 
 import Card from '../card/card.jsx';
@@ -13,11 +13,13 @@ const CardList = (props) => {
     offers,
     addActiveCityOffers,
     listOfOffers,
-    onCardHeaderClick
+    onCardHeaderClick,
+    resetOffers
   } = props;
 
   useEffect(() => {
     const activeCityOffers = [];
+    resetOffers();
 
     offers.filter((offer) => {
       const {city} = offer;
@@ -106,18 +108,22 @@ CardList.propTypes = {
   ).isRequired,
   activeCity: PropTypes.string.isRequired,
   addActiveCityOffers: PropTypes.func.isRequired,
-  onCardHeaderClick: PropTypes.func.isRequired
+  onCardHeaderClick: PropTypes.func.isRequired,
+  resetOffers: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state, ownProps) =>
   Object.assign({}, ownProps, {
-    activeCity: state.activeCity,
-    listOfOffers: state.listOfOffers
+    activeCity: state.cityList.activeCity,
+    listOfOffers: state.offers.listOfOffers
   });
 
 const mapDispatchToProps = (dispatch) => ({
   addActiveCityOffers: (activeOffers) => {
-    dispatch(ActionsCreator.addActiveCityOffers(activeOffers));
+    dispatch(ActionCreator.addActiveCityOffers(activeOffers));
+  },
+  resetOffers: () => {
+    dispatch(ActionCreator.resetOffersList());
   }
 });
 

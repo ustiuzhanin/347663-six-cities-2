@@ -5,10 +5,12 @@ import ReactDOM from 'react-dom';
 import thunk from 'redux-thunk';
 import {compose} from 'recompose';
 import createAPI from './api';
-import {Operations} from './reducer';
+// import {Operations} from './reducer';
+import {Operations} from './reducer/data/data';
 
 import App from './components/app/app.jsx';
-import {reducer} from './reducer';
+// import {reducer} from './reducer';
+import reducer from './reducer/index';
 
 const init = () => {
   const api = createAPI((...args) => store.dispatch(...args));
