@@ -1,23 +1,33 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import {Route, Switch} from 'react-router-dom';
 
 import Home from '../home/home.jsx';
+import Login from '../login/login.jsx';
 import PropTypes from 'prop-types';
 
 const App = (props) => {
   const {offers} = props;
 
-  const onCardHeaderClick = () => {
-    // TODO: opens the card page/info
-  };
+  // const onCardHeaderClick = () => {
+  //   // TODO: opens the card page/info
+  // };
 
   return (
-    // TODO: change key
-    <Home
-      offersData={offers}
-      onCardHeaderClick={onCardHeaderClick}
-      key={Math.random()}
-    />
+    <Switch>
+      <Route
+        path='/'
+        exact
+        render={() => (
+          <Home
+            offersData={offers}
+            // onCardHeaderClick={onCardHeaderClick}
+            key={Math.random()}
+          />
+        )}
+      />
+      <Route path='/login' exact component={Login} />
+    </Switch>
   );
 };
 

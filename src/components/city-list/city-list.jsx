@@ -6,7 +6,6 @@ import {ActionCreator} from '../../reducer/city-list/city-list';
 const CityList = (props) => {
   useEffect(() => {
     const {offers, createListOfCities} = props;
-
     const listOfCities = [];
     offers.filter(({city}) => {
       if (!listOfCities.includes(city.name)) {
@@ -18,9 +17,11 @@ const CityList = (props) => {
   }, []);
 
   const handleCityLinkClick = (evt) => {
-    const {onCityLinkClick} = props;
-
-    onCityLinkClick(evt.currentTarget.id);
+    evt.preventDefault();
+    const {onCityLinkClick, activeCity} = props;
+    if (evt.currentTarget.id !== activeCity) {
+      onCityLinkClick(evt.currentTarget.id);
+    }
   };
 
   const cityList = (list, currentActiveCity) => {
@@ -31,7 +32,7 @@ const CityList = (props) => {
             currentActiveCity && `tabs__item--active`}`}
           href='#'
           id={city}
-          onClick={handleCityLinkClick}
+          onClick={(e) => handleCityLinkClick(e)}
         >
           <span>{city}</span>
         </a>
