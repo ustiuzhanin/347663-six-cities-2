@@ -3,7 +3,11 @@ import {reducer, ActionType, ActionCreator} from './offers';
 describe(`reducer works correctly`, () => {
   it(`undefined action doesnt affect the state`, () => {
     expect(reducer(undefined, {})).toEqual({
-      listOfOffers: []
+      listOfOffers: [],
+      sorting: {
+        text: 'Popular',
+        type: 'popular'
+      }
     });
   });
 

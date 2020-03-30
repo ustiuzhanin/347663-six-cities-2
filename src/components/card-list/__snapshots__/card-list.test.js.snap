@@ -28,6 +28,7 @@ exports[`CardList's snapshot 1`] = `
     </span>
     <span
       className="places__sorting-type"
+      onClick={[Function]}
       tabIndex="0"
     >
       Popular
@@ -42,28 +43,36 @@ exports[`CardList's snapshot 1`] = `
       </svg>
     </span>
     <ul
-      className="places__options places__options--custom places__options--opened"
+      className="places__options places__options--custom null"
     >
       <li
-        className="places__option places__option--active"
+        className="places__option"
+        id="popular"
+        onClick={[Function]}
         tabIndex="0"
       >
         Popular
       </li>
       <li
         className="places__option"
+        id="price-low"
+        onClick={[Function]}
         tabIndex="0"
       >
         Price: low to high
       </li>
       <li
         className="places__option"
+        id="price-high"
+        onClick={[Function]}
         tabIndex="0"
       >
         Price: high to low
       </li>
       <li
         className="places__option"
+        id="price-raitig"
+        onClick={[Function]}
         tabIndex="0"
       >
         Top rated first

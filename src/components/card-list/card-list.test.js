@@ -62,6 +62,8 @@ test(`CardList's snapshot`, () => {
         addActiveCityOffers={jest.fn()}
         activeCity={`Amsterdam`}
         resetOffers={jest.fn()}
+        sorting={{type: 'popular', text: 'Popular'}}
+        changeSortingType={jest.fn()}
       />
     )
     .toJSON();
