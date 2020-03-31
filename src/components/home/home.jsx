@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import CardList from '../card-list/card-list.jsx';
 import RenderMap from '../map/map.jsx';
 import CityList from '../city-list/city-list.jsx';
+import ProfileBtn from '../profile-btn/profile-btn.jsx';
 
 const Home = (props) => {
   const {offersData} = props;
@@ -47,21 +48,7 @@ const Home = (props) => {
                   />
                 </a>
               </div>
-              <nav className='header__nav'>
-                <ul className='header__nav-list'>
-                  <li className='header__nav-item user'>
-                    <a
-                      className='header__nav-link header__nav-link--profile'
-                      href='#'
-                    >
-                      <div className='header__avatar-wrapper user__avatar-wrapper'></div>
-                      <span className='header__user-name user__name'>
-                        Oliver.conner@gmail.com
-                      </span>
-                    </a>
-                  </li>
-                </ul>
-              </nav>
+              <ProfileBtn />
             </div>
           </div>
         </header>

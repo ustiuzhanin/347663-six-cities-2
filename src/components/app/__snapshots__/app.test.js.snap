@@ -8,7 +8,15 @@ exports[`App's snapshot 1`] = `
     render={[Function]}
   />
   <Route
-    component={[Function]}
+    component={
+      Object {
+        "$$typeof": Symbol(react.memo),
+        "WrappedComponent": [Function],
+        "compare": null,
+        "displayName": "Connect(Login)",
+        "type": [Function],
+      }
+    }
     exact={true}
     path="/login"
   />

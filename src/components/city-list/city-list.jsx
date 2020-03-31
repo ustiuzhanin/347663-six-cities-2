@@ -6,14 +6,14 @@ import {ActionCreator} from '../../reducer/city-list/city-list';
 const CityList = (props) => {
   useEffect(() => {
     const {offers, createListOfCities} = props;
-    const listOfCities = [];
+    const list = [];
     offers.filter(({city}) => {
-      if (!listOfCities.includes(city.name)) {
-        listOfCities.push(city.name);
+      if (!list.includes(city.name)) {
+        list.push(city.name);
       }
     });
 
-    createListOfCities(listOfCities);
+    createListOfCities(list);
   }, []);
 
   const handleCityLinkClick = (evt) => {
@@ -24,25 +24,21 @@ const CityList = (props) => {
     }
   };
 
-  const cityList = (list, currentActiveCity) => {
-    return list.map((city, i) => (
-      <li className='locations__item' key={`${city}${i}`}>
-        <a
-          className={`locations__item-link tabs__item ${city ===
-            currentActiveCity && `tabs__item--active`}`}
-          href='#'
-          id={city}
-          onClick={(e) => handleCityLinkClick(e)}
-        >
-          <span>{city}</span>
-        </a>
-      </li>
-    ));
-  };
-
   const {listOfCities, activeCity} = props;
 
-  return cityList(listOfCities, activeCity);
+  return listOfCities.map((city, i) => (
+    <li className='locations__item' key={`${city}${i}`}>
+      <a
+        className={`locations__item-link tabs__item ${city === activeCity &&
+          `tabs__item--active`}`}
+        href='#'
+        id={city}
+        onClick={(e) => handleCityLinkClick(e)}
+      >
+        <span>{city}</span>
+      </a>
+    </li>
+  ));
 };
 
 CityList.propTypes = {
@@ -71,6 +67,9 @@ const mapDispatchToProps = (dispatch) => ({
   },
   createListOfCities: (listOfCities) => {
     dispatch(ActionCreator.createListOfCities(listOfCities));
+  },
+  resetListOfCities: () => {
+    dispatch(ActionCreator.resetListOfCities());
   }
 });
 

@@ -31,7 +31,7 @@ const reducer = (state = initialState, action) => {
       });
     case ActionType.CREATE_LIST_OF_CITIES:
       return Object.assign({}, state, {
-        listOfCities: [...state.listOfCities, ...action.payload]
+        listOfCities: [...action.payload]
       });
   }
 
