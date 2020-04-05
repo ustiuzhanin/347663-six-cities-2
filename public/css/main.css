@@ -1091,6 +1091,7 @@ img {
   background-repeat: no-repeat;
 }
 .property__feature--entire {
+  text-transform: capitalize;
   background-image: url(../img/ico-place.svg);
   background-size: 13px 16px;
 }
