@@ -1217,10 +1217,10 @@ img {
 .property__inside-item::before {
   content: '';
   position: absolute;
-  top: 14px;
+  top: 13px;
   left: 0;
   width: 12px;
-  height: 1px;
+  height: 2px;
   background-color: #000;
 }
 .property__host-title {
