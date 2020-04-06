@@ -61,12 +61,12 @@ describe(`Card component testing`, () => {
     });
 
     const card = shallow(
-        <Card
-          card={mockCard}
-          cardMouseEnterHandler={mouseEnter}
-          onCardHeaderClick={jest.fn()}
-          cardMouseLeaveHandler={jest.fn()}
-        />
+      <Card
+        card={mockCard}
+        cardMouseEnterHandler={mouseEnter}
+        onCardHeaderClick={jest.fn()}
+        cardMouseLeaveHandler={jest.fn()}
+      />
     );
 
     const activeCard = card.find(`.place-card`);
@@ -85,15 +85,15 @@ describe(`Card component testing`, () => {
   it(`click on card headers`, () => {
     const clickHandler = jest.fn();
     const home = shallow(
-        <Card
-          card={mockCard}
-          cardMouseEnterHandler={jest.fn()}
-          onCardHeaderClick={clickHandler}
-          cardMouseLeaveHandler={jest.fn()}
-        />
+      <Card
+        card={mockCard}
+        cardMouseEnterHandler={jest.fn()}
+        onCardHeaderClick={clickHandler}
+        cardMouseLeaveHandler={jest.fn()}
+      />
     );
 
-    const header = home.find(`.place-card__name a`);
+    const header = home.find(`.place-card__name Link`);
 
     header.at(0).simulate(`click`);
 

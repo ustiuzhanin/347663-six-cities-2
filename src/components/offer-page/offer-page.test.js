@@ -1,12 +1,11 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
-import {BrowserRouter} from 'react-router-dom';
+import {OfferPage} from './offer-page.jsx';
+import ShallowRenderer from 'react-test-renderer/shallow';
 
-import Card from './card.jsx';
+/* eslint-disable camelcase*/
 
-test(`Card's snapshot`, () => {
-  /* eslint-disable camelcase*/
-  const mockCard = {
+const mockOffers = [
+  {
     city: {
       name: `Dusseldorf`,
       location: {latitude: 51.225402, longitude: 6.776314, zoom: 13}
@@ -50,13 +49,16 @@ test(`Card's snapshot`, () => {
       zoom: 16
     },
     id: 1
-  };
-  /* eslint-enable camelcase*/
-  const tree = renderer.create(
-    <BrowserRouter>
-      <Card card={mockCard} onCardHeaderClick={jest.fn()} />
-    </BrowserRouter>
-  );
+  }
+];
 
-  expect(tree).toMatchSnapshot();
+test(`OfferPage's Snapshot`, () => {
+  const renderer = new ShallowRenderer();
+  renderer.render(
+    <OfferPage match={{params: {id: '2'}}} offers={mockOffers} />
+  );
+  const result = renderer.getRenderOutput();
+
+  expect(result).toMatchSnapshot();
 });
+/* eslint-enable camelcase*/

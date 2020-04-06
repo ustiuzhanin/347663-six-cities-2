@@ -449,8 +449,23 @@ img {
   padding-top: 2px;
 }
 .user__avatar-wrapper {
+  position: relative;
   background-image: url(../img/avatar.svg);
   background-size: 100%;
+  background-repeat: no-repeat;
+}
+.user__avatar-wrapper--pro::after {
+  content: '';
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background-color: #ff9000;
+  background-image: url(../img/star-white.svg);
+  background-size: 10px 9px;
+  background-position: center;
   background-repeat: no-repeat;
 }
 .user__avatar {

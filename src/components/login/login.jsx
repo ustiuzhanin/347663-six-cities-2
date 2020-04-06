@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
+import Header from '../header/header.jsx';
 import PropTypes from 'prop-types';
 
-import {Link, Redirect} from 'react-router-dom';
+import {Redirect} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {Operations} from '../../reducer/auth/auth';
 
@@ -22,7 +23,7 @@ const Login = (props) => {
     return <Redirect to='/' />;
   }
   return (
-    <body>
+    <div>
       <div style={{display: 'none'}}>
         <svg xmlns='http://www.w3.org/2000/svg'>
           <symbol id='icon-arrow-select' viewBox='0 0 7 4'>
@@ -46,23 +47,7 @@ const Login = (props) => {
       </div>
 
       <div className='page page--gray page--login'>
-        <header className='header'>
-          <div className='container'>
-            <div className='header__wrapper'>
-              <div className='header__left'>
-                <Link to='/' className='header__logo-link'>
-                  <img
-                    className='header__logo'
-                    src='img/logo.svg'
-                    alt='6 cities logo'
-                    width='81'
-                    height='41'
-                  />
-                </Link>
-              </div>
-            </div>
-          </div>
-        </header>
+        <Header />
 
         <main className='page__main page__main--login'>
           <div className='page__login-container container'>
@@ -106,7 +91,7 @@ const Login = (props) => {
             </section>
             <section className='locations locations--login locations--current'>
               <div className='locations__item'>
-                <a className='locations__item-link' href='#'>
+                <a className='locations__item-link'>
                   <span>Amsterdam</span>
                 </a>
               </div>
@@ -114,7 +99,7 @@ const Login = (props) => {
           </div>
         </main>
       </div>
-    </body>
+    </div>
   );
 };
 

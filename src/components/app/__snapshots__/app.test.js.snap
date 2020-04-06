@@ -20,5 +20,18 @@ exports[`App's snapshot 1`] = `
     exact={true}
     path="/login"
   />
+  <Route
+    component={
+      Object {
+        "$$typeof": Symbol(react.memo),
+        "WrappedComponent": [Function],
+        "compare": null,
+        "displayName": "Connect(OfferPage)",
+        "type": [Function],
+      }
+    }
+    exact={true}
+    path="/offer/:id"
+  />
 </Switch>
 `;

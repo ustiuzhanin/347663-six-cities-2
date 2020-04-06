@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Login's Snapshot 1`] = `
-<body>
+<div>
   <div
     style={
       Object {
@@ -45,35 +45,7 @@ exports[`Login's Snapshot 1`] = `
   <div
     className="page page--gray page--login"
   >
-    <header
-      className="header"
-    >
-      <div
-        className="container"
-      >
-        <div
-          className="header__wrapper"
-        >
-          <div
-            className="header__left"
-          >
-            <a
-              className="header__logo-link"
-              href="/"
-              onClick={[Function]}
-            >
-              <img
-                alt="6 cities logo"
-                className="header__logo"
-                height="41"
-                src="img/logo.svg"
-                width="81"
-              />
-            </a>
-          </div>
-        </div>
-      </div>
-    </header>
+    <Header />
     <main
       className="page__main page__main--login"
     >
@@ -144,7 +116,6 @@ exports[`Login's Snapshot 1`] = `
           >
             <a
               className="locations__item-link"
-              href="#"
             >
               <span>
                 Amsterdam
@@ -155,5 +126,5 @@ exports[`Login's Snapshot 1`] = `
       </div>
     </main>
   </div>
-</body>
+</div>
 `;

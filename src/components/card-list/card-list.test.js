@@ -1,6 +1,7 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import {CardList} from './card-list.jsx';
+import {BrowserRouter} from 'react-router-dom';
 
 test(`CardList's snapshot`, () => {
   /* eslint-disable camelcase*/
@@ -55,16 +56,18 @@ test(`CardList's snapshot`, () => {
 
   const tree = renderer
     .create(
-      <CardList
-        offers={mockCards}
-        listOfOffers={mockCards}
-        onCardHeaderClick={jest.fn()}
-        addActiveCityOffers={jest.fn()}
-        activeCity={`Amsterdam`}
-        resetOffers={jest.fn()}
-        sorting={{type: 'popular', text: 'Popular'}}
-        changeSortingType={jest.fn()}
-      />
+      <BrowserRouter>
+        <CardList
+          offers={mockCards}
+          listOfOffers={mockCards}
+          onCardHeaderClick={jest.fn()}
+          addActiveCityOffers={jest.fn()}
+          activeCity={`Amsterdam`}
+          resetOffers={jest.fn()}
+          sorting={{type: 'popular', text: 'Popular'}}
+          changeSortingType={jest.fn()}
+        />
+      </BrowserRouter>
     )
     .toJSON();
 

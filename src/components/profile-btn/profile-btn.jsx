@@ -33,7 +33,7 @@ ProfileBtn.propTypes = {
     avatar_url: PropTypes.string.isRequired,
     email: PropTypes.string.isRequired,
     id: PropTypes.number.isRequired,
-    ispro: PropTypes.bool.isRequired,
+    ispro: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired
   }).isRequired
 };
@@ -44,5 +44,7 @@ const mapStateToProps = (state) =>
     isAuthorizationRequired: state.auth.isAuthorizationRequired
   });
 /* eslint-enable camelcase*/
+
+export {ProfileBtn};
 
 export default connect(mapStateToProps, null)(ProfileBtn);

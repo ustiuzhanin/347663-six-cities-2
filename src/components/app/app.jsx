@@ -4,6 +4,8 @@ import {Route, Switch} from 'react-router-dom';
 
 import Home from '../home/home.jsx';
 import Login from '../login/login.jsx';
+import OfferPage from '../offer-page/offer-page.jsx';
+
 import PropTypes from 'prop-types';
 
 const App = (props) => {
@@ -27,6 +29,7 @@ const App = (props) => {
         )}
       />
       <Route path='/login' exact component={Login} />
+      <Route path='/offer/:id' exact component={OfferPage} />
     </Switch>
   );
 };

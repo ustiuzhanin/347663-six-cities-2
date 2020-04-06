@@ -1,11 +1,13 @@
 import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 
+import {Link} from 'react-router-dom';
+
 /* eslint-disable camelcase*/
 
 export default function Card(props) {
   const {onCardHeaderClick, card} = props;
-  const {price, rating, title, type, preview_image} = card;
+  const {price, rating, title, type, preview_image, id} = card;
 
   const [activeCard, setActiveCard] = useState(null);
   // eslint-disable-next-line
@@ -61,9 +63,12 @@ export default function Card(props) {
           </div>
         </div>
         <h2 className='place-card__name'>
-          <a href='#' onClick={onCardHeaderClick}>
+          <Link to={`/offer/${id}`} onClick={onCardHeaderClick}>
             {title}
-          </a>
+          </Link>
+          {/* <a href='#' onClick={onCardHeaderClick}>
+            {title}
+          </a> */}
         </h2>
         <p className='place-card__type'>{type}</p>
       </div>
@@ -77,7 +82,8 @@ Card.propTypes = {
     rating: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
-    preview_image: PropTypes.string.isRequired
+    preview_image: PropTypes.string.isRequired,
+    id: PropTypes.number.isRequired
   }).isRequired,
   onCardHeaderClick: PropTypes.func.isRequired
 };
