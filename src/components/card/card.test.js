@@ -2,7 +2,7 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 import {BrowserRouter} from 'react-router-dom';
 
-import Card from './card.jsx';
+import {Card} from './card.jsx';
 
 test(`Card's snapshot`, () => {
   /* eslint-disable camelcase*/
@@ -54,7 +54,7 @@ test(`Card's snapshot`, () => {
   /* eslint-enable camelcase*/
   const tree = renderer.create(
     <BrowserRouter>
-      <Card card={mockCard} onCardHeaderClick={jest.fn()} />
+      <Card card={mockCard} onCardHeaderClick={jest.fn()} changeActiveCard={jest.fn()} />
     </BrowserRouter>
   );
 

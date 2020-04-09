@@ -30,11 +30,11 @@ const ProfileBtn = (props) => {
 ProfileBtn.propTypes = {
   isAuthorizationRequired: PropTypes.bool.isRequired,
   user: PropTypes.shape({
-    avatar_url: PropTypes.string.isRequired,
-    email: PropTypes.string.isRequired,
-    id: PropTypes.number.isRequired,
-    ispro: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired
+    avatar_url: PropTypes.string,
+    email: PropTypes.string,
+    id: PropTypes.number,
+    is_pro: PropTypes.string,
+    name: PropTypes.string
   }).isRequired
 };
 

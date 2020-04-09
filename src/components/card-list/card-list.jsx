@@ -11,7 +11,7 @@ const SortingType = {
   POPULAR: 'popular',
   RATING: 'price-raitig',
   PRICE_LOW_TO_HIGH: 'price-low',
-  PRICE_HIGH_TO_LOW: 'price-high'
+  PRICE_HIGH_TO_LOW: 'price-high',
 };
 
 const CardList = (props) => {
@@ -23,7 +23,7 @@ const CardList = (props) => {
     onCardHeaderClick,
     resetOffers,
     sorting,
-    changeSortingType
+    changeSortingType,
   } = props;
 
   const [isSortPopupOpen, setIsSortPopupOpen] = useState(false);
@@ -184,7 +184,7 @@ CardList.propTypes = {
       price: PropTypes.number.isRequired,
       rating: PropTypes.number.isRequired,
       title: PropTypes.string.isRequired,
-      preview_image: PropTypes.string.isRequired
+      preview_image: PropTypes.string.isRequired,
     }).isRequired
   ).isRequired,
   listOfOffers: PropTypes.arrayOf(
@@ -192,7 +192,7 @@ CardList.propTypes = {
       price: PropTypes.number.isRequired,
       rating: PropTypes.number.isRequired,
       title: PropTypes.string.isRequired,
-      preview_image: PropTypes.string.isRequired
+      preview_image: PropTypes.string.isRequired,
     }).isRequired
   ).isRequired,
   activeCity: PropTypes.string.isRequired,
@@ -201,16 +201,16 @@ CardList.propTypes = {
   resetOffers: PropTypes.func.isRequired,
   sorting: PropTypes.shape({
     type: PropTypes.string.isRequired,
-    text: PropTypes.string.isRequired
+    text: PropTypes.string.isRequired,
   }).isRequired,
-  changeSortingType: PropTypes.func.isRequired
+  changeSortingType: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state, ownProps) =>
   Object.assign({}, ownProps, {
     activeCity: state.cityList.activeCity,
     listOfOffers: state.offers.listOfOffers,
-    sorting: state.offers.sorting
+    sorting: state.offers.sorting,
   });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -222,7 +222,7 @@ const mapDispatchToProps = (dispatch) => ({
   },
   resetOffers: () => {
     dispatch(ActionCreator.resetOffersList());
-  }
+  },
 });
 
 export {CardList};

@@ -54,7 +54,7 @@ it(`RenderMap's snapshot`, () => {
   /* eslint-enable camelcase*/
 
   const renderer = new ShallowRenderer();
-  renderer.render(<RenderMap listOfOffers={mockOffers} />);
+  renderer.render(<RenderMap listOfOffers={mockOffers} activeCard={mockOffers[0]} />);
 
   const result = renderer.getRenderOutput();
   expect(result).toMatchSnapshot();

@@ -1,7 +1,7 @@
 import React from 'react';
 import Enzyme, {shallow} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import Card from './card.jsx';
+import {Card} from './card.jsx';
 
 Enzyme.configure({adapter: new Adapter()});
 
@@ -66,6 +66,7 @@ describe(`Card component testing`, () => {
         cardMouseEnterHandler={mouseEnter}
         onCardHeaderClick={jest.fn()}
         cardMouseLeaveHandler={jest.fn()}
+        changeActiveCard={jest.fn()}
       />
     );
 
@@ -90,6 +91,7 @@ describe(`Card component testing`, () => {
         cardMouseEnterHandler={jest.fn()}
         onCardHeaderClick={clickHandler}
         cardMouseLeaveHandler={jest.fn()}
+        changeActiveCard={jest.fn()}
       />
     );
 

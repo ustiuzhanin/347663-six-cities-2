@@ -55,7 +55,7 @@ const mockOffers = [
 test(`OfferPage's Snapshot`, () => {
   const renderer = new ShallowRenderer();
   renderer.render(
-    <OfferPage match={{params: {id: '2'}}} offers={mockOffers} />
+    <OfferPage match={{params: {id: '2'}}} offers={mockOffers} isAuthorizationRequired={false} />
   );
   const result = renderer.getRenderOutput();
 

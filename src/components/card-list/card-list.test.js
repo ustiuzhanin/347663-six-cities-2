@@ -1,5 +1,5 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
+import ShallowRenderer from 'react-test-renderer/shallow';
 import {CardList} from './card-list.jsx';
 import {BrowserRouter} from 'react-router-dom';
 
@@ -54,8 +54,10 @@ test(`CardList's snapshot`, () => {
   ];
   /* eslint-enable camelcase*/
 
-  const tree = renderer
-    .create(
+  const renderer = new ShallowRenderer();
+
+  renderer
+    .render(
       <BrowserRouter>
         <CardList
           offers={mockCards}
@@ -69,7 +71,9 @@ test(`CardList's snapshot`, () => {
         />
       </BrowserRouter>
     )
-    .toJSON();
 
-  expect(tree).toMatchSnapshot();
+  const result = renderer.getRenderOutput();
+
+
+  expect(result).toMatchSnapshot();
 });

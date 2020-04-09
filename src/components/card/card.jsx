@@ -1,24 +1,22 @@
-import React, {useState} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
+import {connect} from 'react-redux';
+import {ActionCreator} from './../../reducer/active-card/active-card';
 import {Link} from 'react-router-dom';
 
 /* eslint-disable camelcase*/
 
-export default function Card(props) {
-  const {onCardHeaderClick, card} = props;
+const Card = (props) => {
+  const {onCardHeaderClick, card, changeActiveCard} = props;
   const {price, rating, title, type, preview_image, id} = card;
 
-  const [activeCard, setActiveCard] = useState(null);
-  // eslint-disable-next-line
-  console.log(activeCard);
-
   const cardMouseEnterHandler = (cardItem) => {
-    setActiveCard(cardItem);
+    changeActiveCard(cardItem);
   };
 
   const cardMouseLeaveHandler = () => {
-    setActiveCard(null);
+    changeActiveCard({});
   };
 
   const ratingToPercent = (stars) => (stars / 5) * 100;
@@ -66,15 +64,12 @@ export default function Card(props) {
           <Link to={`/offer/${id}`} onClick={onCardHeaderClick}>
             {title}
           </Link>
-          {/* <a href='#' onClick={onCardHeaderClick}>
-            {title}
-          </a> */}
         </h2>
         <p className='place-card__type'>{type}</p>
       </div>
     </article>
   );
-}
+};
 
 Card.propTypes = {
   card: PropTypes.shape({
@@ -83,9 +78,20 @@ Card.propTypes = {
     title: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
     preview_image: PropTypes.string.isRequired,
-    id: PropTypes.number.isRequired
+    id: PropTypes.number.isRequired,
   }).isRequired,
-  onCardHeaderClick: PropTypes.func.isRequired
+  onCardHeaderClick: PropTypes.func.isRequired,
+  changeActiveCard: PropTypes.func.isRequired,
 };
 
 /* eslint-enable camelcase*/
+
+const mapDispatchToProps = (dispatch) => ({
+  changeActiveCard: (card) => {
+    dispatch(ActionCreator.changeActiveCard(card));
+  },
+});
+
+export {Card};
+
+export default connect(null, mapDispatchToProps)(Card);
