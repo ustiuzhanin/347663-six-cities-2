@@ -59,14 +59,32 @@ const RenderMap = (props) => {
           _id: id,
         }).addTo(mapRef.current);
       });
+
+      const circle = L.circle(
+        [listOfOffers[0].location.latitude, listOfOffers[0].location.longitude],
+        { radius: 700 }
+      ).addTo(mapRef.current);
+
+      const circleBounds = circle.getBounds();
+
+      listOfOffers.forEach(({ location, title, price, id }) => {
+        if (
+          location.latitude < circleBounds.getNorth() &&
+          location.latitude > circleBounds.getSouth() &&
+          location.longitude < circleBounds.getEast() &&
+          location.longitude > circleBounds.getWest()
+        ) {
+          console.log(title + " " + price);
+        }
+      });
     }
   }, [listOfOffers]);
 
   useEffect(() => {
-    mapRef.current.eachLayer(function (layer) {
+    mapRef.current.eachLayer((layer) => {
       if (layer instanceof L.Marker) {
         if (layer.options._id === activeCard.id) {
-          console.log(layer._icon.classList.add("marker--active"));
+          layer._icon.classList.add("marker--active");
         } else {
           layer._icon.classList.remove("marker--active");
         }
