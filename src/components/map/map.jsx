@@ -1,9 +1,9 @@
-import React, {useEffect, useRef} from 'react';
-import {mapSettings} from '../../mocks/map-settings';
+import React, { useEffect, useRef } from "react";
+import { mapSettings } from "../../mocks/map-settings";
 
-import {connect} from 'react-redux';
-import L from 'leaflet';
-import PropTypes from 'prop-types';
+import { connect } from "react-redux";
+import L from "leaflet";
+import PropTypes from "prop-types";
 
 const ICON = L.icon({
   iconUrl: mapSettings.icon.url,
@@ -15,7 +15,7 @@ const ACTIVE_ICON = L.icon({
 });
 
 const RenderMap = (props) => {
-  const {listOfOffers, activeCard} = props;
+  const { listOfOffers, activeCard } = props;
 
   const mapRef = useRef(null);
 
@@ -44,18 +44,37 @@ const RenderMap = (props) => {
       ];
       const zoom = listOfOffers[0].city.location.zoom;
       mapRef.current.setView(city, zoom);
+
+      listOfOffers.forEach(({ location, price, title, id }) => {
+        L.marker([location.latitude, location.longitude], {
+          icon: new L.DivIcon({
+            className: "marker",
+            html:
+              `<a href="/offer/${id}" class="marker__link" target="_blank"></a>` +
+              `<div class="marker__wrapper">
+                <span class="marker__title">${title}</span> 
+                <span class="marker__price">€${price}</span>
+              </div>`,
+          }),
+          _id: id,
+        }).addTo(mapRef.current);
+      });
     }
   }, [listOfOffers]);
 
   useEffect(() => {
-    listOfOffers.forEach(({location, id}) => {
-      L.marker([location.latitude, location.longitude], {
-        icon: activeCard.id && activeCard.id === id ? ACTIVE_ICON : ICON,
-      }).addTo(mapRef.current);
+    mapRef.current.eachLayer(function (layer) {
+      if (layer instanceof L.Marker) {
+        if (layer.options._id === activeCard.id) {
+          console.log(layer._icon.classList.add("marker--active"));
+        } else {
+          layer._icon.classList.remove("marker--active");
+        }
+      }
     });
   }, [activeCard]);
 
-  return <div id='map' style={{height: `100%`}}></div>;
+  return <div id="map" style={{ height: `100%` }}></div>;
 };
 
 RenderMap.propTypes = {
@@ -99,6 +118,6 @@ const mapStateToProps = (state, ownProps) =>
     activeCard: state.activeCard.activeCard,
   });
 
-export {RenderMap};
+export { RenderMap };
 
 export default connect(mapStateToProps, null)(RenderMap);

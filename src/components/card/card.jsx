@@ -1,15 +1,15 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from "react";
+import PropTypes from "prop-types";
 
-import {connect} from 'react-redux';
-import {ActionCreator} from './../../reducer/active-card/active-card';
-import {Link} from 'react-router-dom';
+import { connect } from "react-redux";
+import { ActionCreator } from "./../../reducer/active-card/active-card";
+import { Link } from "react-router-dom";
 
 /* eslint-disable camelcase*/
 
 const Card = (props) => {
-  const {onCardHeaderClick, card, changeActiveCard} = props;
-  const {price, rating, title, type, preview_image, id} = card;
+  const { onCardHeaderClick, card, changeActiveCard } = props;
+  const { price, rating, title, type, preview_image, id, is_favorite } = card;
 
   const cardMouseEnterHandler = (cardItem) => {
     changeActiveCard(cardItem);
@@ -23,49 +23,55 @@ const Card = (props) => {
 
   return (
     <article
-      className='cities__place-card place-card'
+      className="cities__place-card place-card"
       onMouseEnter={() => cardMouseEnterHandler(props.card)}
       onMouseLeave={cardMouseLeaveHandler}
     >
-      <div className='cities__image-wrapper place-card__image-wrapper'>
-        <a href='#'>
+      <div className="cities__image-wrapper place-card__image-wrapper">
+        <a>
           <img
-            className='place-card__image'
+            className="place-card__image"
             src={preview_image}
-            width='260'
-            height='200'
-            alt='Place image'
+            width="260"
+            height="200"
+            alt="Place image"
           />
         </a>
       </div>
-      <div className='place-card__info'>
-        <div className='place-card__price-wrapper'>
-          <div className='place-card__price'>
-            <b className='place-card__price-value'>&euro;{price}</b>
-            <span className='place-card__price-text'>&#47;&nbsp;night</span>
+      <div className="place-card__info">
+        <div className="place-card__price-wrapper">
+          <div className="place-card__price">
+            <b className="place-card__price-value">&euro;{price}</b>
+            <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
+          {/* <button
+            className="place-card__bookmark-button place-card__bookmark-button--active button"
+            type="button"
+          > */}
           <button
-            className='place-card__bookmark-button place-card__bookmark-button--active button'
-            type='button'
+            className={`place-card__bookmark-button place-card__bookmark-button${
+              is_favorite ? "--active" : null
+            } button`}
+            type="button"
           >
-            <svg className='place-card__bookmark-icon' width='18' height='19'>
-              <use xlinkHref='#icon-bookmark'></use>
+            <svg className="place-card__bookmark-icon" width="18" height="19">
+              <use xlinkHref="#icon-bookmark"></use>
             </svg>
-            <span className='visually-hidden'>In bookmarks</span>
+            <span className="visually-hidden">In bookmarks</span>
           </button>
         </div>
-        <div className='place-card__rating rating'>
-          <div className='place-card__stars rating__stars'>
-            <span style={{width: `${ratingToPercent(rating)}%`}}></span>
-            <span className='visually-hidden'>Rating</span>
+        <div className="place-card__rating rating">
+          <div className="place-card__stars rating__stars">
+            <span style={{ width: `${ratingToPercent(rating)}%` }}></span>
+            <span className="visually-hidden">Rating</span>
           </div>
         </div>
-        <h2 className='place-card__name'>
+        <h2 className="place-card__name">
           <Link to={`/offer/${id}`} onClick={onCardHeaderClick}>
             {title}
           </Link>
         </h2>
-        <p className='place-card__type'>{type}</p>
+        <p className="place-card__type">{type}</p>
       </div>
     </article>
   );
@@ -92,6 +98,6 @@ const mapDispatchToProps = (dispatch) => ({
   },
 });
 
-export {Card};
+export { Card };
 
 export default connect(null, mapDispatchToProps)(Card);
