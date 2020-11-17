@@ -1,7 +1,8 @@
 import React, { useEffect, useRef } from "react";
 import { mapSettings } from "../../mocks/map-settings";
-
 import { connect } from "react-redux";
+import { ActionCreator } from "../../reducer/offers-in-radius/offers-in-radius";
+
 import L from "leaflet";
 import PropTypes from "prop-types";
 
@@ -15,7 +16,13 @@ const ACTIVE_ICON = L.icon({
 });
 
 const RenderMap = (props) => {
-  const { listOfOffers, activeCard } = props;
+  const {
+    listOfOffers,
+    activeCard,
+    renderCircle,
+    currentOffer,
+    addOffersInRadius,
+  } = props;
 
   const mapRef = useRef(null);
 
@@ -46,7 +53,7 @@ const RenderMap = (props) => {
       mapRef.current.setView(city, zoom);
 
       listOfOffers.forEach(({ location, price, title, id }) => {
-        L.marker([location.latitude, location.longitude], {
+        return L.marker([location.latitude, location.longitude], {
           icon: new L.DivIcon({
             className: "marker",
             html:
@@ -60,23 +67,33 @@ const RenderMap = (props) => {
         }).addTo(mapRef.current);
       });
 
-      const circle = L.circle(
-        [listOfOffers[0].location.latitude, listOfOffers[0].location.longitude],
-        { radius: 700 }
-      ).addTo(mapRef.current);
+      // renredCircle();
+      if (renderCircle) {
+        const circle = L.circle(
+          [
+            listOfOffers[0].location.latitude,
+            listOfOffers[0].location.longitude,
+          ],
+          { radius: 1100 }
+        ).addTo(mapRef.current);
 
-      const circleBounds = circle.getBounds();
-
-      listOfOffers.forEach(({ location, title, price, id }) => {
-        if (
-          location.latitude < circleBounds.getNorth() &&
-          location.latitude > circleBounds.getSouth() &&
-          location.longitude < circleBounds.getEast() &&
-          location.longitude > circleBounds.getWest()
-        ) {
-          console.log(title + " " + price);
-        }
-      });
+        const circleBounds = circle.getBounds();
+        const offersInRadius = [];
+        listOfOffers.forEach((offer) => {
+          const { location, title, price, id } = offer;
+          if (
+            location.latitude < circleBounds.getNorth() &&
+            location.latitude > circleBounds.getSouth() &&
+            location.longitude < circleBounds.getEast() &&
+            location.longitude > circleBounds.getWest()
+          ) {
+            console.log(title + " " + price);
+            offersInRadius.push(offer);
+          }
+        });
+        console.log(offersInRadius);
+        addOffersInRadius(offersInRadius);
+      }
     }
   }, [listOfOffers]);
 
@@ -136,6 +153,12 @@ const mapStateToProps = (state, ownProps) =>
     activeCard: state.activeCard.activeCard,
   });
 
+const mapDispatchToProps = (dispatch) => ({
+  addOffersInRadius: (offers) => {
+    dispatch(ActionCreator.addOffersInRadius(offers));
+  },
+});
+
 export { RenderMap };
 
-export default connect(mapStateToProps, null)(RenderMap);
+export default connect(mapStateToProps, mapDispatchToProps)(RenderMap);

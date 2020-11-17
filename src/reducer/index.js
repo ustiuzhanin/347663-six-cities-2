@@ -1,11 +1,12 @@
-import {combineReducers} from 'redux';
+import { combineReducers } from "redux";
 
-import {reducer as data} from './data/data';
-import {reducer as cityList} from './city-list/city-list';
-import {reducer as offers} from './offers/offers';
-import {reducer as auth} from './auth/auth';
-import {reducer as comments} from './comments/comments';
-import {reducer as activeCard} from './active-card/active-card';
+import { reducer as data } from "./data/data";
+import { reducer as cityList } from "./city-list/city-list";
+import { reducer as offers } from "./offers/offers";
+import { reducer as auth } from "./auth/auth";
+import { reducer as comments } from "./comments/comments";
+import { reducer as activeCard } from "./active-card/active-card";
+import { reducer as offersInRadius } from "./offers-in-radius/offers-in-radius";
 
 export default combineReducers({
   data,
@@ -13,5 +14,6 @@ export default combineReducers({
   offers,
   auth,
   comments,
-  activeCard
+  activeCard,
+  offersInRadius,
 });
