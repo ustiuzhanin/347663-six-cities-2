@@ -67,14 +67,14 @@ const RenderMap = (props) => {
         }).addTo(mapRef.current);
       });
 
-      // renredCircle();
+      mapRef.current.eachLayer((layer) => {
+        if (layer.options.name === "circle") mapRef.current.removeLayer(layer);
+      });
+
       if (renderCircle) {
         const circle = L.circle(
-          [
-            listOfOffers[0].location.latitude,
-            listOfOffers[0].location.longitude,
-          ],
-          { radius: 1100 }
+          [currentOffer.location.latitude, currentOffer.location.longitude],
+          { radius: 1100, name: "circle" }
         ).addTo(mapRef.current);
 
         const circleBounds = circle.getBounds();
@@ -87,15 +87,14 @@ const RenderMap = (props) => {
             location.longitude < circleBounds.getEast() &&
             location.longitude > circleBounds.getWest()
           ) {
-            console.log(title + " " + price);
             offersInRadius.push(offer);
           }
         });
-        console.log(offersInRadius);
+
         addOffersInRadius(offersInRadius);
       }
     }
-  }, [listOfOffers]);
+  }, [listOfOffers, currentOffer]);
 
   useEffect(() => {
     mapRef.current.eachLayer((layer) => {

@@ -8,7 +8,6 @@ const ActionType = {
 
 const ActionCreator = {
   addOffersInRadius: (offers) => {
-    console.log(offers);
     return {
       type: `ADD_OFFERS_IN_RADIUS`,
       payload: offers,
