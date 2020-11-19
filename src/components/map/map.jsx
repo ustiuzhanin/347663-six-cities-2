@@ -22,6 +22,7 @@ const RenderMap = (props) => {
     renderCircle,
     currentOffer,
     addOffersInRadius,
+    resetOffersInRadius,
   } = props;
 
   const mapRef = useRef(null);
@@ -78,8 +79,9 @@ const RenderMap = (props) => {
         ).addTo(mapRef.current);
 
         const circleBounds = circle.getBounds();
+        resetOffersInRadius();
         const offersInRadius = [];
-        listOfOffers.forEach((offer) => {
+        listOfOffers.filter((offer) => {
           const { location, title, price, id } = offer;
           if (
             location.latitude < circleBounds.getNorth() &&
@@ -87,7 +89,7 @@ const RenderMap = (props) => {
             location.longitude < circleBounds.getEast() &&
             location.longitude > circleBounds.getWest()
           ) {
-            offersInRadius.push(offer);
+            return offersInRadius.push(offer);
           }
         });
 
@@ -155,6 +157,9 @@ const mapStateToProps = (state, ownProps) =>
 const mapDispatchToProps = (dispatch) => ({
   addOffersInRadius: (offers) => {
     dispatch(ActionCreator.addOffersInRadius(offers));
+  },
+  resetOffersInRadius: () => {
+    dispatch(ActionCreator.resetOffersInRadius());
   },
 });
 
