@@ -6,15 +6,6 @@ import { ActionCreator } from "../../reducer/offers-in-radius/offers-in-radius";
 import L from "leaflet";
 import PropTypes from "prop-types";
 
-const ICON = L.icon({
-  iconUrl: mapSettings.icon.url,
-  iconSize: mapSettings.icon.size,
-});
-const ACTIVE_ICON = L.icon({
-  iconUrl: mapSettings.activeIcon.url,
-  iconSize: mapSettings.activeIcon.size,
-});
-
 const RenderMap = (props) => {
   const {
     listOfOffers,
@@ -53,8 +44,24 @@ const RenderMap = (props) => {
       const zoom = listOfOffers[0].city.location.zoom;
       mapRef.current.setView(city, zoom);
 
-      listOfOffers.forEach(({ location, price, title, id }) => {
-        return L.marker([location.latitude, location.longitude], {
+      let circle;
+      let offersInRadius = [];
+
+      mapRef.current.eachLayer((layer) => {
+        if (layer.options.name === "circle") mapRef.current.removeLayer(layer);
+      });
+
+      if (renderCircle) {
+        circle = L.circle(
+          [currentOffer.location.latitude, currentOffer.location.longitude],
+          { radius: 1100, name: "circle" }
+        ).addTo(mapRef.current);
+        resetOffersInRadius();
+      }
+
+      listOfOffers.forEach((offer) => {
+        const { location, price, title, id } = offer;
+        const marker = L.marker([location.latitude, location.longitude], {
           icon: new L.DivIcon({
             className: "marker",
             html:
@@ -65,36 +72,18 @@ const RenderMap = (props) => {
               </div>`,
           }),
           _id: id,
-        }).addTo(mapRef.current);
-      });
-
-      mapRef.current.eachLayer((layer) => {
-        if (layer.options.name === "circle") mapRef.current.removeLayer(layer);
-      });
-
-      if (renderCircle) {
-        const circle = L.circle(
-          [currentOffer.location.latitude, currentOffer.location.longitude],
-          { radius: 1100, name: "circle" }
-        ).addTo(mapRef.current);
-
-        const circleBounds = circle.getBounds();
-        resetOffersInRadius();
-        const offersInRadius = [];
-        listOfOffers.filter((offer) => {
-          const { location, title, price, id } = offer;
-          if (
-            location.latitude < circleBounds.getNorth() &&
-            location.latitude > circleBounds.getSouth() &&
-            location.longitude < circleBounds.getEast() &&
-            location.longitude > circleBounds.getWest()
-          ) {
-            return offersInRadius.push(offer);
-          }
         });
+        marker.addTo(mapRef.current);
 
-        addOffersInRadius(offersInRadius);
-      }
+        if (circle) {
+          const markerDistance = mapRef.current.distance(
+            marker.getLatLng(),
+            circle.getLatLng()
+          );
+          markerDistance <= 1100 ? offersInRadius.push(offer) : null;
+        }
+      });
+      addOffersInRadius(offersInRadius);
     }
   }, [listOfOffers, currentOffer]);
 
