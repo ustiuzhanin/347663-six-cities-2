@@ -1,12 +1,14 @@
 const initialState = {
   listOfOffers: [],
   sorting: { type: "popular", text: "Popular" },
+  offer: null,
 };
 
 const ActionType = {
   ADD_OFFERS: "ADD_OFFERS",
   CHANGE_SORTING: "CHANGE_SORTING",
   RESET_OFFERS_LIST: "RESET_OFFERS_LIST",
+  LOAD_OFFER: "LOAD_OFFER",
 };
 
 const ActionCreator = {
@@ -27,6 +29,21 @@ const ActionCreator = {
       payload: type,
     };
   },
+  loadOffer: (data) => {
+    return {
+      type: ActionType.LOAD_OFFER,
+      payload: data,
+    };
+  },
+};
+
+const Operations = {
+  loadOffer: (offerId) => (dispatch, getState, api) => {
+    return api.get(`/offers/${offerId}`).then((response) => {
+      console.log(response);
+      dispatch(ActionCreator.loadOffer(response.data));
+    });
+  },
 };
 
 const reducer = (state = initialState, action) => {
@@ -43,8 +60,12 @@ const reducer = (state = initialState, action) => {
       return Object.assign({}, state, {
         sorting: action.payload,
       });
+    case ActionType.LOAD_OFFER:
+      return Object.assign({}, state, {
+        offer: action.payload,
+      });
   }
   return state;
 };
 
-export { ActionType, ActionCreator, reducer };
+export { ActionType, ActionCreator, Operations, reducer };

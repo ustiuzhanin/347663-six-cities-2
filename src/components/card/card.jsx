@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 
 const Card = (props) => {
   const { onCardHeaderClick, card, changeActiveCard } = props;
-  const { price, rating, title, type, preview_image, id, is_favorite } = card;
+  const { price, rating, title, type, preview_image, _id, is_favorite } = card;
 
   const cardMouseEnterHandler = (cardItem) => {
     changeActiveCard(cardItem);
@@ -67,7 +67,7 @@ const Card = (props) => {
           </div>
         </div>
         <h2 className="place-card__name">
-          <Link to={`/offer/${id}`} onClick={onCardHeaderClick}>
+          <Link to={`/offer/${_id}`} onClick={onCardHeaderClick}>
             {title}
           </Link>
         </h2>
@@ -84,7 +84,7 @@ Card.propTypes = {
     title: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
     preview_image: PropTypes.string.isRequired,
-    id: PropTypes.number.isRequired,
+    _id: PropTypes.string.isRequired,
   }).isRequired,
   onCardHeaderClick: PropTypes.func.isRequired,
   changeActiveCard: PropTypes.func.isRequired,

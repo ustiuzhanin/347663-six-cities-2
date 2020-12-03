@@ -2,6 +2,8 @@ import React, { useEffect, useRef } from "react";
 import { mapSettings } from "../../mocks/map-settings";
 import { connect } from "react-redux";
 import { ActionCreator } from "../../reducer/offers-in-radius/offers-in-radius";
+import { Link } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 
 import L from "leaflet";
 import PropTypes from "prop-types";
@@ -17,6 +19,8 @@ const RenderMap = (props) => {
   } = props;
 
   const mapRef = useRef(null);
+
+  const onlickFunc = (id) => console.log("ee");
 
   useEffect(() => {
     mapRef.current = L.map(`map`, {
@@ -65,7 +69,7 @@ const RenderMap = (props) => {
           icon: new L.DivIcon({
             className: "marker",
             html:
-              `<a href="/offer/${id}" class="marker__link" target="_blank"></a>` +
+              `<button class="marker__link" onclick="onlickFunc(${id})"></button>` +
               `<div class="marker__wrapper">
                 <span class="marker__title">${title}</span> 
                 <span class="marker__price">€${price}</span>
@@ -74,6 +78,7 @@ const RenderMap = (props) => {
           _id: id,
         });
         marker.addTo(mapRef.current);
+        // `<a href="/offer/${id}" class="marker__link" target="_blank"></a>` +
 
         if (circle) {
           const markerDistance = mapRef.current.distance(
@@ -154,4 +159,7 @@ const mapDispatchToProps = (dispatch) => ({
 
 export { RenderMap };
 
-export default connect(mapStateToProps, mapDispatchToProps)(RenderMap);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withRouter(RenderMap));

@@ -1,15 +1,15 @@
-import React from 'react';
-import {connect} from 'react-redux';
-import {Route, Switch} from 'react-router-dom';
+import React from "react";
+import { connect } from "react-redux";
+import { Route, Switch } from "react-router-dom";
 
-import Home from '../home/home.jsx';
-import Login from '../login/login.jsx';
-import OfferPage from '../offer-page/offer-page.jsx';
+import Home from "../home/home.jsx";
+import Login from "../login/login.jsx";
+import OfferPage from "../offer-page/offer-page.jsx";
 
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 
 const App = (props) => {
-  const {offers} = props;
+  const { offers } = props;
 
   // const onCardHeaderClick = () => {
   //   // TODO: opens the card page/info
@@ -18,7 +18,7 @@ const App = (props) => {
   return (
     <Switch>
       <Route
-        path='/'
+        path="/"
         exact
         render={() => (
           <Home
@@ -28,8 +28,8 @@ const App = (props) => {
           />
         )}
       />
-      <Route path='/login' exact component={Login} />
-      <Route path='/offer/:id' exact component={OfferPage} />
+      <Route path="/login" exact component={Login} />
+      <Route path="/offers/:id" exact component={OfferPage} />
     </Switch>
   );
 };
@@ -41,8 +41,8 @@ App.propTypes = {
         location: PropTypes.shape({
           latitude: PropTypes.number.isRequired,
           longitude: PropTypes.number.isRequired,
-          zoom: PropTypes.number.isRequired
-        }).isRequired
+          zoom: PropTypes.number.isRequired,
+        }).isRequired,
       }).isRequired,
 
       id: PropTypes.number.isRequired,
@@ -53,16 +53,16 @@ App.propTypes = {
       location: PropTypes.shape({
         latitude: PropTypes.number.isRequired,
         longitude: PropTypes.number.isRequired,
-        zoom: PropTypes.number.isRequired
-      }).isRequired
+        zoom: PropTypes.number.isRequired,
+      }).isRequired,
     }).isRequired
-  ).isRequired
+  ).isRequired,
 };
 
 const mapStateToProps = (state) =>
   Object.assign({}, null, {
-    offers: state.data.data
+    offers: state.data.data,
   });
 
-export {App};
+export { App };
 export default connect(mapStateToProps, null)(App);

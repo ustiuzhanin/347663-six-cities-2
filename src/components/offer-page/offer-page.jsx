@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import { ActionCreator } from "../../reducer/offers/offers";
+import { ActionCreator, Operations } from "../../reducer/offers/offers";
 
 import Header from "../header/header.jsx";
 import PropTypes from "prop-types";
@@ -19,12 +19,19 @@ const OfferPage = (props) => {
     resetOffers,
     listOfOffers,
     offersInRadius,
+    loadOffer,
+    card,
   } = props;
   const { id } = props.match.params;
 
-  const idToNumber = Number(id);
-  const card = offers.find((offer) => offer.id === idToNumber);
+  useEffect(() => {
+    loadOffer(id);
+  }, []);
 
+  // const idToNumber = Number(id);
+  // const card = offers.find((offer) => offer.id === idToNumber);
+  // const card = offers.find((offer) => offer._id === id);
+  console.log(card);
   useEffect(() => {
     const activeCityOffers = [];
     resetOffers();
@@ -172,10 +179,10 @@ const OfferPage = (props) => {
                       <p className="property__text">{card.description}</p>
                     </div>
                   </div>
-                  <section className="property__reviews reviews">
+                  {/* <section className="property__reviews reviews">
                     <Comments id={id} />
                     {!isAuthorizationRequired && <CommentForm />}
-                  </section>
+                  </section> */}
                 </div>
               </div>
               <section className="property__map map">
@@ -247,6 +254,7 @@ const mapStateToProps = (state) =>
     isAuthorizationRequired: state.auth.isAuthorizationRequired,
     listOfOffers: state.offers.listOfOffers,
     offersInRadius: state.offersInRadius.offersInRadius,
+    card: state.offers.offer,
   });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -255,6 +263,9 @@ const mapDispatchToProps = (dispatch) => ({
   },
   resetOffers: () => {
     dispatch(ActionCreator.resetOffersList());
+  },
+  loadOffer: (id) => {
+    dispatch(Operations.loadOffer(id));
   },
 });
 
