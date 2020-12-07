@@ -172,11 +172,7 @@ const OfferPage = (props) => {
                 </div>
               </div>
               <section className="property__map map">
-                <Map
-                  renderCircle
-                  currentOffer={card}
-                  listOfOffers={cityOffers}
-                />
+                <Map renderCircle currentOffer={card} offers={cityOffers} />
               </section>
             </section>
             <div className="container">

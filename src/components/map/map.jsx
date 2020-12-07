@@ -10,7 +10,7 @@ import PropTypes from "prop-types";
 
 const RenderMap = (props) => {
   const {
-    listOfOffers,
+    offers,
     activeCard,
     renderCircle,
     currentOffer,
@@ -38,12 +38,12 @@ const RenderMap = (props) => {
   }, []);
 
   useEffect(() => {
-    if (listOfOffers) {
+    if (offers) {
       const city = [
-        listOfOffers[0].city.location.latitude,
-        listOfOffers[0].city.location.longitude,
+        offers[0].city.location.latitude,
+        offers[0].city.location.longitude,
       ];
-      const zoom = listOfOffers[0].city.location.zoom;
+      const zoom = offers[0].city.location.zoom;
       mapRef.current.setView(city, zoom);
 
       let circle;
@@ -61,22 +61,21 @@ const RenderMap = (props) => {
         resetOffersInRadius();
       }
 
-      listOfOffers.forEach((offer) => {
-        const { location, price, title, id } = offer;
+      offers.forEach((offer) => {
+        const { location, price, title, _id } = offer;
         const marker = L.marker([location.latitude, location.longitude], {
           icon: new L.DivIcon({
             className: "marker",
             html:
-              `<button class="marker__link" onclick="onlickFunc(${id})"></button>` +
+              `<a href="/offer/${_id}" class="marker__link"></a>` +
               `<div class="marker__wrapper">
                 <span class="marker__title">${title}</span> 
                 <span class="marker__price">€${price}</span>
               </div>`,
           }),
-          _id: id,
+          _id: _id,
         });
         marker.addTo(mapRef.current);
-        // `<a href="/offer/${id}" class="marker__link" target="_blank"></a>` +
 
         if (circle) {
           const markerDistance = mapRef.current.distance(
@@ -88,7 +87,7 @@ const RenderMap = (props) => {
       });
       addOffersInRadius(offersInRadius);
     }
-  }, [listOfOffers, currentOffer]);
+  }, [offers, currentOffer]);
 
   useEffect(() => {
     mapRef.current.eachLayer((layer) => {
@@ -106,7 +105,7 @@ const RenderMap = (props) => {
 };
 
 RenderMap.propTypes = {
-  listOfOffers: PropTypes.arrayOf(
+  offers: PropTypes.arrayOf(
     PropTypes.shape({
       city: PropTypes.shape({
         location: PropTypes.shape({
@@ -142,7 +141,6 @@ RenderMap.propTypes = {
 
 const mapStateToProps = (state, ownProps) =>
   Object.assign({}, ownProps, {
-    // listOfOffers: state.offers.cityOffers,
     activeCard: state.activeCard.activeCard,
   });
 
