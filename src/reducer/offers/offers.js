@@ -2,6 +2,7 @@ const initialState = {
   listOfOffers: [],
   sorting: { type: "popular", text: "Popular" },
   offer: null,
+  cityOffers: null,
 };
 
 const ActionType = {
@@ -9,6 +10,7 @@ const ActionType = {
   CHANGE_SORTING: "CHANGE_SORTING",
   RESET_OFFERS_LIST: "RESET_OFFERS_LIST",
   LOAD_OFFER: "LOAD_OFFER",
+  LOAD_CITY_OFFERS: "LOAD_CITY_OFFERS",
 };
 
 const ActionCreator = {
@@ -35,13 +37,26 @@ const ActionCreator = {
       payload: data,
     };
   },
+
+  loadCityOffers: (data) => {
+    return {
+      type: ActionType.LOAD_CITY_OFFERS,
+      payload: data,
+    };
+  },
 };
 
 const Operations = {
   loadOffer: (offerId) => (dispatch, getState, api) => {
-    return api.get(`/offers/${offerId}`).then((response) => {
-      console.log(response);
+    return api.get(`/offer/${offerId}`).then((response) => {
       dispatch(ActionCreator.loadOffer(response.data));
+    });
+  },
+
+  loadCityOffers: (city) => (dispatch, getState, api) => {
+    console.log(city);
+    return api.get(`/city-offers/${city}`).then((response) => {
+      dispatch(ActionCreator.loadCityOffers(response.data));
     });
   },
 };
@@ -63,6 +78,10 @@ const reducer = (state = initialState, action) => {
     case ActionType.LOAD_OFFER:
       return Object.assign({}, state, {
         offer: action.payload,
+      });
+    case ActionType.LOAD_CITY_OFFERS:
+      return Object.assign({}, state, {
+        cityOffers: action.payload,
       });
   }
   return state;

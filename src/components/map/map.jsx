@@ -20,8 +20,6 @@ const RenderMap = (props) => {
 
   const mapRef = useRef(null);
 
-  const onlickFunc = (id) => console.log("ee");
-
   useEffect(() => {
     mapRef.current = L.map(`map`, {
       center: mapSettings.defaultCity,
@@ -40,7 +38,7 @@ const RenderMap = (props) => {
   }, []);
 
   useEffect(() => {
-    if (listOfOffers.length > 0) {
+    if (listOfOffers) {
       const city = [
         listOfOffers[0].city.location.latitude,
         listOfOffers[0].city.location.longitude,
@@ -144,7 +142,7 @@ RenderMap.propTypes = {
 
 const mapStateToProps = (state, ownProps) =>
   Object.assign({}, ownProps, {
-    listOfOffers: state.offers.listOfOffers,
+    // listOfOffers: state.offers.cityOffers,
     activeCard: state.activeCard.activeCard,
   });
 

@@ -13,14 +13,13 @@ import Card from "../card/card.jsx";
 
 const OfferPage = (props) => {
   const {
-    offers,
     isAuthorizationRequired,
-    addActiveCityOffers,
-    resetOffers,
     listOfOffers,
     offersInRadius,
     loadOffer,
+    loadCityOffers,
     card,
+    cityOffers,
   } = props;
   const { id } = props.match.params;
 
@@ -28,24 +27,11 @@ const OfferPage = (props) => {
     loadOffer(id);
   }, []);
 
-  // const idToNumber = Number(id);
-  // const card = offers.find((offer) => offer.id === idToNumber);
-  // const card = offers.find((offer) => offer._id === id);
-  console.log(card);
   useEffect(() => {
-    const activeCityOffers = [];
-    resetOffers();
-
-    offers.filter((offer) => {
-      const { city } = offer;
-
-      if (city.name === card.city.name) {
-        activeCityOffers.push(offer);
-      }
-    });
-
-    addActiveCityOffers(activeCityOffers);
-  }, [offers]);
+    if (card) {
+      loadCityOffers(card.city.name);
+    }
+  }, [card]);
 
   return (
     <div>
@@ -74,7 +60,7 @@ const OfferPage = (props) => {
       <div className="page">
         <Header />
 
-        {card ? (
+        {card && (
           <main className="page__main page__main--property">
             <section className="property">
               <div className="property__gallery-container container">
@@ -187,9 +173,9 @@ const OfferPage = (props) => {
               </div>
               <section className="property__map map">
                 <Map
-                  listOfOffers={listOfOffers}
                   renderCircle
                   currentOffer={card}
+                  listOfOffers={cityOffers}
                 />
               </section>
             </section>
@@ -211,35 +197,33 @@ const OfferPage = (props) => {
               </section>
             </div>
           </main>
-        ) : null}
+        )}
       </div>
     </div>
   );
 };
 
 OfferPage.propTypes = {
-  offers: PropTypes.arrayOf(
-    PropTypes.shape({
-      city: PropTypes.shape({
-        location: PropTypes.shape({
-          latitude: PropTypes.number.isRequired,
-          longitude: PropTypes.number.isRequired,
-          zoom: PropTypes.number.isRequired,
-        }).isRequired,
-      }).isRequired,
-
-      id: PropTypes.number.isRequired,
-      price: PropTypes.number.isRequired,
-      rating: PropTypes.number.isRequired,
-      title: PropTypes.string.isRequired,
-      type: PropTypes.string.isRequired,
+  card: PropTypes.shape({
+    city: PropTypes.shape({
       location: PropTypes.shape({
         latitude: PropTypes.number.isRequired,
         longitude: PropTypes.number.isRequired,
         zoom: PropTypes.number.isRequired,
       }).isRequired,
-    }).isRequired
-  ).isRequired,
+    }).isRequired,
+
+    id: PropTypes.number.isRequired,
+    price: PropTypes.string.isRequired,
+    rating: PropTypes.number.isRequired,
+    title: PropTypes.string.isRequired,
+    type: PropTypes.string.isRequired,
+    location: PropTypes.shape({
+      latitude: PropTypes.number.isRequired,
+      longitude: PropTypes.number.isRequired,
+      zoom: PropTypes.number.isRequired,
+    }).isRequired,
+  }).isRequired,
   match: PropTypes.shape({
     params: PropTypes.shape({
       id: PropTypes.string.isRequired,
@@ -250,22 +234,18 @@ OfferPage.propTypes = {
 
 const mapStateToProps = (state) =>
   Object.assign({}, null, {
-    offers: state.data.data,
     isAuthorizationRequired: state.auth.isAuthorizationRequired,
-    listOfOffers: state.offers.listOfOffers,
     offersInRadius: state.offersInRadius.offersInRadius,
     card: state.offers.offer,
+    cityOffers: state.offers.cityOffers,
   });
 
 const mapDispatchToProps = (dispatch) => ({
-  addActiveCityOffers: (activeOffers) => {
-    dispatch(ActionCreator.addActiveCityOffers(activeOffers));
-  },
-  resetOffers: () => {
-    dispatch(ActionCreator.resetOffersList());
-  },
   loadOffer: (id) => {
     dispatch(Operations.loadOffer(id));
+  },
+  loadCityOffers: (city) => {
+    dispatch(Operations.loadCityOffers(city));
   },
 });
 

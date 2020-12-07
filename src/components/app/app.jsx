@@ -29,7 +29,7 @@ const App = (props) => {
         )}
       />
       <Route path="/login" exact component={Login} />
-      <Route path="/offers/:id" exact component={OfferPage} />
+      <Route path="/offer/:id" exact component={OfferPage} />
     </Switch>
   );
 };
@@ -46,7 +46,7 @@ App.propTypes = {
       }).isRequired,
 
       id: PropTypes.number.isRequired,
-      price: PropTypes.number.isRequired,
+      price: PropTypes.string.isRequired,
       rating: PropTypes.number.isRequired,
       title: PropTypes.string.isRequired,
       type: PropTypes.string.isRequired,
