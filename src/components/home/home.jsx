@@ -78,7 +78,7 @@ Home.propTypes = {
       }).isRequired,
 
       id: PropTypes.number.isRequired,
-      price: PropTypes.number.isRequired,
+      price: PropTypes.string.isRequired,
       rating: PropTypes.number.isRequired,
       title: PropTypes.string.isRequired,
       type: PropTypes.string.isRequired,

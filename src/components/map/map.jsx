@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from "react";
 import { mapSettings } from "../../mocks/map-settings";
 import { connect } from "react-redux";
 import { ActionCreator } from "../../reducer/offers-in-radius/offers-in-radius";
-import { Link } from "react-router-dom";
+
 import { withRouter } from "react-router-dom";
 
 import L from "leaflet";
@@ -38,7 +38,7 @@ const RenderMap = (props) => {
   }, []);
 
   useEffect(() => {
-    if (offers) {
+    if (offers.length > 0) {
       const city = [
         offers[0].city.location.latitude,
         offers[0].city.location.longitude,
@@ -142,6 +142,7 @@ RenderMap.propTypes = {
 const mapStateToProps = (state, ownProps) =>
   Object.assign({}, ownProps, {
     activeCard: state.activeCard.activeCard,
+    offers: state.offers.cityOffers,
   });
 
 const mapDispatchToProps = (dispatch) => ({

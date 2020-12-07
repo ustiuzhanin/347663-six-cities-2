@@ -2,7 +2,7 @@ const initialState = {
   listOfOffers: [],
   sorting: { type: "popular", text: "Popular" },
   offer: null,
-  cityOffers: null,
+  cityOffers: [],
 };
 
 const ActionType = {

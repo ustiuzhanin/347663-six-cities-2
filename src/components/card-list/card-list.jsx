@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import { ActionCreator } from "../../reducer/offers/offers";
+import { ActionCreator, Operations } from "../../reducer/offers/offers";
 import PropTypes from "prop-types";
 
 import Card from "../card/card.jsx";
@@ -17,13 +17,11 @@ const SortingType = {
 const CardList = (props) => {
   const {
     activeCity,
-    offers,
-    addActiveCityOffers,
-    listOfOffers,
+    cityOffers,
     onCardHeaderClick,
-    resetOffers,
     sorting,
     changeSortingType,
+    loadCityOffers,
   } = props;
 
   const [isSortPopupOpen, setIsSortPopupOpen] = useState(false);
@@ -41,18 +39,7 @@ const CardList = (props) => {
   });
 
   useEffect(() => {
-    const activeCityOffers = [];
-    resetOffers();
-
-    offers.filter((offer) => {
-      const { city } = offer;
-
-      if (city.name === activeCity) {
-        activeCityOffers.push(offer);
-      }
-    });
-
-    addActiveCityOffers(activeCityOffers);
+    loadCityOffers(activeCity);
   }, [activeCity]);
 
   const sortingClickHandler = () => {
@@ -97,7 +84,7 @@ const CardList = (props) => {
     <section className="cities__places places">
       <h2 className="visually-hidden">Places</h2>
       <b className="places__found">
-        {listOfOffers.length} places to stay in {activeCity}
+        {cityOffers.length} places to stay in {activeCity}
       </b>
       <form className="places__sorting" action="#" method="get">
         <span className="places__sorting-caption">Sort by</span>
@@ -151,7 +138,7 @@ const CardList = (props) => {
         </ul>
       </form>
       <div className="cities__places-list places__list tabs__content">
-        {sortOffers(sorting, listOfOffers).map((card) => (
+        {sortOffers(sorting, cityOffers).map((card) => (
           <Card
             key={card.id}
             card={card}
@@ -164,26 +151,31 @@ const CardList = (props) => {
 };
 
 CardList.propTypes = {
-  offers: PropTypes.arrayOf(
+  cityOffers: PropTypes.arrayOf(
     PropTypes.shape({
-      price: PropTypes.number.isRequired,
+      city: PropTypes.shape({
+        location: PropTypes.shape({
+          latitude: PropTypes.number.isRequired,
+          longitude: PropTypes.number.isRequired,
+          zoom: PropTypes.number.isRequired,
+        }).isRequired,
+      }).isRequired,
+
+      id: PropTypes.number.isRequired,
+      price: PropTypes.string.isRequired,
       rating: PropTypes.number.isRequired,
       title: PropTypes.string.isRequired,
-      preview_image: PropTypes.string.isRequired,
-    }).isRequired
-  ).isRequired,
-  listOfOffers: PropTypes.arrayOf(
-    PropTypes.shape({
-      price: PropTypes.number.isRequired,
-      rating: PropTypes.number.isRequired,
-      title: PropTypes.string.isRequired,
-      preview_image: PropTypes.string.isRequired,
+      type: PropTypes.string.isRequired,
+      location: PropTypes.shape({
+        latitude: PropTypes.number.isRequired,
+        longitude: PropTypes.number.isRequired,
+        zoom: PropTypes.number.isRequired,
+      }).isRequired,
     }).isRequired
   ).isRequired,
   activeCity: PropTypes.string.isRequired,
-  addActiveCityOffers: PropTypes.func.isRequired,
   onCardHeaderClick: PropTypes.func.isRequired,
-  resetOffers: PropTypes.func.isRequired,
+  loadCityOffers: PropTypes.func.isRequired,
   sorting: PropTypes.shape({
     type: PropTypes.string.isRequired,
     text: PropTypes.string.isRequired,
@@ -194,19 +186,16 @@ CardList.propTypes = {
 const mapStateToProps = (state, ownProps) =>
   Object.assign({}, ownProps, {
     activeCity: state.cityList.activeCity,
-    listOfOffers: state.offers.listOfOffers,
+    cityOffers: state.offers.cityOffers,
     sorting: state.offers.sorting,
   });
 
 const mapDispatchToProps = (dispatch) => ({
-  addActiveCityOffers: (activeOffers) => {
-    dispatch(ActionCreator.addActiveCityOffers(activeOffers));
-  },
   changeSortingType: (type) => {
     dispatch(ActionCreator.changeSorting(type));
   },
-  resetOffers: () => {
-    dispatch(ActionCreator.resetOffersList());
+  loadCityOffers: (city) => {
+    dispatch(Operations.loadCityOffers(city));
   },
 });
 

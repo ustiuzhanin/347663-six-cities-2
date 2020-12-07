@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import { ActionCreator, Operations } from "../../reducer/offers/offers";
+import { Operations } from "../../reducer/offers/offers";
 
 import Header from "../header/header.jsx";
 import PropTypes from "prop-types";
@@ -14,12 +14,10 @@ import Card from "../card/card.jsx";
 const OfferPage = (props) => {
   const {
     isAuthorizationRequired,
-    listOfOffers,
     offersInRadius,
     loadOffer,
     loadCityOffers,
     card,
-    cityOffers,
   } = props;
   const { id } = props.match.params;
 
@@ -172,7 +170,7 @@ const OfferPage = (props) => {
                 </div>
               </div>
               <section className="property__map map">
-                <Map renderCircle currentOffer={card} offers={cityOffers} />
+                <Map renderCircle currentOffer={card} />
               </section>
             </section>
             <div className="container">
@@ -233,7 +231,6 @@ const mapStateToProps = (state) =>
     isAuthorizationRequired: state.auth.isAuthorizationRequired,
     offersInRadius: state.offersInRadius.offersInRadius,
     card: state.offers.offer,
-    cityOffers: state.offers.cityOffers,
   });
 
 const mapDispatchToProps = (dispatch) => ({
