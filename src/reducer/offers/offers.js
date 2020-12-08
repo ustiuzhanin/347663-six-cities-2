@@ -1,6 +1,7 @@
 const initialState = {
   sorting: { type: "popular", text: "Popular" },
   cityOffers: [],
+  offer: null,
 };
 
 const ActionType = {
@@ -39,7 +40,6 @@ const Operations = {
   },
 
   loadCityOffers: (city) => (dispatch, getState, api) => {
-    console.log(city);
     return api.get(`/city-offers/${city}`).then((response) => {
       dispatch(ActionCreator.loadCityOffers(response.data));
     });

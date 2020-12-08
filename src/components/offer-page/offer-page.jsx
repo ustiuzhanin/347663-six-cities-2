@@ -27,6 +27,8 @@ const OfferPage = (props) => {
 
   useEffect(() => {
     if (card) {
+      // if (Object.keys(card).length !== 0) {
+      console.log(card);
       loadCityOffers(card.city.name);
     }
   }, [card]);
@@ -58,6 +60,7 @@ const OfferPage = (props) => {
       <div className="page">
         <Header />
 
+        {/* {Object.keys(card).length !== 0 && ( */}
         {card && (
           <main className="page__main page__main--property">
             <section className="property">
@@ -181,11 +184,7 @@ const OfferPage = (props) => {
                 <div className="near-places__list places__list">
                   {offersInRadius &&
                     offersInRadius.map((card) => (
-                      <Card
-                        key={card.id}
-                        card={card}
-                        // onCardHeaderClick={onCardHeaderClick}
-                      />
+                      <Card key={card.id} card={card} />
                     ))}
                 </div>
               </section>
@@ -198,26 +197,29 @@ const OfferPage = (props) => {
 };
 
 OfferPage.propTypes = {
-  card: PropTypes.shape({
-    city: PropTypes.shape({
+  card: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.shape({
+      city: PropTypes.shape({
+        location: PropTypes.shape({
+          latitude: PropTypes.number.isRequired,
+          longitude: PropTypes.number.isRequired,
+          zoom: PropTypes.number.isRequired,
+        }).isRequired,
+      }).isRequired,
+
+      id: PropTypes.number.isRequired,
+      price: PropTypes.string.isRequired,
+      rating: PropTypes.number.isRequired,
+      title: PropTypes.string.isRequired,
+      type: PropTypes.string.isRequired,
       location: PropTypes.shape({
         latitude: PropTypes.number.isRequired,
         longitude: PropTypes.number.isRequired,
         zoom: PropTypes.number.isRequired,
       }).isRequired,
     }).isRequired,
-
-    id: PropTypes.number.isRequired,
-    price: PropTypes.string.isRequired,
-    rating: PropTypes.number.isRequired,
-    title: PropTypes.string.isRequired,
-    type: PropTypes.string.isRequired,
-    location: PropTypes.shape({
-      latitude: PropTypes.number.isRequired,
-      longitude: PropTypes.number.isRequired,
-      zoom: PropTypes.number.isRequired,
-    }).isRequired,
-  }).isRequired,
+  ]),
   match: PropTypes.shape({
     params: PropTypes.shape({
       id: PropTypes.string.isRequired,

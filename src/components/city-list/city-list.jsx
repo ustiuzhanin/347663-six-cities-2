@@ -34,13 +34,6 @@ const CityList = (props) => {
 };
 
 CityList.propTypes = {
-  offers: PropTypes.arrayOf(
-    PropTypes.shape({
-      city: PropTypes.shape({
-        name: PropTypes.string.isRequired,
-      }).isRequired,
-    }).isRequired
-  ).isRequired,
   listOfCities: PropTypes.array.isRequired,
   activeCity: PropTypes.string.isRequired,
   onCityLinkClick: PropTypes.func.isRequired,

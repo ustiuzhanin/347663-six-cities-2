@@ -18,7 +18,6 @@ const CardList = (props) => {
   const {
     activeCity,
     cityOffers,
-    onCardHeaderClick,
     sorting,
     changeSortingType,
     loadCityOffers,
@@ -139,11 +138,7 @@ const CardList = (props) => {
       </form>
       <div className="cities__places-list places__list tabs__content">
         {sortOffers(sorting, cityOffers).map((card) => (
-          <Card
-            key={card.id}
-            card={card}
-            onCardHeaderClick={onCardHeaderClick}
-          />
+          <Card key={card.id} card={card} />
         ))}
       </div>
     </section>
@@ -174,7 +169,6 @@ CardList.propTypes = {
     }).isRequired
   ).isRequired,
   activeCity: PropTypes.string.isRequired,
-  onCardHeaderClick: PropTypes.func.isRequired,
   loadCityOffers: PropTypes.func.isRequired,
   sorting: PropTypes.shape({
     type: PropTypes.string.isRequired,

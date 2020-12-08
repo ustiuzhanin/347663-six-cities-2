@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 /* eslint-disable camelcase*/
 
 const Card = (props) => {
-  const { onCardHeaderClick, card, changeActiveCard } = props;
+  const { card, changeActiveCard } = props;
   const { price, rating, title, type, preview_image, _id, is_favorite } = card;
 
   const cardMouseEnterHandler = (cardItem) => {
@@ -67,9 +67,7 @@ const Card = (props) => {
           </div>
         </div>
         <h2 className="place-card__name">
-          <Link to={`/offer/${_id}`} onClick={onCardHeaderClick}>
-            {title}
-          </Link>
+          <Link to={`/offer/${_id}`}>{title}</Link>
         </h2>
         <p className="place-card__type">{type}</p>
       </div>
@@ -86,7 +84,6 @@ Card.propTypes = {
     preview_image: PropTypes.string.isRequired,
     _id: PropTypes.string.isRequired,
   }).isRequired,
-  onCardHeaderClick: PropTypes.func.isRequired,
   changeActiveCard: PropTypes.func.isRequired,
 };
 
