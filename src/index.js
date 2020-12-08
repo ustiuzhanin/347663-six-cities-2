@@ -1,15 +1,15 @@
-import {createStore, applyMiddleware} from 'redux';
-import {Provider} from 'react-redux';
-import React from 'react';
-import ReactDOM from 'react-dom';
-import thunk from 'redux-thunk';
-import {compose} from 'recompose';
-import createAPI from './api';
-import {Operations} from './reducer/data/data';
-import {BrowserRouter} from 'react-router-dom';
+import { createStore, applyMiddleware } from "redux";
+import { Provider } from "react-redux";
+import React from "react";
+import ReactDOM from "react-dom";
+import thunk from "redux-thunk";
+import { compose } from "recompose";
+import createAPI from "./api";
+import { Operations } from "./reducer/data/data";
+import { BrowserRouter } from "react-router-dom";
 
-import App from './components/app/app.jsx';
-import reducer from './reducer/index';
+import App from "./components/app/app.jsx";
+import reducer from "./reducer/index";
 
 const init = () => {
   const api = createAPI((...args) => store.dispatch(...args));
@@ -24,7 +24,7 @@ const init = () => {
     )
   );
 
-  store.dispatch(Operations.loadData());
+  // store.dispatch(Operations.loadData());
 
   ReactDOM.render(
     <Provider store={store}>
