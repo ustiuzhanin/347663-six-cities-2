@@ -92,7 +92,7 @@ const RenderMap = (props) => {
   useEffect(() => {
     mapRef.current.eachLayer((layer) => {
       if (layer instanceof L.Marker) {
-        if (layer.options._id === activeCard.id) {
+        if (layer.options._id === activeCard._id) {
           layer._icon.classList.add("marker--active");
         } else {
           layer._icon.classList.remove("marker--active");

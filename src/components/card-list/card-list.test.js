@@ -1,7 +1,7 @@
-import React from 'react';
-import ShallowRenderer from 'react-test-renderer/shallow';
-import {CardList} from './card-list.jsx';
-import {BrowserRouter} from 'react-router-dom';
+import React from "react";
+import ShallowRenderer from "react-test-renderer/shallow";
+import { CardList } from "./card-list.jsx";
+import { BrowserRouter } from "react-router-dom";
 
 test(`CardList's snapshot`, () => {
   /* eslint-disable camelcase*/
@@ -9,7 +9,7 @@ test(`CardList's snapshot`, () => {
     {
       city: {
         name: `Dusseldorf`,
-        location: {latitude: 51.225402, longitude: 6.776314, zoom: 13}
+        location: { latitude: 51.225402, longitude: 6.776314, zoom: 13 },
       },
       preview_image: `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/9.jpg`,
       images: [
@@ -26,7 +26,7 @@ test(`CardList's snapshot`, () => {
         `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/8.jpg`,
         `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/9.jpg`,
         `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/11.jpg`,
-        `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/16.jpg`
+        `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/16.jpg`,
       ],
       title: `Canal View Prinsengracht`,
       is_favorite: false,
@@ -41,39 +41,36 @@ test(`CardList's snapshot`, () => {
         id: 25,
         name: `Angelina`,
         is_pro: true,
-        avatar_url: `img/avatar-angelina.jpg`
+        avatar_url: `img/avatar-angelina.jpg`,
       },
       description: `This is a place for dreamers to reset, reflect, and create. Designed with a 'slow' pace in mind, our hope is that you enjoy every part of your stay; from making local coffee by drip in the morning, choosing the perfect record to put on as the sun sets.`,
       location: {
         latitude: 51.248402000000006,
         longitude: 6.763314,
-        zoom: 16
+        zoom: 16,
       },
-      id: 1
-    }
+      id: 1,
+    },
   ];
   /* eslint-enable camelcase*/
 
   const renderer = new ShallowRenderer();
 
-  renderer
-    .render(
-      <BrowserRouter>
-        <CardList
-          offers={mockCards}
-          listOfOffers={mockCards}
-          onCardHeaderClick={jest.fn()}
-          addActiveCityOffers={jest.fn()}
-          activeCity={`Amsterdam`}
-          resetOffers={jest.fn()}
-          sorting={{type: 'popular', text: 'Popular'}}
-          changeSortingType={jest.fn()}
-        />
-      </BrowserRouter>
-    )
+  renderer.render(
+    <BrowserRouter>
+      <CardList
+        offers={mockCards}
+        listOfOffers={mockCards}
+        onCardHeaderClick={jest.fn()}
+        activeCity={`Amsterdam`}
+        resetOffers={jest.fn()}
+        sorting={{ type: "popular", text: "Popular" }}
+        changeSortingType={jest.fn()}
+      />
+    </BrowserRouter>
+  );
 
   const result = renderer.getRenderOutput();
-
 
   expect(result).toMatchSnapshot();
 });

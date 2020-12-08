@@ -1,13 +1,13 @@
-import {reducer, ActionType, ActionCreator} from './offers';
+import { reducer, ActionType, ActionCreator } from "./offers";
 
 describe(`reducer works correctly`, () => {
   it(`undefined action doesnt affect the state`, () => {
     expect(reducer(undefined, {})).toEqual({
       listOfOffers: [],
       sorting: {
-        text: 'Popular',
-        type: 'popular'
-      }
+        text: "Popular",
+        type: "popular",
+      },
     });
   });
 
@@ -15,23 +15,23 @@ describe(`reducer works correctly`, () => {
     expect(
       reducer(
         {
-          listOfOffers: []
+          listOfOffers: [],
         },
-        {type: ActionType.ADD_OFFERS, payload: [{}, {}, {}]}
+        { type: ActionType.ADD_OFFERS, payload: [{}, {}, {}] }
       )
     ).toEqual({
-      listOfOffers: [{}, {}, {}]
+      listOfOffers: [{}, {}, {}],
     });
 
     expect(
       reducer(
         {
-          listOfOffers: []
+          listOfOffers: [],
         },
-        {type: ActionType.RESET_OFFERS_LIST}
+        { type: ActionType.RESET_OFFERS_LIST }
       )
     ).toEqual({
-      listOfOffers: []
+      listOfOffers: [],
     });
   });
 });
@@ -39,16 +39,10 @@ describe(`reducer works correctly`, () => {
 describe(`action creators works correctly`, () => {
   it(`addActiveCityOffers returns correct value`, () => {
     expect(
-      ActionCreator.addActiveCityOffers([{city: `SPB`}, {city: `MSC`}])
+      ActionCreator.addActiveCityOffers([{ city: `SPB` }, { city: `MSC` }])
     ).toEqual({
       type: ActionType.ADD_OFFERS,
-      payload: [{city: `SPB`}, {city: `MSC`}]
-    });
-  });
-
-  it(`resetOffersList returns correct value`, () => {
-    expect(ActionCreator.resetOffersList()).toEqual({
-      type: ActionType.RESET_OFFERS_LIST
+      payload: [{ city: `SPB` }, { city: `MSC` }],
     });
   });
 });
