@@ -5,7 +5,6 @@ import ReactDOM from "react-dom";
 import thunk from "redux-thunk";
 import { compose } from "recompose";
 import createAPI from "./api";
-import { Operations } from "./reducer/data/data";
 import { BrowserRouter } from "react-router-dom";
 
 import App from "./components/app/app.jsx";
@@ -23,8 +22,6 @@ const init = () => {
         : (f) => f
     )
   );
-
-  // store.dispatch(Operations.loadData());
 
   ReactDOM.render(
     <Provider store={store}>

@@ -1,6 +1,6 @@
-import React from 'react';
-import {Login} from './login.jsx';
-import ShallowRenderer from 'react-test-renderer/shallow';
+import React from "react";
+import { Login } from "./signup.jsx.js";
+import ShallowRenderer from "react-test-renderer/shallow";
 
 test(`Login's Snapshot`, () => {
   const renderer = new ShallowRenderer();

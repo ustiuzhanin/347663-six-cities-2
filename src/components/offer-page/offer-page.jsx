@@ -27,8 +27,6 @@ const OfferPage = (props) => {
 
   useEffect(() => {
     if (card) {
-      // if (Object.keys(card).length !== 0) {
-      console.log(card);
       loadCityOffers(card.city.name);
     }
   }, [card]);
@@ -60,7 +58,6 @@ const OfferPage = (props) => {
       <div className="page">
         <Header />
 
-        {/* {Object.keys(card).length !== 0 && ( */}
         {card && (
           <main className="page__main page__main--property">
             <section className="property">

@@ -3,14 +3,14 @@ import { connect } from "react-redux";
 import { Route, Switch } from "react-router-dom";
 
 import Home from "../home/home.jsx";
-import Login from "../login/login.jsx";
+import Signup from "../signup/signup.jsx";
 import OfferPage from "../offer-page/offer-page.jsx";
 
 const App = (props) => {
   return (
     <Switch>
       <Route path="/" exact render={() => <Home key={Math.random()} />} />
-      <Route path="/login" exact component={Login} />
+      <Route path="/login" exact component={Signup} />
       <Route path="/offer/:id" exact component={OfferPage} />
     </Switch>
   );
