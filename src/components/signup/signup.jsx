@@ -11,13 +11,17 @@ const Login = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const { isAuthorizationRequired, method } = props;
+
   const onFormSubmit = (event) => {
     event.preventDefault();
-    const { requestSignUp } = props;
-    requestSignUp(email, password, name);
+    const { requestSignUp, requestLogin } = props;
+
+    return method === "Sign up"
+      ? requestSignUp(email, password, name)
+      : requestLogin(email, password);
   };
 
-  const { isAuthorizationRequired } = props;
   if (!isAuthorizationRequired) {
     return <Redirect to="/" />;
   }
@@ -51,24 +55,26 @@ const Login = (props) => {
         <main className="page__main page__main--login">
           <div className="page__login-container container">
             <section className="login">
-              <h1 className="login__title">Sign up</h1>
+              <h1 className="login__title">{method}</h1>
               <form
                 className="login__form form"
                 action="#"
                 method="post"
                 onSubmit={(evt) => onFormSubmit(evt)}
               >
-                <div className="login__input-wrapper form__input-wrapper">
-                  <label className="visually-hidden">Name</label>
-                  <input
-                    className="login__input form__input"
-                    type="text"
-                    name="name"
-                    placeholder="Name"
-                    required=""
-                    onChange={(evt) => setName(evt.target.value)}
-                  />
-                </div>
+                {method === "Sign up" && (
+                  <div className="login__input-wrapper form__input-wrapper">
+                    <label className="visually-hidden">Name</label>
+                    <input
+                      className="login__input form__input"
+                      type="text"
+                      name="name"
+                      placeholder="Name"
+                      required=""
+                      onChange={(evt) => setName(evt.target.value)}
+                    />
+                  </div>
+                )}
                 <div className="login__input-wrapper form__input-wrapper">
                   <label className="visually-hidden">E-mail</label>
                   <input
@@ -95,7 +101,7 @@ const Login = (props) => {
                   className="login__submit form__submit button"
                   type="submit"
                 >
-                  Sign up
+                  {method}
                 </button>
               </form>
             </section>
@@ -115,6 +121,7 @@ const Login = (props) => {
 
 Login.propTypes = {
   requestSignUp: PropTypes.func.isRequired,
+  requestLogin: PropTypes.func.isRequired,
   isAuthorizationRequired: PropTypes.bool.isRequired,
 };
 
@@ -126,6 +133,9 @@ const mapStateToProps = (state) =>
 const mapDispatchToProps = (dispatch) => ({
   requestSignUp: (email, password, name) => {
     dispatch(Operations.requestSignUp(email, password, name));
+  },
+  requestLogin: (email, password) => {
+    dispatch(Operations.requestLogin(email, password));
   },
 });
 

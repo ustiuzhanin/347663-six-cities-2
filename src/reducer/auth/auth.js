@@ -5,6 +5,7 @@ const initialState = {
 
 const ActionType = {
   REQUEST_SIGNUP: `REQUEST_SIGNUP`,
+  REQUEST_LOGIN: `REQUEST_LOGIN`,
   REQUIRED_AUTHORIZATION: "REQUIRED_AUTHORIZATION",
 };
 
@@ -12,6 +13,13 @@ const ActionCreator = {
   requestSignUp: (user) => {
     return {
       type: ActionType.REQUEST_SIGNUP,
+      payload: user,
+    };
+  },
+
+  requestLogin: (user) => {
+    return {
+      type: ActionType.REQUEST_LOGIN,
       payload: user,
     };
   },
@@ -25,14 +33,6 @@ const ActionCreator = {
 };
 
 const Operations = {
-  // requestSignUp: (email, password) => (dispatch, getState, api) => {
-  //   return api.post(`/login`, {email, password}).then((response) => {
-  //     dispatch(ActionCreator.requestSignUp(response.data));
-  //     if (response.status === 200) {
-  //       dispatch(ActionCreator.requireAuthorization(false));
-  //     }
-  //   });
-  // }
   requestSignUp: (email, password, name) => (dispatch, getState, api) => {
     return api
       .post(`/auth/signup`, { email, password, name })
@@ -43,11 +43,24 @@ const Operations = {
         }
       });
   },
+  requestLogin: (email, password) => (dispatch, getState, api) => {
+    return api.post(`/auth/login`, { email, password }).then((response) => {
+      dispatch(ActionCreator.requestSignUp(response.data));
+      if (response.status === 200) {
+        dispatch(ActionCreator.requireAuthorization(false));
+      }
+    });
+  },
 };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case ActionType.REQUEST_SIGNUP:
+      return Object.assign({}, state, {
+        user: action.payload,
+      });
+
+    case ActionType.REQUEST_LOGIN:
       return Object.assign({}, state, {
         user: action.payload,
       });
