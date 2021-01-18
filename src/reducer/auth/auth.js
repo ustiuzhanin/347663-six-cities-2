@@ -38,6 +38,12 @@ const Operations = {
       .post(`/auth/signup`, { email, password, name })
       .then((response) => {
         dispatch(ActionCreator.requestSignUp(response.data));
+        if (response.status === 201) {
+          return api.post(`/auth/login`, { email, password });
+        }
+      })
+      .then((response) => {
+        dispatch(ActionCreator.requestLogin(response.data));
         if (response.status === 200) {
           dispatch(ActionCreator.requireAuthorization(false));
         }
@@ -45,7 +51,7 @@ const Operations = {
   },
   requestLogin: (email, password) => (dispatch, getState, api) => {
     return api.post(`/auth/login`, { email, password }).then((response) => {
-      dispatch(ActionCreator.requestSignUp(response.data));
+      dispatch(ActionCreator.requestLogin(response.data));
       if (response.status === 200) {
         dispatch(ActionCreator.requireAuthorization(false));
       }
@@ -56,10 +62,6 @@ const Operations = {
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case ActionType.REQUEST_SIGNUP:
-      return Object.assign({}, state, {
-        user: action.payload,
-      });
-
     case ActionType.REQUEST_LOGIN:
       return Object.assign({}, state, {
         user: action.payload,
