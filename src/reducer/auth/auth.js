@@ -37,25 +37,46 @@ const Operations = {
     return api
       .post(`/auth/signup`, { email, password, name })
       .then((response) => {
-        dispatch(ActionCreator.requestSignUp(response.data));
         if (response.status === 201) {
+          dispatch(ActionCreator.requestSignUp(response.data));
           return api.post(`/auth/login`, { email, password });
         }
       })
       .then((response) => {
-        dispatch(ActionCreator.requestLogin(response.data));
         if (response.status === 200) {
+          dispatch(ActionCreator.requestLogin(response.data));
           dispatch(ActionCreator.requireAuthorization(false));
         }
       });
   },
   requestLogin: (email, password) => (dispatch, getState, api) => {
-    return api.post(`/auth/login`, { email, password }).then((response) => {
-      dispatch(ActionCreator.requestLogin(response.data));
-      if (response.status === 200) {
-        dispatch(ActionCreator.requireAuthorization(false));
-      }
-    });
+    return api
+      .post(`/auth/login`, { email, password })
+      .then((response) => {
+        if (response.status === 200) {
+          localStorage.setItem("token", response.data.token);
+          dispatch(ActionCreator.requestLogin(response.data));
+          dispatch(ActionCreator.requireAuthorization(false));
+        }
+      })
+      .catch((err) => console.log(err));
+  },
+  autoAuth: () => (dispatch, getState, api) => {
+    const token = localStorage.token;
+
+    return api
+      .get(`auth/auto-auth`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => {
+        if (response.status === 200) {
+          dispatch(ActionCreator.requestLogin(response.data));
+          dispatch(ActionCreator.requireAuthorization(false));
+        }
+      })
+      .catch((err) => console.log(err));
   },
 };
 
