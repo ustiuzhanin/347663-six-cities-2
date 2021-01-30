@@ -138,7 +138,7 @@ const CardList = (props) => {
       </form>
       <div className="cities__places-list places__list tabs__content">
         {sortOffers(sorting, cityOffers).map((card) => (
-          <Card key={card.id} card={card} />
+          <Card key={card._id} card={card} />
         ))}
       </div>
     </section>
@@ -156,7 +156,7 @@ CardList.propTypes = {
         }).isRequired,
       }).isRequired,
 
-      id: PropTypes.number.isRequired,
+      _id: PropTypes.string.isRequired,
       price: PropTypes.string.isRequired,
       rating: PropTypes.number.isRequired,
       title: PropTypes.string.isRequired,

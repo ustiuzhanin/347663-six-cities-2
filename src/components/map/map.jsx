@@ -114,7 +114,7 @@ RenderMap.propTypes = {
           zoom: PropTypes.number.isRequired,
         }).isRequired,
       }).isRequired,
-      id: PropTypes.number.isRequired,
+      _id: PropTypes.string.isRequired,
       location: PropTypes.shape({
         latitude: PropTypes.number.isRequired,
         longitude: PropTypes.number.isRequired,
@@ -130,7 +130,7 @@ RenderMap.propTypes = {
         zoom: PropTypes.number,
       }),
     }),
-    id: PropTypes.number,
+    _id: PropTypes.string,
     location: PropTypes.shape({
       latitude: PropTypes.number,
       longitude: PropTypes.number,
