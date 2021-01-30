@@ -17,17 +17,17 @@ const CityList = (props) => {
     }
   };
 
-  return listOfCities.map((city, i) => (
-    <li className="locations__item" key={`${city}${i}`}>
+  return listOfCities.map(({ name }, i) => (
+    <li className="locations__item" key={`${name}${i}`}>
       <a
         className={`locations__item-link tabs__item ${
-          city === activeCity && `tabs__item--active`
+          name === activeCity && `tabs__item--active`
         }`}
         href="#"
-        id={city}
+        id={name}
         onClick={(e) => handleCityLinkClick(e)}
       >
-        <span>{city}</span>
+        <span>{name}</span>
       </a>
     </li>
   ));
