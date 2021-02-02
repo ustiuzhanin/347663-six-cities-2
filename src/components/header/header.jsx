@@ -1,6 +1,7 @@
 import React from "react";
 
 import ProfileBtn from "../profile-btn/profile-btn.jsx";
+import LogoutBtn from "../logout-btn/logout-btn.jsx";
 
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
@@ -28,7 +29,10 @@ const Header = (props) => {
               <ProfileBtn url="/signup" title="Sign Up" />
             </>
           ) : (
-            <ProfileBtn url="/profile" title={user.email} />
+            <>
+              <ProfileBtn url="/profile" title={user.email} />
+              <LogoutBtn />
+            </>
           )}
         </div>
       </div>

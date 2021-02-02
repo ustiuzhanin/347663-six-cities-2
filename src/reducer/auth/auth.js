@@ -6,6 +6,7 @@ const initialState = {
 const ActionType = {
   REQUEST_SIGNUP: `REQUEST_SIGNUP`,
   REQUEST_LOGIN: `REQUEST_LOGIN`,
+  LOGOUT_USER: "LOGOUT_USER",
   REQUIRED_AUTHORIZATION: "REQUIRED_AUTHORIZATION",
 };
 
@@ -28,6 +29,12 @@ const ActionCreator = {
     return {
       type: ActionType.REQUIRED_AUTHORIZATION,
       payload: status,
+    };
+  },
+
+  logoutUser: () => {
+    return {
+      type: ActionType.LOGOUT_USER,
     };
   },
 };
@@ -64,6 +71,10 @@ const Operations = {
   autoAuth: () => (dispatch, getState, api) => {
     const token = localStorage.token;
 
+    if (!token) {
+      return;
+    }
+
     return api
       .get(`auth/auto-auth`, {
         headers: {
@@ -74,6 +85,8 @@ const Operations = {
         if (response.status === 200) {
           dispatch(ActionCreator.requestLogin(response.data));
           dispatch(ActionCreator.requireAuthorization(false));
+        } else {
+          localStorage.removeItem("token");
         }
       })
       .catch((err) => console.log(err));
@@ -91,6 +104,11 @@ const reducer = (state = initialState, action) => {
     case ActionType.REQUIRED_AUTHORIZATION:
       return Object.assign({}, state, {
         isAuthorizationRequired: action.payload,
+      });
+
+    case ActionType.LOGOUT_USER:
+      return Object.assign({}, state, {
+        user: {},
       });
   }
 
