@@ -419,6 +419,7 @@ img {
 }
 .header__nav-item {
   margin-bottom: 15px;
+  margin-left: 10px;
 }
 .header__nav-link {
   display: -webkit-box;
@@ -434,7 +435,20 @@ img {
   background-color: #4481c3;
   color: #fff;
   padding: 8px 12px;
+  border: none;
   border-radius: 7px;
+}
+.header__nav-link--btn {
+  cursor: pointer;
+}
+.header__nav-link--logout {
+  width: 20px;
+  height: 20px;
+
+  position: relative;
+  background-image: url(../img/logout.svg);
+  background-size: 100%;
+  background-repeat: no-repeat;
 }
 .header__nav-link:focus,
 .header__nav-link:hover {

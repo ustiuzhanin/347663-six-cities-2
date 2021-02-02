@@ -23,17 +23,22 @@ const Header = (props) => {
               />
             </Link>
           </div>
-          {isAuthorizationRequired ? (
-            <>
-              <ProfileBtn url="/login" title="Login" />
-              <ProfileBtn url="/signup" title="Sign Up" />
-            </>
-          ) : (
-            <>
-              <ProfileBtn url="/profile" title={user.email} />
-              <LogoutBtn />
-            </>
-          )}
+
+          <nav className="header__nav">
+            <ul className="header__nav-list">
+              {isAuthorizationRequired ? (
+                <>
+                  <ProfileBtn url="/login" title="Login" />
+                  <ProfileBtn url="/signup" title="Sign Up" />
+                </>
+              ) : (
+                <>
+                  <ProfileBtn url="/profile" title={user.email} />
+                  <LogoutBtn />
+                </>
+              )}
+            </ul>
+          </nav>
         </div>
       </div>
     </header>

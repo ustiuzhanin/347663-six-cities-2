@@ -12,9 +12,16 @@ const logoutBtn = (props) => {
   };
 
   return (
-    <button type="button" onClick={logoutClickHandler}>
-      Logout
-    </button>
+    <li className="header__nav-item user">
+      <button
+        className="header__nav-link header__nav-link--btn"
+        type="button"
+        onClick={logoutClickHandler}
+      >
+        <div className="header__nav-link--logout"></div>
+        <div className="visually-hidden">Logout</div>
+      </button>
+    </li>
   );
 };
 
