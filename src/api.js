@@ -1,5 +1,5 @@
 import axios from "axios";
-// import { ActionCreator } from "./reducer/errors/errors";
+import { ActionCreator } from "./reducer/errors/errors";
 
 export default function createAPI(dispatch) {
   const api = axios.create({
@@ -11,9 +11,7 @@ export default function createAPI(dispatch) {
   const onSucces = (response) => response;
 
   const onFail = (err) => {
-    // eslint-disable-next-line
-    console.log(err);
-    // dispatch(ActionCreator.showErrorMessage({ err: err.code }));
+    dispatch(ActionCreator.showErrorMessage({ err: err }));
     return err;
   };
 

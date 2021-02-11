@@ -5,6 +5,7 @@ import { Route, Switch } from "react-router-dom";
 import Home from "../home/home.jsx";
 import Signup from "../signup/signup.jsx";
 import OfferPage from "../offer-page/offer-page.jsx";
+import ErrorModal from "../error-modal/error-modal.jsx";
 import { Operations } from "../../reducer/auth/auth";
 
 const App = (props) => {
@@ -13,8 +14,14 @@ const App = (props) => {
     autoAuth();
   }, []);
 
+  const { errorMessage } = props;
+  const showMessage = Object.entries(errorMessage).length !== 0 && (
+    <ErrorModal error={errorMessage.err} />
+  );
+
   return (
     <Switch>
+      {showMessage}
       <Route path="/" exact render={() => <Home key={Math.random()} />} />
       <Route path="/login" exact render={() => <Signup method="Login" />} />
       <Route path="/signup" exact render={() => <Signup method="Sign up" />} />
@@ -23,6 +30,11 @@ const App = (props) => {
   );
 };
 
+const mapStateToProps = () => (state, ownProps) =>
+  Object.assign({}, ownProps, {
+    errorMessage: state.errors.errorMessage,
+  });
+
 const mapDispatchToProps = (dispatch) => ({
   autoAuth: () => {
     dispatch(Operations.autoAuth());
@@ -30,4 +42,4 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 export { App };
-export default connect(null, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);
