@@ -23,7 +23,7 @@ const OfferPage = (props) => {
 
   useEffect(() => {
     loadOffer(id);
-  }, []);
+  }, [id]);
 
   useEffect(() => {
     if (card) {

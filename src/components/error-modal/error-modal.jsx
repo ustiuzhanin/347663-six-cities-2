@@ -8,7 +8,8 @@ const ModalError = (props) => {
     <section className="modal">
       <h2 className="modal__title">An error occurred!</h2>
       <p className="modal__text">
-        {`Status: ${error.response.status} ${error.response.statusText}`}
+        {error.response &&
+          `Status: ${error.response.status} ${error.response.statusText}`}
         <br />
         {error.message}
         <br />
