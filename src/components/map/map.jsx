@@ -63,16 +63,20 @@ const RenderMap = (props) => {
 
       offers.forEach((offer) => {
         const { location, price, title, _id } = offer;
+        let href = currentOffer._id !== _id ? `href="/offer/${_id}"` : null;
         const marker = L.marker([location.latitude, location.longitude], {
           icon: new L.DivIcon({
             className: "marker",
             html:
-              `<a href="/offer/${_id}" class="marker__link"></a>` +
+              `<a ${href} class="marker__link ${
+                !href && "marker__link--active"
+              }"></a>` +
               `<div class="marker__wrapper">
                 <span class="marker__title">${title}</span> 
                 <span class="marker__price">€${price}</span>
               </div>`,
           }),
+          keyboard: false,
           _id: _id,
         });
         marker.addTo(mapRef.current);
@@ -82,7 +86,9 @@ const RenderMap = (props) => {
             marker.getLatLng(),
             circle.getLatLng()
           );
-          markerDistance <= 1100 ? offersInRadius.push(offer) : null;
+          markerDistance <= 1100 && markerDistance !== 0
+            ? offersInRadius.push(offer)
+            : null;
         }
       });
       addOffersInRadius(offersInRadius);

@@ -1886,13 +1886,16 @@ img {
   display: block;
 }
 
-.marker--active .marker__link {
+.marker--active .marker__link,
+.marker__link--active {
   background-image: url("../img/pin-active.svg");
 }
 
 .marker__link:hover + .marker__wrapper {
   display: block;
 }
+.marker__link:active,
+.marker__link:focus,
 .marker__link:hover {
   background-image: url("../img/pin-active.svg");
 }
