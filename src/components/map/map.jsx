@@ -63,7 +63,14 @@ const RenderMap = (props) => {
 
       offers.forEach((offer) => {
         const { location, price, title, _id } = offer;
-        let href = currentOffer._id !== _id ? `href="/offer/${_id}"` : null;
+
+        let href;
+        if (currentOffer) {
+          href = currentOffer._id !== _id ? `href="/offer/${_id}"` : null;
+        } else {
+          href = `href="/offer/${_id}"`;
+        }
+
         const marker = L.marker([location.latitude, location.longitude], {
           icon: new L.DivIcon({
             className: "marker",
