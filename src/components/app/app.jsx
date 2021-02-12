@@ -5,6 +5,7 @@ import { Route, Switch } from "react-router-dom";
 import Home from "../home/home.jsx";
 import Signup from "../signup/signup.jsx";
 import OfferPage from "../offer-page/offer-page.jsx";
+import Profile from "../profile/profile.jsx";
 import ErrorModal from "../error-modal/error-modal.jsx";
 import { Operations } from "../../reducer/auth/auth";
 
@@ -26,6 +27,7 @@ const App = (props) => {
       <Route path="/login" exact render={() => <Signup method="Login" />} />
       <Route path="/signup" exact render={() => <Signup method="Sign up" />} />
       <Route path="/offer/:id" exact component={OfferPage} />
+      <Route path="/profile" exact component={Profile} />
     </Switch>
   );
 };
