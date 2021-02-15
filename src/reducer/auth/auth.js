@@ -1,6 +1,7 @@
 const initialState = {
   isAuthorizationRequired: true,
   user: {},
+  popupModal: false,
 };
 
 const ActionType = {
@@ -8,6 +9,7 @@ const ActionType = {
   REQUEST_LOGIN: `REQUEST_LOGIN`,
   LOGOUT_USER: "LOGOUT_USER",
   REQUIRED_AUTHORIZATION: "REQUIRED_AUTHORIZATION",
+  TOGGLE_POPUP: "TOGGLE_POPUP",
 };
 
 const ActionCreator = {
@@ -35,6 +37,12 @@ const ActionCreator = {
   logoutUser: () => {
     return {
       type: ActionType.LOGOUT_USER,
+    };
+  },
+
+  togglePopup: () => {
+    return {
+      type: ActionType.TOGGLE_POPUP,
     };
   },
 };
@@ -109,6 +117,11 @@ const reducer = (state = initialState, action) => {
     case ActionType.LOGOUT_USER:
       return Object.assign({}, state, {
         user: {},
+      });
+
+    case ActionType.TOGGLE_POPUP:
+      return Object.assign({}, state, {
+        popupModal: !state.popupModal,
       });
   }
 

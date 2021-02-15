@@ -27,6 +27,23 @@ const Operations = {
       })
       .catch((err) => console.log(err));
   },
+  changeBookmark: (id) => (dispatch, getState, api) => {
+    const token = localStorage.token;
+    return api
+      .put(
+        `/change-bookmark/${id}`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((err) => console.log(err));
+  },
 };
 
 const reducer = (state = initialState, action) => {

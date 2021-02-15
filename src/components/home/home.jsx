@@ -1,12 +1,16 @@
 import React from "react";
 
+import { connect } from "react-redux";
+
 import CardList from "../card-list/card-list.jsx";
 import RenderMap from "../map/map.jsx";
 import CityList from "../city-list/city-list.jsx";
-
+import AuthModal from "../auth-modal/auth-modal.jsx";
 import Header from "../header/header.jsx";
 
 const Home = (props) => {
+  const { popupModal } = props;
+
   return (
     <section>
       <div style={{ display: `none` }}>
@@ -33,6 +37,7 @@ const Home = (props) => {
 
       <div className="page page--gray page--main">
         <Header />
+        {popupModal && <AuthModal />}
 
         <main className="page__main page__main--index">
           <h1 className="visually-hidden">Cities</h1>
@@ -60,4 +65,9 @@ const Home = (props) => {
   );
 };
 
-export default Home;
+const mapStateToProps = (state, ownProps) =>
+  Object.assign({}, ownProps, {
+    popupModal: state.auth.popupModal,
+  });
+
+export default connect(mapStateToProps, null)(Home);

@@ -1,14 +1,21 @@
 import React from "react";
 import PropTypes from "prop-types";
 
+import { withRouter } from "react-router";
 import { connect } from "react-redux";
 import { ActionCreator } from "./../../reducer/active-card/active-card";
 import { Link } from "react-router-dom";
-
-/* eslint-disable camelcase*/
+import { Operations } from "../../reducer/user/user";
+import { ActionCreator as ActionCraetorAuth } from "../../reducer/auth/auth";
 
 const Card = (props) => {
-  const { card, changeActiveCard } = props;
+  const {
+    card,
+    changeActiveCard,
+    changeBookmark,
+    openAuthPopup,
+    isAuthorizationRequired,
+  } = props;
   const { price, rating, title, type, preview_image, _id, is_favorite } = card;
 
   const cardMouseEnterHandler = (cardItem) => {
@@ -17,6 +24,14 @@ const Card = (props) => {
 
   const cardMouseLeaveHandler = () => {
     changeActiveCard({});
+  };
+
+  const bookmarkClickHandler = () => {
+    if (isAuthorizationRequired) {
+      openAuthPopup();
+    } else {
+      changeBookmark(_id);
+    }
   };
 
   const ratingToPercent = (stars) => (stars / 5) * 100;
@@ -49,10 +64,11 @@ const Card = (props) => {
             type="button"
           > */}
           <button
-            className={`place-card__bookmark-button place-card__bookmark-button${
-              is_favorite ? "--active" : null
+            className={`place-card__bookmark-button ${
+              is_favorite && "place-card__bookmark-button--active"
             } button`}
             type="button"
+            onClick={(evt) => bookmarkClickHandler()}
           >
             <svg className="place-card__bookmark-icon" width="18" height="19">
               <use xlinkHref="#icon-bookmark"></use>
@@ -76,6 +92,7 @@ const Card = (props) => {
 };
 
 Card.propTypes = {
+  isAuthorizationRequired: PropTypes.bool.isRequired,
   card: PropTypes.shape({
     price: PropTypes.string.isRequired,
     rating: PropTypes.number.isRequired,
@@ -87,14 +104,23 @@ Card.propTypes = {
   changeActiveCard: PropTypes.func.isRequired,
 };
 
-/* eslint-enable camelcase*/
+const mapStateToProps = (state, ownProps) =>
+  Object.assign({}, ownProps, {
+    isAuthorizationRequired: state.auth.isAuthorizationRequired,
+  });
 
 const mapDispatchToProps = (dispatch) => ({
   changeActiveCard: (card) => {
     dispatch(ActionCreator.changeActiveCard(card));
   },
+  changeBookmark: (id) => {
+    dispatch(Operations.changeBookmark(id));
+  },
+  openAuthPopup: () => {
+    dispatch(ActionCraetorAuth.togglePopup());
+  },
 });
 
 export { Card };
 
-export default connect(null, mapDispatchToProps)(Card);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Card));
