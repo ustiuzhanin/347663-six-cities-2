@@ -1,7 +1,8 @@
 import React from "react";
 
 import { connect } from "react-redux";
-import { ActionCreator } from "../../reducer/auth/auth";
+import { ActionCreator as AuthActionCreator } from "../../reducer/auth/auth";
+import { ActionCreator } from "../../reducer/user/user";
 
 const logoutBtn = (props) => {
   const logoutClickHandler = () => {
@@ -27,8 +28,9 @@ const logoutBtn = (props) => {
 
 const mapDispatchToProps = (dispatch) => ({
   logoutUser: () => {
-    dispatch(ActionCreator.logoutUser());
-    dispatch(ActionCreator.requireAuthorization(true));
+    dispatch(AuthActionCreator.logoutUser());
+    dispatch(ActionCreator.clearUser());
+    dispatch(AuthActionCreator.requireAuthorization(true));
   },
 });
 

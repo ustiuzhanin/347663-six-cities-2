@@ -4,6 +4,8 @@ const initialState = {
 
 const ActionType = {
   GET_USER: `GET_USER`,
+  CHANGE_USER: `CHANGE_USER`,
+  CLEAR_USER: "CLEAR_USER",
 };
 
 const ActionCreator = {
@@ -11,6 +13,17 @@ const ActionCreator = {
     return {
       type: ActionType.GET_USER,
       payload: user,
+    };
+  },
+  changeUser: (user) => {
+    return {
+      type: ActionType.CHANGE_USER,
+      payload: user,
+    };
+  },
+  clearUser: () => {
+    return {
+      type: ActionType.CLEAR_USER,
     };
   },
 };
@@ -21,7 +34,6 @@ const Operations = {
       .get(`/get-user/${id}`)
       .then((response) => {
         if (response.status === 200) {
-          console.log(response.data);
           dispatch(ActionCreator.getUser(response.data));
         }
       })
@@ -40,7 +52,7 @@ const Operations = {
         }
       )
       .then((response) => {
-        console.log(response);
+        dispatch(ActionCreator.changeUser(response.data));
       })
       .catch((err) => console.log(err));
   },
@@ -49,9 +61,15 @@ const Operations = {
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case ActionType.GET_USER:
+    case ActionType.CHANGE_USER:
       return Object.assign({}, state, {
         user: action.payload,
       });
+    case ActionType.CLEAR_USER: {
+      return Object.assign({}, state, {
+        user: {},
+      });
+    }
   }
 
   return state;

@@ -1,11 +1,11 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 
 import { withRouter } from "react-router";
 import { connect } from "react-redux";
-import { ActionCreator } from "./../../reducer/active-card/active-card";
 import { Link } from "react-router-dom";
 import { Operations } from "../../reducer/user/user";
+import { ActionCreator } from "./../../reducer/active-card/active-card";
 import { ActionCreator as ActionCraetorAuth } from "../../reducer/auth/auth";
 
 const Card = (props) => {
@@ -15,8 +15,28 @@ const Card = (props) => {
     changeBookmark,
     openAuthPopup,
     isAuthorizationRequired,
+    user,
   } = props;
   const { price, rating, title, type, preview_image, _id, is_favorite } = card;
+
+  const [isFavorite, setIsFavorite] = useState(false);
+
+  useEffect(() => {
+    if (user.bookmarks) {
+      user.bookmarks.indexOf(card._id) !== -1
+        ? setIsFavorite(true)
+        : setIsFavorite(false);
+    } else {
+      setIsFavorite(false);
+    }
+
+    // if (user && user.bookmarks.indexOf(card._id) !== -1) {
+    //   console.log(user.bookmarks.indexOf(card._id));
+    //   setIsFavorite(true);
+    // } else {
+    //   setIsFavorite(false);
+    // }
+  }, [card, user]);
 
   const cardMouseEnterHandler = (cardItem) => {
     changeActiveCard(cardItem);
@@ -30,6 +50,7 @@ const Card = (props) => {
     if (isAuthorizationRequired) {
       openAuthPopup();
     } else {
+      setIsFavorite(!isFavorite);
       changeBookmark(_id);
     }
   };
@@ -65,7 +86,7 @@ const Card = (props) => {
           > */}
           <button
             className={`place-card__bookmark-button ${
-              is_favorite && "place-card__bookmark-button--active"
+              isFavorite && "place-card__bookmark-button--active"
             } button`}
             type="button"
             onClick={(evt) => bookmarkClickHandler()}
@@ -107,6 +128,7 @@ Card.propTypes = {
 const mapStateToProps = (state, ownProps) =>
   Object.assign({}, ownProps, {
     isAuthorizationRequired: state.auth.isAuthorizationRequired,
+    user: state.user.user,
   });
 
 const mapDispatchToProps = (dispatch) => ({

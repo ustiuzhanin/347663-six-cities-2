@@ -52,7 +52,9 @@ const Profile = (props) => {
               <h2>Your bookmarks</h2>
               <ul>
                 {bookmarks && bookmarks.length > 0 ? (
-                  bookmarks.map((bookmark) => <li>{bookmark}</li>)
+                  bookmarks.map((bookmark) => (
+                    <li key={bookmark}>{bookmark}</li>
+                  ))
                 ) : (
                   <p>No bookmarks yet</p>
                 )}

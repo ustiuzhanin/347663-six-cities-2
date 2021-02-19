@@ -8,11 +8,18 @@ import OfferPage from "../offer-page/offer-page.jsx";
 import Profile from "../profile/profile.jsx";
 import ErrorModal from "../error-modal/error-modal.jsx";
 import { Operations } from "../../reducer/auth/auth";
+import { Operations as UserOperaions } from "../../reducer/user/user";
 
 const App = (props) => {
+  const { autoAuth } = props;
+
   useEffect(() => {
-    const { autoAuth } = props;
     autoAuth();
+
+    // if (!isAuthorizationRequired) {
+    //   console.log(user.userId);
+    //   getUser(user.userId);
+    // }
   }, []);
 
   const { errorMessage } = props;
