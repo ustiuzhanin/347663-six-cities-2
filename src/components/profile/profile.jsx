@@ -6,12 +6,8 @@ import { Operations } from "../../reducer/user/user";
 import { connect } from "react-redux";
 
 const Profile = (props) => {
-  const { userAuth, getUser, user } = props;
+  const { user } = props;
   const { avatar_url, name, is_pro, email, offers, bookmarks } = props.user;
-
-  useEffect(() => {
-    userAuth.userId && getUser(userAuth.userId);
-  }, [userAuth]);
 
   return (
     <>

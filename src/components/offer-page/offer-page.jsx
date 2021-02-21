@@ -40,16 +40,6 @@ const OfferPage = (props) => {
     }
   }, [card]);
 
-  // useEffect(() => {
-  //   if (user.bookmarks) {
-  //     user.bookmarks.indexOf(card._id) !== -1
-  //       ? setIsFavorite(true)
-  //       : setIsFavorite(false);
-  //   } else {
-  //     setIsFavorite(false);
-  //   }
-  // }, [card, user]);
-
   useEffect(() => {
     if (card && user.bookmarks && user.bookmarks.indexOf(card._id) !== -1) {
       setIsFavorite(true);
