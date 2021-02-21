@@ -22,20 +22,11 @@ const Card = (props) => {
   const [isFavorite, setIsFavorite] = useState(false);
 
   useEffect(() => {
-    if (user.bookmarks) {
-      user.bookmarks.indexOf(card._id) !== -1
-        ? setIsFavorite(true)
-        : setIsFavorite(false);
+    if (card && user.bookmarks && user.bookmarks.indexOf(card._id) !== -1) {
+      setIsFavorite(true);
     } else {
       setIsFavorite(false);
     }
-
-    // if (user && user.bookmarks.indexOf(card._id) !== -1) {
-    //   console.log(user.bookmarks.indexOf(card._id));
-    //   setIsFavorite(true);
-    // } else {
-    //   setIsFavorite(false);
-    // }
   }, [card, user]);
 
   const cardMouseEnterHandler = (cardItem) => {
@@ -80,10 +71,6 @@ const Card = (props) => {
             <b className="place-card__price-value">&euro;{price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          {/* <button
-            className="place-card__bookmark-button place-card__bookmark-button--active button"
-            type="button"
-          > */}
           <button
             className={`place-card__bookmark-button ${
               isFavorite && "place-card__bookmark-button--active"

@@ -11,16 +11,17 @@ import { Operations } from "../../reducer/auth/auth";
 import { Operations as UserOperaions } from "../../reducer/user/user";
 
 const App = (props) => {
-  const { autoAuth } = props;
+  const { autoAuth, isAuthorizationRequired, user, getUser } = props;
 
   useEffect(() => {
     autoAuth();
-
-    // if (!isAuthorizationRequired) {
-    //   console.log(user.userId);
-    //   getUser(user.userId);
-    // }
   }, []);
+
+  useEffect(() => {
+    if (!isAuthorizationRequired) {
+      getUser(user.userId);
+    }
+  }, [isAuthorizationRequired]);
 
   const { errorMessage } = props;
   const showMessage = Object.entries(errorMessage).length !== 0 && (
@@ -42,11 +43,16 @@ const App = (props) => {
 const mapStateToProps = () => (state, ownProps) =>
   Object.assign({}, ownProps, {
     errorMessage: state.errors.errorMessage,
+    isAuthorizationRequired: state.auth.isAuthorizationRequired,
+    user: state.auth.user,
   });
 
 const mapDispatchToProps = (dispatch) => ({
   autoAuth: () => {
     dispatch(Operations.autoAuth());
+  },
+  getUser: (id) => {
+    dispatch(UserOperaions.getUser(id));
   },
 });
 

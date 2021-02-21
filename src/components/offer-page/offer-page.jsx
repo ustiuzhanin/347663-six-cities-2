@@ -1,9 +1,13 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { Operations } from "../../reducer/offers/offers";
+import { Operations as UserOperations } from "../../reducer/user/user";
+import { ActionCreator } from "../../reducer/auth/auth";
+
+import PropTypes from "prop-types";
 
 import Header from "../header/header.jsx";
-import PropTypes from "prop-types";
+import AuthModal from "../auth-modal/auth-modal.jsx";
 import Comments from "../comments/comments.jsx";
 import CommentForm from "../comment-form/comment-form.jsx";
 import Map from "../map/map.jsx";
@@ -18,8 +22,13 @@ const OfferPage = (props) => {
     loadOffer,
     loadCityOffers,
     card,
+    user,
+    openAuthPopup,
+    changeBookmark,
+    popupModal,
   } = props;
   const { id } = props.match.params;
+  const [isFavorite, setIsFavorite] = useState(false);
 
   useEffect(() => {
     loadOffer(id);
@@ -30,6 +39,33 @@ const OfferPage = (props) => {
       loadCityOffers(card.city.name);
     }
   }, [card]);
+
+  // useEffect(() => {
+  //   if (user.bookmarks) {
+  //     user.bookmarks.indexOf(card._id) !== -1
+  //       ? setIsFavorite(true)
+  //       : setIsFavorite(false);
+  //   } else {
+  //     setIsFavorite(false);
+  //   }
+  // }, [card, user]);
+
+  useEffect(() => {
+    if (card && user.bookmarks && user.bookmarks.indexOf(card._id) !== -1) {
+      setIsFavorite(true);
+    } else {
+      setIsFavorite(false);
+    }
+  }, [card, user]);
+
+  const bookmarkClickHandler = () => {
+    if (isAuthorizationRequired) {
+      openAuthPopup();
+    } else {
+      setIsFavorite(!isFavorite);
+      changeBookmark(card._id);
+    }
+  };
 
   return (
     <div>
@@ -58,6 +94,8 @@ const OfferPage = (props) => {
       <div className="page">
         <Header />
 
+        {popupModal && <AuthModal />}
+
         {card && (
           <main className="page__main page__main--property">
             <section className="property">
@@ -85,9 +123,20 @@ const OfferPage = (props) => {
                   <div className="property__name-wrapper">
                     <h1 className="property__name">{card.title}</h1>
                     <button
-                      className="property__bookmark-button button"
+                      className={`${
+                        isFavorite && "property__bookmark-button--active "
+                      } property__bookmark-button button`}
                       type="button"
+                      onClick={() => bookmarkClickHandler()}
                     >
+                      {/* <button
+                      className={`${
+                        user.bookmarks &&
+                        user.bookmarks.indexOf(card._id) !== -1 &&
+                        "property__bookmark-button--active "
+                      } property__bookmark-button button`}
+                      type="button"
+                    > */}
                       <svg
                         className="property__bookmark-icon"
                         width="31"
@@ -181,7 +230,7 @@ const OfferPage = (props) => {
                 <div className="near-places__list places__list">
                   {offersInRadius &&
                     offersInRadius.map((card) => (
-                      <Card key={card.id} card={card} />
+                      <Card key={card._id} card={card} />
                     ))}
                 </div>
               </section>
@@ -230,6 +279,8 @@ const mapStateToProps = (state) =>
     isAuthorizationRequired: state.auth.isAuthorizationRequired,
     offersInRadius: state.offersInRadius.offersInRadius,
     card: state.offers.offer,
+    user: state.user.user,
+    popupModal: state.auth.popupModal,
   });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -238,6 +289,12 @@ const mapDispatchToProps = (dispatch) => ({
   },
   loadCityOffers: (city) => {
     dispatch(Operations.loadCityOffers(city));
+  },
+  changeBookmark: (id) => {
+    dispatch(UserOperations.changeBookmark(id));
+  },
+  openAuthPopup: () => {
+    dispatch(ActionCreator.togglePopup());
   },
 });
 

@@ -1125,6 +1125,10 @@ img {
   -webkit-transition: fill 0.3s, stroke 0.3s;
   transition: fill 0.3s, stroke 0.3s;
 }
+.property__bookmark-button--active .property__bookmark-icon {
+  stroke: #4481c3;
+  fill: #4481c3;
+}
 .property__rating {
   display: -webkit-box;
   display: -ms-flexbox;

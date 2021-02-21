@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import { ActionCreator, Operations } from "../../reducer/offers/offers";
-import { Operations as UserOperaions } from "../../reducer/user/user";
+
 import PropTypes from "prop-types";
 
 import Card from "../card/card.jsx";
+import { ActionCreator, Operations } from "../../reducer/offers/offers";
 
 /* eslint-disable camelcase*/
 
@@ -22,9 +22,6 @@ const CardList = (props) => {
     sorting,
     changeSortingType,
     loadCityOffers,
-    isAuthorizationRequired,
-    getUser,
-    user,
   } = props;
 
   const [isSortPopupOpen, setIsSortPopupOpen] = useState(false);
@@ -44,12 +41,6 @@ const CardList = (props) => {
   useEffect(() => {
     loadCityOffers(activeCity);
   }, [activeCity]);
-
-  useEffect(() => {
-    if (!isAuthorizationRequired) {
-      getUser(user.userId);
-    }
-  }, [isAuthorizationRequired]);
 
   const sortingClickHandler = () => {
     setIsSortPopupOpen(!isSortPopupOpen);
@@ -192,8 +183,6 @@ const mapStateToProps = (state, ownProps) =>
     activeCity: state.cityList.activeCity,
     cityOffers: state.offers.cityOffers,
     sorting: state.offers.sorting,
-    isAuthorizationRequired: state.auth.isAuthorizationRequired,
-    user: state.auth.user,
   });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -202,9 +191,6 @@ const mapDispatchToProps = (dispatch) => ({
   },
   loadCityOffers: (city) => {
     dispatch(Operations.loadCityOffers(city));
-  },
-  getUser: (id) => {
-    dispatch(UserOperaions.getUser(id));
   },
 });
 
