@@ -1,13 +1,26 @@
 import React, { useEffect } from "react";
 
 import Header from "../header/header.jsx";
+import Card from "../card/card.jsx";
 import { Operations } from "../../reducer/user/user";
+import { Operations as OffersOperations } from "../../reducer/offers/offers";
+import { ActionCreator } from "../../reducer/offers/offers.js";
 
 import { connect } from "react-redux";
 
 const Profile = (props) => {
-  const { user } = props;
+  const { user, loadOffers, bookmarkOffers, clearBookmarks } = props;
   const { avatar_url, name, is_pro, email, offers, bookmarks } = props.user;
+
+  useEffect(() => {
+    console.log(bookmarkOffers);
+    if (bookmarks && bookmarks.length > 0) {
+      console.log(bookmarks);
+      loadOffers(bookmarks);
+    } else {
+      clearBookmarks();
+    }
+  }, [bookmarks, user]);
 
   return (
     <>
@@ -46,15 +59,15 @@ const Profile = (props) => {
             </div>
             <div className="bookmarks">
               <h2>Your bookmarks</h2>
-              <ul>
-                {bookmarks && bookmarks.length > 0 ? (
-                  bookmarks.map((bookmark) => (
-                    <li key={bookmark}>{bookmark}</li>
+              <div className="bookmarks__wrapper">
+                {bookmarkOffers && bookmarkOffers.length > 0 ? (
+                  bookmarkOffers.map((bookmark) => (
+                    <Card key={bookmark._id} card={bookmark} />
                   ))
                 ) : (
                   <p>No bookmarks yet</p>
                 )}
-              </ul>
+              </div>
             </div>
           </>
         )}
@@ -65,13 +78,19 @@ const Profile = (props) => {
 
 const mapStateToProps = () => (state, ownProps) =>
   Object.assign({}, ownProps, {
-    userAuth: state.auth.user,
     user: state.user.user,
+    bookmarkOffers: state.offers.offers,
   });
 
 const mapDispatchToProps = (dispatch) => ({
   getUser: (id) => {
     dispatch(Operations.getUser(id));
+  },
+  loadOffers: (offersArr) => {
+    dispatch(OffersOperations.loadOffers(offersArr));
+  },
+  clearBookmarks: () => {
+    dispatch(ActionCreator.clearOffers());
   },
 });
 

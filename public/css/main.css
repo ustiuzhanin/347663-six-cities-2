@@ -1963,3 +1963,8 @@ img {
   font-family: Arial, sans-serif;
   font-size: 15px;
 }
+
+.bookmarks__wrapper {
+  display: flex;
+  flex-wrap: wrap;
+}

@@ -1,6 +1,9 @@
+import qs from "qs";
+
 const initialState = {
   sorting: { type: "popular", text: "Popular" },
   cityOffers: [],
+  offers: [],
   offer: null,
 };
 
@@ -8,6 +11,8 @@ const ActionType = {
   CHANGE_SORTING: "CHANGE_SORTING",
   LOAD_OFFER: "LOAD_OFFER",
   LOAD_CITY_OFFERS: "LOAD_CITY_OFFERS",
+  LOAD_OFFERS: "LOAD_OFFERS",
+  CLEAR_OFFERS: "CLEAR_OFFERS",
 };
 
 const ActionCreator = {
@@ -17,6 +22,7 @@ const ActionCreator = {
       payload: type,
     };
   },
+
   loadOffer: (data) => {
     return {
       type: ActionType.LOAD_OFFER,
@@ -29,6 +35,17 @@ const ActionCreator = {
       type: ActionType.LOAD_CITY_OFFERS,
       payload: data,
     };
+  },
+
+  loadOffers: (data) => {
+    return {
+      type: ActionType.LOAD_OFFERS,
+      payload: data,
+    };
+  },
+
+  clearOffers: () => {
+    return { type: ActionType.CLEAR_OFFERS };
   },
 };
 
@@ -43,6 +60,19 @@ const Operations = {
     return api.get(`/city-offers/${city}`).then((response) => {
       dispatch(ActionCreator.loadCityOffers(response.data));
     });
+  },
+
+  loadOffers: (offersArr) => (dispatch, getState, api) => {
+    return api
+      .get("/offers", {
+        params: { offers: offersArr },
+        paramsSerializer: (params) => {
+          return qs.stringify(params);
+        },
+      })
+      .then((response) => {
+        dispatch(ActionCreator.loadOffers(response.data));
+      });
   },
 };
 
@@ -59,6 +89,14 @@ const reducer = (state = initialState, action) => {
     case ActionType.LOAD_CITY_OFFERS:
       return Object.assign({}, state, {
         cityOffers: action.payload,
+      });
+    case ActionType.LOAD_OFFERS:
+      return Object.assign({}, state, {
+        offers: action.payload,
+      });
+    case ActionType.CLEAR_OFFERS:
+      return Object.assign({}, state, {
+        offers: null,
       });
   }
   return state;

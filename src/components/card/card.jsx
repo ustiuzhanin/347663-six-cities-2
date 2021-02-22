@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 
-import { withRouter } from "react-router";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { Operations } from "../../reducer/user/user";
@@ -22,7 +21,9 @@ const Card = (props) => {
   const [isFavorite, setIsFavorite] = useState(false);
 
   useEffect(() => {
-    if (card && user.bookmarks && user.bookmarks.indexOf(card._id) !== -1) {
+    if (!card || !user.bookmarks) return;
+
+    if (user.bookmarks.indexOf(card._id) !== -1) {
       setIsFavorite(true);
     } else {
       setIsFavorite(false);
@@ -132,4 +133,4 @@ const mapDispatchToProps = (dispatch) => ({
 
 export { Card };
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Card));
+export default connect(mapStateToProps, mapDispatchToProps)(Card);
