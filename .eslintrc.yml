@@ -17,5 +17,5 @@ plugins: ['react']
 settings:
   react:
     version: '16'
-# rules:
-#   prettier/prettier: 'error'
+rules:
+  camelcase: off

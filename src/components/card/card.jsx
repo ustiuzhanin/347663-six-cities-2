@@ -16,7 +16,7 @@ const Card = (props) => {
     isAuthorizationRequired,
     user,
   } = props;
-  const { price, rating, title, type, preview_image, _id, is_favorite } = card;
+  const { price, rating, title, type, preview_image, _id } = card;
 
   const [isFavorite, setIsFavorite] = useState(false);
 
@@ -77,7 +77,7 @@ const Card = (props) => {
               isFavorite && "place-card__bookmark-button--active"
             } button`}
             type="button"
-            onClick={(evt) => bookmarkClickHandler()}
+            onClick={() => bookmarkClickHandler()}
           >
             <svg className="place-card__bookmark-icon" width="18" height="19">
               <use xlinkHref="#icon-bookmark"></use>
@@ -102,15 +102,47 @@ const Card = (props) => {
 
 Card.propTypes = {
   isAuthorizationRequired: PropTypes.bool.isRequired,
+  changeBookmark: PropTypes.func.isRequired,
+  changeActiveCard: PropTypes.func.isRequired,
+  openAuthPopup: PropTypes.func.isRequired,
   card: PropTypes.shape({
+    _id: PropTypes.string.isRequired,
+    bedrooms: PropTypes.number.isRequired,
+    city: PropTypes.shape({
+      _id: PropTypes.string.isRequired,
+      location: PropTypes.shape({
+        latitude: PropTypes.number.isRequired,
+        longitude: PropTypes.number.isRequired,
+        zoom: PropTypes.number.isRequired,
+        name: PropTypes.string.isRequired,
+      }),
+    }),
+    description: PropTypes.string.isRequired,
+    goods: PropTypes.array.isRequired,
+    host: PropTypes.string.isRequired,
+    images: PropTypes.array.isRequired,
+    is_premium: PropTypes.bool.isRequired,
+    location: PropTypes.shape({
+      latitude: PropTypes.number.isRequired,
+      longitude: PropTypes.number.isRequired,
+      zoom: PropTypes.number.isRequired,
+    }).isRequired,
+    max_adults: PropTypes.number.isRequired,
+    preview_image: PropTypes.string.isRequired,
     price: PropTypes.string.isRequired,
     rating: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
-    preview_image: PropTypes.string.isRequired,
-    _id: PropTypes.string.isRequired,
   }).isRequired,
-  changeActiveCard: PropTypes.func.isRequired,
+  user: PropTypes.shape({
+    _id: PropTypes.string.isRequired,
+    avatar_url: PropTypes.string.isRequired,
+    bookmarks: PropTypes.array.isRequired,
+    email: PropTypes.string.isRequired,
+    is_pro: PropTypes.bool.isRequired,
+    name: PropTypes.string.isRequired,
+    offers: PropTypes.array.isRequired,
+  }),
 };
 
 const mapStateToProps = (state, ownProps) =>

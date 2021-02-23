@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
@@ -35,6 +36,10 @@ const AuthModal = (props) => {
       </div>
     </article>
   );
+};
+
+AuthModal.propTypes = {
+  closePopup: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state, ownProps) =>
