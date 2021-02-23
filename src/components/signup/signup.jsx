@@ -123,6 +123,7 @@ Login.propTypes = {
   requestSignUp: PropTypes.func.isRequired,
   requestLogin: PropTypes.func.isRequired,
   isAuthorizationRequired: PropTypes.bool.isRequired,
+  method: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = (state) =>

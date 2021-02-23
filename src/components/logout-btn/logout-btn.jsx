@@ -1,10 +1,11 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 import { connect } from "react-redux";
 import { ActionCreator as AuthActionCreator } from "../../reducer/auth/auth";
 import { ActionCreator } from "../../reducer/user/user";
 
-const logoutBtn = (props) => {
+const LogoutBtn = (props) => {
   const logoutClickHandler = () => {
     const { logoutUser } = props;
 
@@ -26,6 +27,10 @@ const logoutBtn = (props) => {
   );
 };
 
+LogoutBtn.propTypes = {
+  logoutUser: PropTypes.func.isRequired,
+};
+
 const mapDispatchToProps = (dispatch) => ({
   logoutUser: () => {
     dispatch(AuthActionCreator.logoutUser());
@@ -34,4 +39,4 @@ const mapDispatchToProps = (dispatch) => ({
   },
 });
 
-export default connect(null, mapDispatchToProps)(logoutBtn);
+export default connect(null, mapDispatchToProps)(LogoutBtn);
