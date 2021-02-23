@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 import ProfileBtn from "../profile-btn/profile-btn.jsx";
 import LogoutBtn from "../logout-btn/logout-btn.jsx";
@@ -43,6 +44,15 @@ const Header = (props) => {
       </div>
     </header>
   );
+};
+
+Header.propTypes = {
+  isAuthorizationRequired: PropTypes.bool.isRequired,
+  user: PropTypes.shape({
+    email: PropTypes.string,
+    token: PropTypes.string,
+    userId: PropTypes.string,
+  }),
 };
 
 const mapStateToProps = (state) =>

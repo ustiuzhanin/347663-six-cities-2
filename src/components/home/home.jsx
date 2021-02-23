@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 import { connect } from "react-redux";
 
@@ -63,6 +64,10 @@ const Home = (props) => {
       </div>
     </section>
   );
+};
+
+Home.propTypes = {
+  popupModal: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = (state, ownProps) =>
