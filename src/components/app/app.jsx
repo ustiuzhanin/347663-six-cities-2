@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Route, Switch } from "react-router-dom";
 
@@ -11,7 +12,13 @@ import { Operations } from "../../reducer/auth/auth";
 import { Operations as UserOperaions } from "../../reducer/user/user";
 
 const App = (props) => {
-  const { autoAuth, isAuthorizationRequired, user, getUser } = props;
+  const {
+    autoAuth,
+    isAuthorizationRequired,
+    user,
+    getUser,
+    errorMessage,
+  } = props;
 
   useEffect(() => {
     autoAuth();
@@ -23,7 +30,6 @@ const App = (props) => {
     }
   }, [isAuthorizationRequired]);
 
-  const { errorMessage } = props;
   const showMessage = Object.entries(errorMessage).length !== 0 && (
     <ErrorModal error={errorMessage.err} />
   );
@@ -38,6 +44,19 @@ const App = (props) => {
       <Route path="/profile" exact component={Profile} />
     </Switch>
   );
+};
+
+App.propTypes = {
+  autoAuth: PropTypes.func.isRequired,
+  getUser: PropTypes.func.isRequired,
+  isAuthorizationRequired: PropTypes.bool.isRequired,
+  user: PropTypes.shape({
+    token: PropTypes.string,
+    userId: PropTypes.string,
+    email: PropTypes.string,
+    bookmarks: PropTypes.array,
+  }),
+  errorMessage: PropTypes.object,
 };
 
 const mapStateToProps = () => (state, ownProps) =>

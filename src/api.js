@@ -11,7 +11,7 @@ export default function createAPI(dispatch) {
   const onSucces = (response) => response;
 
   const onFail = (err) => {
-    dispatch(ActionCreator.showErrorMessage({ err: err }));
+    dispatch(ActionCreator.showErrorMessage({ err }));
     return err;
   };
 

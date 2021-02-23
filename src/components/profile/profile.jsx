@@ -13,9 +13,7 @@ const Profile = (props) => {
   const { avatar_url, name, is_pro, email, offers, bookmarks } = props.user;
 
   useEffect(() => {
-    console.log(bookmarkOffers);
     if (bookmarks && bookmarks.length > 0) {
-      console.log(bookmarks);
       loadOffers(bookmarks);
     } else {
       clearBookmarks();
