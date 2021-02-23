@@ -34,10 +34,20 @@ const CityList = (props) => {
 };
 
 CityList.propTypes = {
-  listOfCities: PropTypes.array.isRequired,
   activeCity: PropTypes.string.isRequired,
   onCityLinkClick: PropTypes.func.isRequired,
   loadCityList: PropTypes.func.isRequired,
+  listOfCities: PropTypes.arrayOf(
+    PropTypes.shape({
+      _id: PropTypes.string.isRequired,
+      location: PropTypes.shape({
+        latitude: PropTypes.number.isRequired,
+        longitude: PropTypes.number.isRequired,
+        zoom: PropTypes.number.isRequired,
+      }),
+      name: PropTypes.string.isRequired,
+    })
+  ).isRequired,
 };
 
 const mapStateToProps = (state, ownProps) =>

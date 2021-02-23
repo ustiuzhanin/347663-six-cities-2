@@ -147,35 +147,44 @@ const CardList = (props) => {
 };
 
 CardList.propTypes = {
-  cityOffers: PropTypes.arrayOf(
-    PropTypes.shape({
-      city: PropTypes.shape({
-        location: PropTypes.shape({
-          latitude: PropTypes.number.isRequired,
-          longitude: PropTypes.number.isRequired,
-          zoom: PropTypes.number.isRequired,
-        }).isRequired,
-      }).isRequired,
-
-      _id: PropTypes.string.isRequired,
-      price: PropTypes.string.isRequired,
-      rating: PropTypes.number.isRequired,
-      title: PropTypes.string.isRequired,
-      type: PropTypes.string.isRequired,
-      location: PropTypes.shape({
-        latitude: PropTypes.number.isRequired,
-        longitude: PropTypes.number.isRequired,
-        zoom: PropTypes.number.isRequired,
-      }).isRequired,
-    }).isRequired
-  ).isRequired,
   activeCity: PropTypes.string.isRequired,
+  changeSortingType: PropTypes.func.isRequired,
   loadCityOffers: PropTypes.func.isRequired,
   sorting: PropTypes.shape({
     type: PropTypes.string.isRequired,
     text: PropTypes.string.isRequired,
   }).isRequired,
-  changeSortingType: PropTypes.func.isRequired,
+  cityOffers: PropTypes.arrayOf(
+    PropTypes.shape({
+      _id: PropTypes.string.isRequired,
+      bedrooms: PropTypes.number.isRequired,
+      city: PropTypes.shape({
+        _id: PropTypes.string.isRequired,
+        location: PropTypes.shape({
+          latitude: PropTypes.number.isRequired,
+          longitude: PropTypes.number.isRequired,
+          zoom: PropTypes.number.isRequired,
+        }),
+        name: PropTypes.string.isRequired,
+      }),
+      description: PropTypes.string.isRequired,
+      goods: PropTypes.array.isRequired,
+      host: PropTypes.string.isRequired,
+      images: PropTypes.array.isRequired,
+      is_premium: PropTypes.bool.isRequired,
+      location: PropTypes.shape({
+        latitude: PropTypes.number.isRequired,
+        longitude: PropTypes.number.isRequired,
+        zoom: PropTypes.number.isRequired,
+      }).isRequired,
+      max_adults: PropTypes.number.isRequired,
+      preview_image: PropTypes.string.isRequired,
+      price: PropTypes.string.isRequired,
+      rating: PropTypes.number.isRequired,
+      title: PropTypes.string.isRequired,
+      type: PropTypes.string.isRequired,
+    })
+  ).isRequired,
 };
 
 const mapStateToProps = (state, ownProps) =>
