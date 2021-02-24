@@ -84,7 +84,7 @@ const RenderMap = (props) => {
               </div>`,
           }),
           keyboard: false,
-          _id: _id,
+          _id,
         });
         marker.addTo(mapRef.current);
 
@@ -93,10 +93,13 @@ const RenderMap = (props) => {
             marker.getLatLng(),
             circle.getLatLng()
           );
-          markerDistance <= 1100 && markerDistance !== 0
-            ? offersInRadius.push(offer)
-            : null;
+          return (
+            markerDistance <= 1100 &&
+            markerDistance !== 0 &&
+            offersInRadius.push(offer)
+          );
         }
+        return null;
       });
       addOffersInRadius(offersInRadius);
     }
@@ -118,38 +121,53 @@ const RenderMap = (props) => {
 };
 
 RenderMap.propTypes = {
+  renderCircle: PropTypes.bool,
+  addOffersInRadius: PropTypes.func.isRequired,
+  resetOffersInRadius: PropTypes.func.isRequired,
+  currentOffer: PropTypes.shape({
+    _id: PropTypes.string.isRequired,
+    location: PropTypes.shape({
+      latitude: PropTypes.number.isRequired,
+      longitude: PropTypes.number.isRequired,
+      zoom: PropTypes.number.isRequired,
+    }).isRequired,
+  }),
+
+  activeCard: PropTypes.shape({
+    _id: PropTypes.string,
+  }).isRequired,
+
   offers: PropTypes.arrayOf(
     PropTypes.shape({
+      _id: PropTypes.string.isRequired,
+      bedrooms: PropTypes.number.isRequired,
       city: PropTypes.shape({
+        _id: PropTypes.string.isRequired,
         location: PropTypes.shape({
           latitude: PropTypes.number.isRequired,
           longitude: PropTypes.number.isRequired,
           zoom: PropTypes.number.isRequired,
-        }).isRequired,
-      }).isRequired,
-      _id: PropTypes.string.isRequired,
+        }),
+        name: PropTypes.string.isRequired,
+      }),
+      description: PropTypes.string.isRequired,
+      goods: PropTypes.array.isRequired,
+      host: PropTypes.string.isRequired,
+      images: PropTypes.array.isRequired,
+      is_premium: PropTypes.bool.isRequired,
       location: PropTypes.shape({
         latitude: PropTypes.number.isRequired,
         longitude: PropTypes.number.isRequired,
         zoom: PropTypes.number.isRequired,
       }).isRequired,
+      max_adults: PropTypes.number.isRequired,
+      preview_image: PropTypes.string.isRequired,
+      price: PropTypes.string.isRequired,
+      rating: PropTypes.number.isRequired,
+      title: PropTypes.string.isRequired,
+      type: PropTypes.string.isRequired,
     }).isRequired
   ).isRequired,
-  activeCard: PropTypes.shape({
-    city: PropTypes.shape({
-      location: PropTypes.shape({
-        latitude: PropTypes.number,
-        longitude: PropTypes.number,
-        zoom: PropTypes.number,
-      }),
-    }),
-    _id: PropTypes.string,
-    location: PropTypes.shape({
-      latitude: PropTypes.number,
-      longitude: PropTypes.number,
-      zoom: PropTypes.number,
-    }),
-  }).isRequired,
 };
 
 const mapStateToProps = (state, ownProps) =>
