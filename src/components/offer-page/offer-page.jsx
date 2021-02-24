@@ -119,14 +119,6 @@ const OfferPage = (props) => {
                       type="button"
                       onClick={() => bookmarkClickHandler()}
                     >
-                      {/* <button
-                      className={`${
-                        user.bookmarks &&
-                        user.bookmarks.indexOf(card._id) !== -1 &&
-                        "property__bookmark-button--active "
-                      } property__bookmark-button button`}
-                      type="button"
-                    > */}
                       <svg
                         className="property__bookmark-icon"
                         width="31"
@@ -219,8 +211,8 @@ const OfferPage = (props) => {
                 </h2>
                 <div className="near-places__list places__list">
                   {offersInRadius &&
-                    offersInRadius.map((card) => (
-                      <Card key={card._id} card={card} />
+                    offersInRadius.map((offerCard) => (
+                      <Card key={offerCard._id} card={offerCard} />
                     ))}
                 </div>
               </section>
@@ -233,29 +225,89 @@ const OfferPage = (props) => {
 };
 
 OfferPage.propTypes = {
-  card: PropTypes.oneOfType([
-    PropTypes.number,
+  loadOffer: PropTypes.func.isRequired,
+  loadCityOffers: PropTypes.func.isRequired,
+  openAuthPopup: PropTypes.func.isRequired,
+  popupModal: PropTypes.func.isRequired,
+  changeBookmark: PropTypes.func.isRequired,
+  offersInRadius: PropTypes.arrayOf(
     PropTypes.shape({
+      _id: PropTypes.string.isRequired,
+      bedrooms: PropTypes.number.isRequired,
       city: PropTypes.shape({
+        _id: PropTypes.string.isRequired,
         location: PropTypes.shape({
           latitude: PropTypes.number.isRequired,
           longitude: PropTypes.number.isRequired,
           zoom: PropTypes.number.isRequired,
-        }).isRequired,
-      }).isRequired,
-
-      id: PropTypes.number.isRequired,
-      price: PropTypes.string.isRequired,
-      rating: PropTypes.number.isRequired,
-      title: PropTypes.string.isRequired,
-      type: PropTypes.string.isRequired,
+        }),
+        name: PropTypes.string.isRequired,
+      }),
+      description: PropTypes.string.isRequired,
+      goods: PropTypes.array.isRequired,
+      host: PropTypes.string.isRequired,
+      images: PropTypes.array.isRequired,
+      is_premium: PropTypes.bool.isRequired,
       location: PropTypes.shape({
         latitude: PropTypes.number.isRequired,
         longitude: PropTypes.number.isRequired,
         zoom: PropTypes.number.isRequired,
       }).isRequired,
+      max_adults: PropTypes.number.isRequired,
+      preview_image: PropTypes.string.isRequired,
+      price: PropTypes.string.isRequired,
+      rating: PropTypes.number.isRequired,
+      title: PropTypes.string.isRequired,
+      type: PropTypes.string.isRequired,
+    }).isRequired
+  ),
+  card: PropTypes.shape({
+    _id: PropTypes.string.isRequired,
+    bedrooms: PropTypes.number.isRequired,
+    city: PropTypes.shape({
+      _id: PropTypes.string.isRequired,
+      location: PropTypes.shape({
+        latitude: PropTypes.number.isRequired,
+        longitude: PropTypes.number.isRequired,
+        zoom: PropTypes.number.isRequired,
+      }),
+      name: PropTypes.string.isRequired,
+    }),
+    description: PropTypes.string.isRequired,
+    goods: PropTypes.array.isRequired,
+    host: PropTypes.shape({
+      _id: PropTypes.string.isRequired,
+      avatar_url: PropTypes.string.isRequired,
+      bookmarks: PropTypes.array.isRequired,
+      email: PropTypes.string.isRequired,
+      is_pro: PropTypes.bool.isRequired,
+      name: PropTypes.string.isRequired,
+      offers: PropTypes.array.isRequired,
     }).isRequired,
-  ]),
+    images: PropTypes.array.isRequired,
+    is_premium: PropTypes.bool.isRequired,
+    location: PropTypes.shape({
+      latitude: PropTypes.number.isRequired,
+      longitude: PropTypes.number.isRequired,
+      zoom: PropTypes.number.isRequired,
+    }).isRequired,
+    max_adults: PropTypes.number.isRequired,
+    preview_image: PropTypes.string.isRequired,
+    price: PropTypes.string.isRequired,
+    rating: PropTypes.number.isRequired,
+    title: PropTypes.string.isRequired,
+    type: PropTypes.string.isRequired,
+  }),
+  user: PropTypes.shape({
+    _id: PropTypes.string,
+    avatar_url: PropTypes.string,
+    bookmarks: PropTypes.array,
+    email: PropTypes.string,
+    is_pro: PropTypes.bool,
+    name: PropTypes.string,
+    offers: PropTypes.array,
+  }),
+
   match: PropTypes.shape({
     params: PropTypes.shape({
       id: PropTypes.string.isRequired,
