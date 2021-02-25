@@ -80,7 +80,7 @@ const Operations = {
     const token = localStorage.token;
 
     if (!token) {
-      return;
+      return null;
     }
 
     return api

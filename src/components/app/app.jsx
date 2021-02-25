@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Route, Switch } from "react-router-dom";
 
+import PrivateRoute from "../../utils/PrivateRoute.jsx";
 import Home from "../home/home.jsx";
 import Signup from "../signup/signup.jsx";
 import OfferPage from "../offer-page/offer-page.jsx";
@@ -41,7 +42,7 @@ const App = (props) => {
       <Route path="/login" exact render={() => <Signup method="Login" />} />
       <Route path="/signup" exact render={() => <Signup method="Sign up" />} />
       <Route path="/offer/:id" exact component={OfferPage} />
-      <Route path="/profile" exact component={Profile} />
+      <PrivateRoute path="/profile" exact component={Profile} />
     </Switch>
   );
 };
