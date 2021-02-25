@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import PropTypes from "prop-types";
 
 import Header from "../header/header.jsx";
 import Card from "../card/card.jsx";
@@ -49,7 +50,7 @@ const Profile = (props) => {
               <h2>Your listings</h2>
               <ul>
                 {offers && offers.length > 0 ? (
-                  offers.map((offer) => <li>{offer}</li>)
+                  offers.map((offer) => <li key={offer._id}>{offer}</li>)
                 ) : (
                   <p>No listings yet</p>
                 )}
@@ -72,6 +73,53 @@ const Profile = (props) => {
       </section>
     </>
   );
+};
+
+Profile.propTypes = {
+  loadOffers: PropTypes.func.isRequired,
+  clearBookmarks: PropTypes.func.isRequired,
+  bookmarkOffers: PropTypes.arrayOf(
+    PropTypes.shape({
+      card: PropTypes.shape({
+        _id: PropTypes.string.isRequired,
+        bedrooms: PropTypes.number.isRequired,
+        city: PropTypes.shape({
+          _id: PropTypes.string.isRequired,
+          location: PropTypes.shape({
+            latitude: PropTypes.number.isRequired,
+            longitude: PropTypes.number.isRequired,
+            zoom: PropTypes.number.isRequired,
+          }),
+          name: PropTypes.string.isRequired,
+        }),
+        description: PropTypes.string.isRequired,
+        goods: PropTypes.array.isRequired,
+        host: PropTypes.string.isRequired,
+        images: PropTypes.array.isRequired,
+        is_premium: PropTypes.bool.isRequired,
+        location: PropTypes.shape({
+          latitude: PropTypes.number.isRequired,
+          longitude: PropTypes.number.isRequired,
+          zoom: PropTypes.number.isRequired,
+        }).isRequired,
+        max_adults: PropTypes.number.isRequired,
+        preview_image: PropTypes.string.isRequired,
+        price: PropTypes.string.isRequired,
+        rating: PropTypes.number.isRequired,
+        title: PropTypes.string.isRequired,
+        type: PropTypes.string.isRequired,
+      }),
+    })
+  ),
+  user: PropTypes.shape({
+    _id: PropTypes.string,
+    avatar_url: PropTypes.string,
+    bookmarks: PropTypes.array,
+    email: PropTypes.string,
+    is_pro: PropTypes.bool,
+    name: PropTypes.string,
+    offers: PropTypes.array,
+  }),
 };
 
 const mapStateToProps = () => (state, ownProps) =>
