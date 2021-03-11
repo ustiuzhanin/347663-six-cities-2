@@ -318,6 +318,7 @@ img {
 .page {
   background-color: #fff;
 }
+.page--error,
 .page--login {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -340,6 +341,7 @@ img {
 @media (-webkit-min-device-pixel-ratio: 1.5),
   (min-resolution: 144dpi),
   (min-resolution: 1.5dppx) {
+  .page--error,
   .page--login {
     background-image: linear-gradient(
         to right,
@@ -350,6 +352,7 @@ img {
   }
 }
 @media (max-height: 720px) {
+  .page--error,
   .page--login {
     background-size: auto, auto 715px;
   }
@@ -1967,4 +1970,12 @@ img {
 .bookmarks__wrapper {
   display: flex;
   flex-wrap: wrap;
+}
+
+.error__title {
+  font-size: 50px;
+}
+
+.error__text {
+  font-size: 30px;
 }

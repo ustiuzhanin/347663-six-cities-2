@@ -5,10 +5,11 @@ import { Route, Switch } from "react-router-dom";
 
 import PrivateRoute from "../../utils/PrivateRoute.jsx";
 import Home from "../home/home.jsx";
-import Signup from "../signup/signup.jsx";
+import AuthPage from "../auth-page/auth-page.jsx";
 import OfferPage from "../offer-page/offer-page.jsx";
 import Profile from "../profile/profile.jsx";
-import ErrorModal from "../error-modal/error-modal.jsx";
+import ErrorPage from "../error-page/error-page.jsx";
+
 import { Operations } from "../../reducer/auth/auth";
 import { Operations as UserOperaions } from "../../reducer/user/user";
 
@@ -31,18 +32,24 @@ const App = (props) => {
     }
   }, [isAuthorizationRequired]);
 
-  const showMessage = Object.entries(errorMessage).length !== 0 && (
-    <ErrorModal error={errorMessage.err} />
-  );
+  if (Object.entries(errorMessage).length !== 0) {
+    return (
+      <Route exact render={() => <ErrorPage error={errorMessage.err} />} />
+    );
+  }
 
   return (
     <Switch>
-      {showMessage}
-      <Route path="/" exact render={() => <Home key={Math.random()} />} />
-      <Route path="/login" exact render={() => <Signup method="Login" />} />
-      <Route path="/signup" exact render={() => <Signup method="Sign up" />} />
+      <Route path="/" exact render={() => <Home />} />
+      <Route path="/login" exact render={() => <AuthPage method="Login" />} />
+      <Route
+        path="/signup"
+        exact
+        render={() => <AuthPage method="Sign up" />}
+      />
       <Route path="/offer/:id" exact component={OfferPage} />
       <PrivateRoute path="/profile" exact component={Profile} />
+      <Route exact component={ErrorPage} />
     </Switch>
   );
 };

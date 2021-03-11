@@ -1,11 +1,11 @@
 import React from "react";
-import { Login } from "./signup.jsx.js";
+import { AuthPage } from "./signup.jsx.js.js";
 import ShallowRenderer from "react-test-renderer/shallow";
 
-test(`Login's Snapshot`, () => {
+test(`AuthPage's Snapshot`, () => {
   const renderer = new ShallowRenderer();
   renderer.render(
-    <Login isAuthorizationRequired={true} requestSignUp={jest.fn()} />
+    <AuthPage isAuthorizationRequired={true} requestSignUp={jest.fn()} />
   );
   const result = renderer.getRenderOutput();
 

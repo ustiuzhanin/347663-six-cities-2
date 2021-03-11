@@ -5,7 +5,7 @@ export default function createAPI(dispatch) {
   const api = axios.create({
     // baseURL: `https://htmlacademy-react-2.appspot.com/six-cities`,
     baseURL: `http://localhost:8080/`,
-    timeout: 1000 * 10,
+    timeout: 100,
   });
 
   const onSucces = (response) => response;

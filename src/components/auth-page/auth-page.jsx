@@ -6,7 +6,7 @@ import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { Operations } from "../../reducer/auth/auth";
 
-const Login = (props) => {
+const AuthPage = (props) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -119,7 +119,7 @@ const Login = (props) => {
   );
 };
 
-Login.propTypes = {
+AuthPage.propTypes = {
   requestSignUp: PropTypes.func.isRequired,
   requestLogin: PropTypes.func.isRequired,
   isAuthorizationRequired: PropTypes.bool.isRequired,
@@ -140,6 +140,6 @@ const mapDispatchToProps = (dispatch) => ({
   },
 });
 
-export { Login };
+export { AuthPage };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default connect(mapStateToProps, mapDispatchToProps)(AuthPage);
