@@ -21,12 +21,12 @@ const Card = (props) => {
   const [isFavorite, setIsFavorite] = useState(false);
 
   useEffect(() => {
+    setIsFavorite(false);
+
     if (!card || !user.bookmarks) return;
 
     if (user.bookmarks.indexOf(card._id) !== -1) {
       setIsFavorite(true);
-    } else {
-      setIsFavorite(false);
     }
   }, [card, user]);
 

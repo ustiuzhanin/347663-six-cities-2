@@ -1,9 +1,8 @@
 import React, { useEffect, useRef } from "react";
+
 import { mapSettings } from "../../mocks/map-settings";
 import { connect } from "react-redux";
 import { ActionCreator } from "../../reducer/offers-in-radius/offers-in-radius";
-
-import { withRouter } from "react-router-dom";
 
 import L from "leaflet";
 import PropTypes from "prop-types";
@@ -79,13 +78,14 @@ const RenderMap = (props) => {
                 !href && "marker__link--active"
               }"></a>` +
               `<div class="marker__wrapper">
-                <span class="marker__title">${title}</span> 
+                <span class="marker__title">${title}</span>
                 <span class="marker__price">€${price}</span>
               </div>`,
           }),
           keyboard: false,
           _id,
         });
+
         marker.addTo(mapRef.current);
 
         if (circle) {
@@ -187,7 +187,4 @@ const mapDispatchToProps = (dispatch) => ({
 
 export { RenderMap };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(withRouter(RenderMap));
+export default connect(mapStateToProps, mapDispatchToProps)(RenderMap);
