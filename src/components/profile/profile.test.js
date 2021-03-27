@@ -2,21 +2,20 @@ import React from "react";
 import ShallowRenderer from "react-test-renderer/shallow";
 
 import { offer as mockOffer } from "../../mocks/single-offer";
-import { RenderMap } from "./map.jsx";
+import { user as mockUser } from "../../mocks/user";
+import { Profile } from "./profile.jsx";
 
-it(`RenderMap's snapshot`, () => {
+test(`Profile's Snapshot`, () => {
   const renderer = new ShallowRenderer();
   renderer.render(
-    <RenderMap
-      renderCircle
-      addOffersInRadius={jest.fn()}
-      resetOffersInRadius={jest.fn()}
-      currentOffer={mockOffer}
-      activeCard={mockOffer}
-      offers={[mockOffer]}
+    <Profile
+      loadOffers={jest.fn()}
+      clearBookmarks={jest.fn()}
+      bookmarkOffers={[mockOffer]}
+      user={mockUser}
     />
   );
-
   const result = renderer.getRenderOutput();
+
   expect(result).toMatchSnapshot();
 });

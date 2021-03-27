@@ -53,4 +53,6 @@ const mapDispatchToProps = (dispatch) => ({
   },
 });
 
+export { AuthModal };
+
 export default connect(mapStateToProps, mapDispatchToProps)(AuthModal);

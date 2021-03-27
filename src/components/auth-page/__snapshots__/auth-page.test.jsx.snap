@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Login's Snapshot 1`] = `
+exports[`AuthPage's Snapshot 1`] = `
 <div>
   <div
     style={
@@ -45,7 +45,7 @@ exports[`Login's Snapshot 1`] = `
   <div
     className="page page--gray page--login"
   >
-    <Header />
+    <Memo(Connect(Header)) />
     <main
       className="page__main page__main--login"
     >
@@ -58,7 +58,7 @@ exports[`Login's Snapshot 1`] = `
           <h1
             className="login__title"
           >
-            Sign in
+            login
           </h1>
           <form
             action="#"
@@ -104,7 +104,7 @@ exports[`Login's Snapshot 1`] = `
               className="login__submit form__submit button"
               type="submit"
             >
-              Sign in
+              login
             </button>
           </form>
         </section>

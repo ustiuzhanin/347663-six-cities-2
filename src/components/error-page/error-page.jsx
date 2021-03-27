@@ -69,4 +69,6 @@ ErrorPage.propTypes = {
   }).isRequired,
 };
 
+export { ErrorPage };
+
 export default ErrorPage;

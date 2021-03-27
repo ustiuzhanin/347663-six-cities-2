@@ -1,30 +1,18 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`ProfileBtn's Snapshot 1`] = `
-<nav
-  className="header__nav"
+<li
+  className="header__nav-item user"
 >
-  <ul
-    className="header__nav-list"
+  <ForwardRef
+    className="header__nav-link header__nav-link--profile"
+    to="test.com"
   >
-    <li
-      className="header__nav-item user"
+    <span
+      className="header__login"
     >
-      <a
-        className="header__nav-link header__nav-link--profile"
-        href="/login"
-        onClick={[Function]}
-      >
-        <div
-          className="header__avatar-wrapper user__avatar-wrapper"
-        />
-        <span
-          className="header__login"
-        >
-          Sign in
-        </span>
-      </a>
-    </li>
-  </ul>
-</nav>
+      test
+    </span>
+  </ForwardRef>
+</li>
 `;

@@ -22,4 +22,6 @@ ProfileBtn.propTypes = {
   url: PropTypes.string.isRequired,
 };
 
+export { ProfileBtn };
+
 export default ProfileBtn;

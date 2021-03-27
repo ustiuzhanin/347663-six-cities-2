@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LogoutBtn's snapshot 1`] = `
+<li
+  className="header__nav-item user"
+>
+  <button
+    className="header__nav-link header__nav-link--btn"
+    onClick={[Function]}
+    type="button"
+  >
+    <div
+      className="header__nav-link--logout"
+    />
+    <div
+      className="visually-hidden"
+    >
+      Logout
+    </div>
+  </button>
+</li>
+`;

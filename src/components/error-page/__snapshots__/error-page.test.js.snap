@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Home's snapshot 1`] = `
-<section>
+exports[`ErrorPage's snapshot 1`] = `
+<div>
   <div
     style={
       Object {
@@ -43,49 +43,34 @@ exports[`Home's snapshot 1`] = `
     </svg>
   </div>
   <div
-    className="page page--gray page--main"
+    className="page page--gray page--error"
   >
     <Memo(Connect(Header)) />
     <main
-      className="page__main page__main--index"
+      className="page__main"
     >
-      <h1
-        className="visually-hidden"
-      >
-        Cities
-      </h1>
       <div
-        className="tabs"
+        className="container error"
       >
-        <section
-          className="locations container"
+        <h2
+          className="error__title"
         >
-          <ul
-            className="locations__list tabs__list"
-          >
-            <Memo(Connect(CityList)) />
-          </ul>
-        </section>
-      </div>
-      <div
-        className="cities"
-      >
-        <div
-          className="cities__places-container container"
+          An error occurred!
+        </h2>
+        <p
+          className="error__text"
         >
-          <Memo(Connect(CardList)) />
-          <div
-            className="cities__right-section"
-          >
-            <section
-              className="cities__map map"
-            >
-              <Memo(Connect(RenderMap)) />
-            </section>
-          </div>
-        </div>
+          <React.Fragment>
+            Status: 404 Error test
+                  
+            <br />
+            Error
+            <br />
+            Please reload the page
+          </React.Fragment>
+        </p>
       </div>
     </main>
   </div>
-</section>
+</div>
 `;

@@ -37,7 +37,7 @@ const Operations = {
           dispatch(ActionCreator.getUser(response.data));
         }
       })
-      .catch((err) => console.log(err));
+      .catch((err) => err);
   },
   changeBookmark: (id) => (dispatch, getState, api) => {
     const token = localStorage.token;
@@ -53,8 +53,7 @@ const Operations = {
       )
       .then((response) => {
         dispatch(ActionCreator.changeUser(response.data));
-      })
-      .catch((err) => console.log(err));
+      });
   },
 };
 

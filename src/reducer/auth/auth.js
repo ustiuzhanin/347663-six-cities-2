@@ -56,6 +56,8 @@ const Operations = {
           dispatch(ActionCreator.requestSignUp(response.data));
           return api.post(`/auth/login`, { email, password });
         }
+        // return to not violate eslint`s consistent-return
+        return false;
       })
       .then((response) => {
         if (response.status === 200) {
@@ -65,16 +67,13 @@ const Operations = {
       });
   },
   requestLogin: (email, password) => (dispatch, getState, api) => {
-    return api
-      .post(`/auth/login`, { email, password })
-      .then((response) => {
-        if (response.status === 200) {
-          localStorage.setItem("token", response.data.token);
-          dispatch(ActionCreator.requestLogin(response.data));
-          dispatch(ActionCreator.requireAuthorization(false));
-        }
-      })
-      .catch((err) => console.log(err));
+    return api.post(`/auth/login`, { email, password }).then((response) => {
+      if (response.status === 200) {
+        localStorage.setItem("token", response.data.token);
+        dispatch(ActionCreator.requestLogin(response.data));
+        dispatch(ActionCreator.requireAuthorization(false));
+      }
+    });
   },
   autoAuth: () => (dispatch, getState, api) => {
     const token = localStorage.token;
@@ -96,8 +95,7 @@ const Operations = {
         } else {
           localStorage.removeItem("token");
         }
-      })
-      .catch((err) => console.log(err));
+      });
   },
 };
 

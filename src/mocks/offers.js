@@ -1,4 +1,3 @@
-/* eslint-disable camelcase*/
 export const offers = [
   {
     city: {
@@ -4571,5 +4570,3 @@ export const offers = [
     id: 96,
   },
 ];
-
-/* eslint-enable camelcase*/

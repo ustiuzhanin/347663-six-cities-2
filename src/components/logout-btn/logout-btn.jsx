@@ -39,4 +39,6 @@ const mapDispatchToProps = (dispatch) => ({
   },
 });
 
+export { LogoutBtn };
+
 export default connect(null, mapDispatchToProps)(LogoutBtn);

@@ -1,27 +1,13 @@
-import React from 'react';
-import renderer from 'react-test-renderer';
-import {BrowserRouter} from 'react-router-dom';
-import {ProfileBtn} from './profile-btn.jsx';
-/* eslint-disable camelcase*/
+import React from "react";
+import ShallowRenderer from "react-test-renderer/shallow";
+
+import { ProfileBtn } from "./profile-btn.jsx";
 
 test(`ProfileBtn's Snapshot`, () => {
-  const tree = renderer
-    .create(
-      <BrowserRouter>
-        <ProfileBtn
-          isAuthorizationRequired={true}
-          user={{
-            avatar_url: '/222/',
-            email: 'ww@gg.com',
-            id: 3,
-            ispro: 'no',
-            name: 'qwe erd'
-          }}
-        />
-      </BrowserRouter>
-    )
-    .toJSON();
+  const renderer = new ShallowRenderer();
+  renderer.render(<ProfileBtn url="test.com" title="test" />);
 
-  expect(tree).toMatchSnapshot();
+  const result = renderer.getRenderOutput();
+
+  expect(result).toMatchSnapshot();
 });
-/* eslint-enable camelcase*/

@@ -1,17 +1,19 @@
 import React from "react";
 import ShallowRenderer from "react-test-renderer/shallow";
 
-import { Header } from "./header.jsx";
+import { ErrorPage } from "./error-page.jsx";
 
-test(`Header's Snapshot`, () => {
+test(`ErrorPage's snapshot`, () => {
   const renderer = new ShallowRenderer();
+
   renderer.render(
-    <Header
-      isAuthorizationRequired
-      user={{
-        email: "test@test.test",
-        token: "123token",
-        userId: "1234124",
+    <ErrorPage
+      error={{
+        message: "Error",
+        response: {
+          statusText: "Error test",
+          status: 404,
+        },
       }}
     />
   );

@@ -1,37 +1,94 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`CardList's snapshot 1`] = `
-<Router
-  history={
-    Object {
-      "action": "POP",
-      "block": [Function],
-      "createHref": [Function],
-      "go": [Function],
-      "goBack": [Function],
-      "goForward": [Function],
-      "length": 1,
-      "listen": [Function],
-      "location": Object {
-        "hash": "",
-        "pathname": "/",
-        "search": "",
-        "state": undefined,
-      },
-      "push": [Function],
-      "replace": [Function],
-    }
-  }
+<section
+  className="cities__places places"
 >
-  <CardList
-    activeCity="Amsterdam"
-    addActiveCityOffers={[MockFunction]}
-    changeSortingType={[MockFunction]}
-    listOfOffers={
-      Array [
+  <h2
+    className="visually-hidden"
+  >
+    Places
+  </h2>
+  <b
+    className="places__found"
+  >
+    1
+     places to stay in 
+    Amsterdam
+  </b>
+  <form
+    action="#"
+    className="places__sorting"
+    method="get"
+  >
+    <span
+      className="places__sorting-caption"
+    >
+      Sort by
+    </span>
+    <span
+      className="places__sorting-type"
+      onClick={[Function]}
+      tabIndex="0"
+    >
+      Popular
+      <svg
+        className="places__sorting-arrow"
+        height="4"
+        width="7"
+      >
+        <use
+          xlinkHref="#icon-arrow-select"
+        />
+      </svg>
+    </span>
+    <ul
+      className="places__options places__options--custom null"
+    >
+      <li
+        className="places__option"
+        id="popular"
+        onClick={[Function]}
+        tabIndex="0"
+      >
+        Popular
+      </li>
+      <li
+        className="places__option"
+        id="price-low"
+        onClick={[Function]}
+        tabIndex="0"
+      >
+        Price: low to high
+      </li>
+      <li
+        className="places__option"
+        id="price-high"
+        onClick={[Function]}
+        tabIndex="0"
+      >
+        Price: high to low
+      </li>
+      <li
+        className="places__option"
+        id="price-raitig"
+        onClick={[Function]}
+        tabIndex="0"
+      >
+        Top rated first
+      </li>
+    </ul>
+  </form>
+  <div
+    className="cities__places-list places__list tabs__content"
+  >
+    <Memo(Connect(Card))
+      card={
         Object {
+          "_id": "6005f36637751d35c8503011",
           "bedrooms": 1,
           "city": Object {
+            "_id": "6005f36637751d35c8503011",
             "location": Object {
               "latitude": 51.225402,
               "longitude": 6.776314,
@@ -44,13 +101,7 @@ exports[`CardList's snapshot 1`] = `
             "Breakfast",
             "Laptop friendly workspace",
           ],
-          "host": Object {
-            "avatar_url": "img/avatar-angelina.jpg",
-            "id": 25,
-            "is_pro": true,
-            "name": "Angelina",
-          },
-          "id": 1,
+          "host": "6005f36637751d35c8503011",
           "images": Array [
             "https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/5.jpg",
             "https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/19.jpg",
@@ -67,7 +118,6 @@ exports[`CardList's snapshot 1`] = `
             "https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/11.jpg",
             "https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/16.jpg",
           ],
-          "is_favorite": false,
           "is_premium": false,
           "location": Object {
             "latitude": 51.248402000000006,
@@ -76,77 +126,13 @@ exports[`CardList's snapshot 1`] = `
           },
           "max_adults": 2,
           "preview_image": "https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/9.jpg",
-          "price": 101,
+          "price": "101",
           "rating": 3.1,
           "title": "Canal View Prinsengracht",
           "type": "room",
-        },
-      ]
-    }
-    offers={
-      Array [
-        Object {
-          "bedrooms": 1,
-          "city": Object {
-            "location": Object {
-              "latitude": 51.225402,
-              "longitude": 6.776314,
-              "zoom": 13,
-            },
-            "name": "Dusseldorf",
-          },
-          "description": "This is a place for dreamers to reset, reflect, and create. Designed with a 'slow' pace in mind, our hope is that you enjoy every part of your stay; from making local coffee by drip in the morning, choosing the perfect record to put on as the sun sets.",
-          "goods": Array [
-            "Breakfast",
-            "Laptop friendly workspace",
-          ],
-          "host": Object {
-            "avatar_url": "img/avatar-angelina.jpg",
-            "id": 25,
-            "is_pro": true,
-            "name": "Angelina",
-          },
-          "id": 1,
-          "images": Array [
-            "https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/5.jpg",
-            "https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/19.jpg",
-            "https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/1.jpg",
-            "https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/2.jpg",
-            "https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/10.jpg",
-            "https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/13.jpg",
-            "https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/20.jpg",
-            "https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/14.jpg",
-            "https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/4.jpg",
-            "https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/7.jpg",
-            "https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/8.jpg",
-            "https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/9.jpg",
-            "https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/11.jpg",
-            "https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/16.jpg",
-          ],
-          "is_favorite": false,
-          "is_premium": false,
-          "location": Object {
-            "latitude": 51.248402000000006,
-            "longitude": 6.763314,
-            "zoom": 16,
-          },
-          "max_adults": 2,
-          "preview_image": "https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/9.jpg",
-          "price": 101,
-          "rating": 3.1,
-          "title": "Canal View Prinsengracht",
-          "type": "room",
-        },
-      ]
-    }
-    onCardHeaderClick={[MockFunction]}
-    resetOffers={[MockFunction]}
-    sorting={
-      Object {
-        "text": "Popular",
-        "type": "popular",
+        }
       }
-    }
-  />
-</Router>
+    />
+  </div>
+</section>
 `;

@@ -1,12 +1,12 @@
 import React from "react";
+import { AuthModal } from "./auth-modal.jsx";
 import ShallowRenderer from "react-test-renderer/shallow";
 
-import { Home } from "./home.jsx";
-
-test(`Home's snapshot`, () => {
+test(`AuthModal's snapshot`, () => {
   const renderer = new ShallowRenderer();
 
-  renderer.render(<Home popupModal={false} />);
+  renderer.render(<AuthModal closePopup={jest.fn()} />);
+
   const result = renderer.getRenderOutput();
 
   expect(result).toMatchSnapshot();

@@ -45,7 +45,463 @@ exports[`OfferPage's Snapshot 1`] = `
   <div
     className="page"
   >
-    <Header />
+    <Memo(Connect(Header)) />
+    <Memo(Connect(AuthModal)) />
+    <main
+      className="page__main page__main--property"
+    >
+      <section
+        className="property"
+      >
+        <div
+          className="property__gallery-container container"
+        >
+          <div
+            className="property__gallery"
+          >
+            <div
+              className="property__image-wrapper"
+            >
+              <img
+                alt="Photo studio"
+                className="property__image"
+                src="https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/5.jpg"
+              />
+            </div>
+            <div
+              className="property__image-wrapper"
+            >
+              <img
+                alt="Photo studio"
+                className="property__image"
+                src="https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/19.jpg"
+              />
+            </div>
+            <div
+              className="property__image-wrapper"
+            >
+              <img
+                alt="Photo studio"
+                className="property__image"
+                src="https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/1.jpg"
+              />
+            </div>
+            <div
+              className="property__image-wrapper"
+            >
+              <img
+                alt="Photo studio"
+                className="property__image"
+                src="https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/2.jpg"
+              />
+            </div>
+            <div
+              className="property__image-wrapper"
+            >
+              <img
+                alt="Photo studio"
+                className="property__image"
+                src="https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/10.jpg"
+              />
+            </div>
+            <div
+              className="property__image-wrapper"
+            >
+              <img
+                alt="Photo studio"
+                className="property__image"
+                src="https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/13.jpg"
+              />
+            </div>
+            <div
+              className="property__image-wrapper"
+            >
+              <img
+                alt="Photo studio"
+                className="property__image"
+                src="https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/20.jpg"
+              />
+            </div>
+            <div
+              className="property__image-wrapper"
+            >
+              <img
+                alt="Photo studio"
+                className="property__image"
+                src="https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/14.jpg"
+              />
+            </div>
+            <div
+              className="property__image-wrapper"
+            >
+              <img
+                alt="Photo studio"
+                className="property__image"
+                src="https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/4.jpg"
+              />
+            </div>
+            <div
+              className="property__image-wrapper"
+            >
+              <img
+                alt="Photo studio"
+                className="property__image"
+                src="https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/7.jpg"
+              />
+            </div>
+            <div
+              className="property__image-wrapper"
+            >
+              <img
+                alt="Photo studio"
+                className="property__image"
+                src="https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/8.jpg"
+              />
+            </div>
+            <div
+              className="property__image-wrapper"
+            >
+              <img
+                alt="Photo studio"
+                className="property__image"
+                src="https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/9.jpg"
+              />
+            </div>
+            <div
+              className="property__image-wrapper"
+            >
+              <img
+                alt="Photo studio"
+                className="property__image"
+                src="https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/11.jpg"
+              />
+            </div>
+            <div
+              className="property__image-wrapper"
+            >
+              <img
+                alt="Photo studio"
+                className="property__image"
+                src="https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/16.jpg"
+              />
+            </div>
+          </div>
+        </div>
+        <div
+          className="property__container container"
+        >
+          <div
+            className="property__wrapper"
+          >
+            <div
+              className="property__mark"
+              style={
+                Object {
+                  "display": "none",
+                }
+              }
+            >
+              <span>
+                Premium
+              </span>
+            </div>
+            <div
+              className="property__name-wrapper"
+            >
+              <h1
+                className="property__name"
+              >
+                Canal View Prinsengracht
+              </h1>
+              <button
+                className="false property__bookmark-button button"
+                onClick={[Function]}
+                type="button"
+              >
+                <svg
+                  className="property__bookmark-icon"
+                  height="33"
+                  width="31"
+                >
+                  <use
+                    xlinkHref="#icon-bookmark"
+                  />
+                </svg>
+                <span
+                  className="visually-hidden"
+                >
+                  To bookmarks
+                </span>
+              </button>
+            </div>
+            <div
+              className="property__rating rating"
+            >
+              <div
+                className="property__stars rating__stars"
+              >
+                <span
+                  style={
+                    Object {
+                      "width": "62%",
+                    }
+                  }
+                />
+                <span
+                  className="visually-hidden"
+                >
+                  Rating
+                </span>
+              </div>
+              <span
+                className="property__rating-value rating__value"
+              >
+                3.1
+              </span>
+            </div>
+            <ul
+              className="property__features"
+            >
+              <li
+                className="property__feature property__feature--entire"
+              >
+                room
+              </li>
+              <li
+                className="property__feature property__feature--bedrooms"
+              >
+                1
+                 
+                Bedroom
+              </li>
+              <li
+                className="property__feature property__feature--adults"
+              >
+                Max 
+                2
+                 
+                Adults
+              </li>
+            </ul>
+            <div
+              className="property__price"
+            >
+              <b
+                className="property__price-value"
+              >
+                €
+                101
+              </b>
+              <span
+                className="property__price-text"
+              >
+                 night
+              </span>
+            </div>
+            <div
+              className="property__inside"
+            >
+              <h2
+                className="property__inside-title"
+              >
+                What's inside
+              </h2>
+              <ul
+                className="property__inside-list"
+              >
+                <li
+                  className="property__inside-item"
+                >
+                  Breakfast
+                </li>
+                <li
+                  className="property__inside-item"
+                >
+                  Laptop friendly workspace
+                </li>
+              </ul>
+            </div>
+            <div
+              className="property__host"
+            >
+              <h2
+                className="property__host-title"
+              >
+                Meet the host
+              </h2>
+              <div
+                className="property__host-user user"
+              >
+                <div
+                  className="property__avatar-wrapper user__avatar-wrapper false"
+                >
+                  <img
+                    alt="Host avatar"
+                    className="property__avatar user__avatar"
+                    height="74"
+                    src="//img/avatar.svg"
+                    width="74"
+                  />
+                </div>
+                <span
+                  className="property__user-name"
+                >
+                  test
+                </span>
+                <span
+                  className="property__user-status"
+                >
+                  Pro
+                </span>
+              </div>
+              <div
+                className="property__description"
+              >
+                <p
+                  className="property__text"
+                >
+                  This is a place for dreamers to reset, reflect, and create. Designed with a 'slow' pace in mind, our hope is that you enjoy every part of your stay; from making local coffee by drip in the morning, choosing the perfect record to put on as the sun sets.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <section
+          className="property__map map"
+        >
+          <Memo(Connect(RenderMap))
+            currentOffer={
+              Object {
+                "_id": "6005f36637751d35c8503011",
+                "bedrooms": 1,
+                "city": Object {
+                  "_id": "6005f36637751d35c8503011",
+                  "location": Object {
+                    "latitude": 51.225402,
+                    "longitude": 6.776314,
+                    "zoom": 13,
+                  },
+                  "name": "Dusseldorf",
+                },
+                "description": "This is a place for dreamers to reset, reflect, and create. Designed with a 'slow' pace in mind, our hope is that you enjoy every part of your stay; from making local coffee by drip in the morning, choosing the perfect record to put on as the sun sets.",
+                "goods": Array [
+                  "Breakfast",
+                  "Laptop friendly workspace",
+                ],
+                "host": Object {
+                  "_id": "6005f36637751d35c8503011",
+                  "avatar_url": "/img/avatar.svg",
+                  "bookmarks": Array [
+                    "5fee3aaa54b627023d7f94b7",
+                  ],
+                  "email": "test1@test.com",
+                  "is_pro": false,
+                  "name": "test",
+                  "offers": Array [],
+                },
+                "images": Array [
+                  "https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/5.jpg",
+                  "https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/19.jpg",
+                  "https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/1.jpg",
+                  "https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/2.jpg",
+                  "https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/10.jpg",
+                  "https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/13.jpg",
+                  "https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/20.jpg",
+                  "https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/14.jpg",
+                  "https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/4.jpg",
+                  "https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/7.jpg",
+                  "https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/8.jpg",
+                  "https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/9.jpg",
+                  "https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/11.jpg",
+                  "https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/16.jpg",
+                ],
+                "is_premium": false,
+                "location": Object {
+                  "latitude": 51.248402000000006,
+                  "longitude": 6.763314,
+                  "zoom": 16,
+                },
+                "max_adults": 2,
+                "preview_image": "https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/9.jpg",
+                "price": "101",
+                "rating": 3.1,
+                "title": "Canal View Prinsengracht",
+                "type": "room",
+              }
+            }
+            renderCircle={true}
+          />
+        </section>
+      </section>
+      <div
+        className="container"
+      >
+        <section
+          className="near-places places"
+        >
+          <h2
+            className="near-places__title"
+          >
+            Other places in the neighbourhood
+          </h2>
+          <div
+            className="near-places__list places__list"
+          >
+            <Memo(Connect(Card))
+              card={
+                Object {
+                  "_id": "6005f36637751d35c8503011",
+                  "bedrooms": 1,
+                  "city": Object {
+                    "_id": "6005f36637751d35c8503011",
+                    "location": Object {
+                      "latitude": 51.225402,
+                      "longitude": 6.776314,
+                      "zoom": 13,
+                    },
+                    "name": "Dusseldorf",
+                  },
+                  "description": "This is a place for dreamers to reset, reflect, and create. Designed with a 'slow' pace in mind, our hope is that you enjoy every part of your stay; from making local coffee by drip in the morning, choosing the perfect record to put on as the sun sets.",
+                  "goods": Array [
+                    "Breakfast",
+                    "Laptop friendly workspace",
+                  ],
+                  "host": "6005f36637751d35c8503011",
+                  "images": Array [
+                    "https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/5.jpg",
+                    "https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/19.jpg",
+                    "https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/1.jpg",
+                    "https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/2.jpg",
+                    "https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/10.jpg",
+                    "https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/13.jpg",
+                    "https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/20.jpg",
+                    "https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/14.jpg",
+                    "https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/4.jpg",
+                    "https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/7.jpg",
+                    "https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/8.jpg",
+                    "https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/9.jpg",
+                    "https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/11.jpg",
+                    "https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/16.jpg",
+                  ],
+                  "is_premium": false,
+                  "location": Object {
+                    "latitude": 51.248402000000006,
+                    "longitude": 6.763314,
+                    "zoom": 16,
+                  },
+                  "max_adults": 2,
+                  "preview_image": "https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/9.jpg",
+                  "price": "101",
+                  "rating": 3.1,
+                  "title": "Canal View Prinsengracht",
+                  "type": "room",
+                }
+              }
+            />
+          </div>
+        </section>
+      </div>
+    </main>
   </div>
 </div>
 `;

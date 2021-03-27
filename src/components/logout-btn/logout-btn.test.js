@@ -1,12 +1,12 @@
 import React from "react";
 import ShallowRenderer from "react-test-renderer/shallow";
 
-import { Home } from "./home.jsx";
+import { LogoutBtn } from "./logout-btn.jsx";
 
-test(`Home's snapshot`, () => {
+test(`LogoutBtn's snapshot`, () => {
   const renderer = new ShallowRenderer();
 
-  renderer.render(<Home popupModal={false} />);
+  renderer.render(<LogoutBtn logoutUser={jest.fn()} />);
   const result = renderer.getRenderOutput();
 
   expect(result).toMatchSnapshot();

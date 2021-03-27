@@ -140,4 +140,5 @@ const mapDispatchToProps = (dispatch) => ({
   },
 });
 
+export { Profile };
 export default connect(mapStateToProps, mapDispatchToProps)(Profile);

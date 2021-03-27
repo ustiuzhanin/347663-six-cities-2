@@ -75,4 +75,6 @@ const mapStateToProps = (state, ownProps) =>
     popupModal: state.auth.popupModal,
   });
 
+export { Home };
+
 export default connect(mapStateToProps, null)(Home);

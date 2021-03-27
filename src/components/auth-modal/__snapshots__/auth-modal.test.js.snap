@@ -1,0 +1,41 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AuthModal's snapshot 1`] = `
+<article
+  className="auth-popup"
+>
+  <div
+    className="auth-popup__wrapper"
+  >
+    <button
+      className="auth-popup__btn--close"
+      onClick={[Function]}
+    >
+      <span
+        className="visually-hidden"
+      >
+        close
+      </span>
+    </button>
+    <h2
+      className="auth-popup__title"
+    >
+      You need to be logged in to use this functionality!
+    </h2>
+    <ForwardRef
+      className="auth-popup__btn"
+      onClick={[Function]}
+      to="/login"
+    >
+      Login
+    </ForwardRef>
+    <ForwardRef
+      className="auth-popup__btn"
+      onClick={[Function]}
+      to="/signup"
+    >
+      Sign Up
+    </ForwardRef>
+  </div>
+</article>
+`;

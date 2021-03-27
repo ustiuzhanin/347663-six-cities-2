@@ -8,17 +8,14 @@ exports[`App's snapshot 1`] = `
     render={[Function]}
   />
   <Route
-    component={
-      Object {
-        "$$typeof": Symbol(react.memo),
-        "WrappedComponent": [Function],
-        "compare": null,
-        "displayName": "Connect(Login)",
-        "type": [Function],
-      }
-    }
     exact={true}
     path="/login"
+    render={[Function]}
+  />
+  <Route
+    exact={true}
+    path="/signup"
+    render={[Function]}
   />
   <Route
     component={
@@ -32,6 +29,23 @@ exports[`App's snapshot 1`] = `
     }
     exact={true}
     path="/offer/:id"
+  />
+  <PrivateRoute
+    component={
+      Object {
+        "$$typeof": Symbol(react.memo),
+        "WrappedComponent": [Function],
+        "compare": null,
+        "displayName": "Connect(Profile)",
+        "type": [Function],
+      }
+    }
+    exact={true}
+    path="/profile"
+  />
+  <Route
+    component={[Function]}
+    exact={true}
   />
 </Switch>
 `;

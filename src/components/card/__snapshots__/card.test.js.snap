@@ -9,9 +9,7 @@ exports[`Card's snapshot 1`] = `
   <div
     className="cities__image-wrapper place-card__image-wrapper"
   >
-    <a
-      href="#"
-    >
+    <a>
       <img
         alt="Place image"
         className="place-card__image"
@@ -43,7 +41,8 @@ exports[`Card's snapshot 1`] = `
         </span>
       </div>
       <button
-        className="place-card__bookmark-button place-card__bookmark-button--active button"
+        className="place-card__bookmark-button false button"
+        onClick={[Function]}
         type="button"
       >
         <svg
@@ -86,7 +85,7 @@ exports[`Card's snapshot 1`] = `
       className="place-card__name"
     >
       <a
-        href="/offer/1"
+        href="/offer/6005f36637751d35c8503011"
         onClick={[Function]}
       >
         Canal View Prinsengracht

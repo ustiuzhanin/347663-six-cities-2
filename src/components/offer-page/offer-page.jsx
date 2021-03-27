@@ -8,12 +8,11 @@ import PropTypes from "prop-types";
 
 import Header from "../header/header.jsx";
 import AuthModal from "../auth-modal/auth-modal.jsx";
-import Comments from "../comments/comments.jsx";
-import CommentForm from "../comment-form/comment-form.jsx";
+// TODO: add comments
+// import Comments from "../comments/comments.jsx";
+// import CommentForm from "../comment-form/comment-form.jsx";
 import Map from "../map/map.jsx";
 import Card from "../card/card.jsx";
-
-/* eslint-disable camelcase*/
 
 const OfferPage = (props) => {
   const {

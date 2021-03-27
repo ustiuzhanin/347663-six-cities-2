@@ -6,13 +6,13 @@ Array [
     className="locations__item"
   >
     <a
-      className="locations__item-link tabs__item tabs__item--active"
+      className="locations__item-link tabs__item false"
       href="#"
-      id="Amsterdam"
+      id="Dusseldorf"
       onClick={[Function]}
     >
       <span>
-        Amsterdam
+        Dusseldorf
       </span>
     </a>
   </li>,
@@ -22,11 +22,11 @@ Array [
     <a
       className="locations__item-link tabs__item false"
       href="#"
-      id="Paris"
+      id="Dusseldorf"
       onClick={[Function]}
     >
       <span>
-        Paris
+        Dusseldorf
       </span>
     </a>
   </li>,
@@ -36,11 +36,11 @@ Array [
     <a
       className="locations__item-link tabs__item false"
       href="#"
-      id="Hamburg"
+      id="Dusseldorf"
       onClick={[Function]}
     >
       <span>
-        Hamburg
+        Dusseldorf
       </span>
     </a>
   </li>,
