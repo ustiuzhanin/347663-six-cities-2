@@ -1,21 +1,24 @@
-import React, { useState } from "react";
+import React from "react";
 import Header from "../header/header.jsx";
 import PropTypes from "prop-types";
 
+import { useFormFields } from "../../hooks/useFormFields";
 import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { Operations } from "../../reducer/auth/auth";
 
 const AuthPage = (props) => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [fields, handleFieldChange] = useFormFields({
+    email: "",
+    password: "",
+  });
 
   const { isAuthorizationRequired, method } = props;
 
   const onFormSubmit = (event) => {
     event.preventDefault();
     const { requestSignUp, requestLogin } = props;
+    const { email, password, name } = fields;
 
     return method === "Sign up"
       ? requestSignUp(email, password, name)
@@ -70,8 +73,10 @@ const AuthPage = (props) => {
                       type="text"
                       name="name"
                       placeholder="Name"
-                      required=""
-                      onChange={(evt) => setName(evt.target.value)}
+                      minLength="3"
+                      required
+                      value={fields.name}
+                      onChange={handleFieldChange}
                     />
                   </div>
                 )}
@@ -82,8 +87,9 @@ const AuthPage = (props) => {
                     type="email"
                     name="email"
                     placeholder="Email"
-                    required=""
-                    onChange={(evt) => setEmail(evt.target.value)}
+                    value={fields.email}
+                    required
+                    onChange={handleFieldChange}
                   />
                 </div>
                 <div className="login__input-wrapper form__input-wrapper">
@@ -93,8 +99,10 @@ const AuthPage = (props) => {
                     type="password"
                     name="password"
                     placeholder="Password"
-                    required=""
-                    onChange={(evt) => setPassword(evt.target.value)}
+                    minLength="5"
+                    value={fields.password}
+                    required
+                    onChange={handleFieldChange}
                   />
                 </div>
                 <button
