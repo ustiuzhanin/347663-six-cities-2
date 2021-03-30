@@ -3,7 +3,7 @@ import MockAdapter from "axios-mock-adapter";
 import { reducer, ActionCreator, ActionType, Operations } from "./city-list";
 import { testApi as api } from "../../api";
 describe(`reducer works correctly`, () => {
-  it("requests an endpoint", async () => {
+  it("Should make a correct API call to /cities", async () => {
     const dispatch = jest.fn();
     const apiMock = new MockAdapter(api);
     const cityListLoader = Operations.loadCityList();

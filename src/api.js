@@ -2,7 +2,6 @@ import axios from "axios";
 import { ActionCreator } from "./reducer/errors/errors";
 
 export const testApi = axios.create({
-  // baseURL: `https://htmlacademy-react-2.appspot.com/six-cities`,
   baseURL: `http://localhost:8080/`,
   timeout: 1000 * 10,
 });
