@@ -79,8 +79,9 @@ exports[`AuthPage's Snapshot 1`] = `
                 name="email"
                 onChange={[Function]}
                 placeholder="Email"
-                required=""
+                required={true}
                 type="email"
+                value=""
               />
             </div>
             <div
@@ -93,11 +94,13 @@ exports[`AuthPage's Snapshot 1`] = `
               </label>
               <input
                 className="login__input form__input"
+                minLength="5"
                 name="password"
                 onChange={[Function]}
                 placeholder="Password"
-                required=""
+                required={true}
                 type="password"
+                value=""
               />
             </div>
             <button

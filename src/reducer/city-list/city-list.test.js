@@ -1,10 +1,28 @@
-import {reducer, ActionCreator, ActionType} from './city-list';
+import MockAdapter from "axios-mock-adapter";
 
+import { reducer, ActionCreator, ActionType, Operations } from "./city-list";
+import { testApi as api } from "../../api";
 describe(`reducer works correctly`, () => {
+  it("requests an endpoint", async () => {
+    const dispatch = jest.fn();
+    const apiMock = new MockAdapter(api);
+    const cityListLoader = Operations.loadCityList();
+
+    apiMock.onGet("/cities").reply(200, [{ fake: true }]);
+
+    return cityListLoader(dispatch, null, api).then(() => {
+      expect(dispatch).toHaveBeenCalledTimes(1);
+      expect(dispatch).toHaveBeenNthCalledWith(1, {
+        type: ActionType.CREATE_LIST_OF_CITIES,
+        payload: [{ fake: true }],
+      });
+    });
+  });
+
   it(`undefined action doesnt affect the state`, () => {
     expect(reducer(undefined, {})).toEqual({
-      activeCity: 'Amsterdam',
-      listOfCities: []
+      activeCity: "Amsterdam",
+      listOfCities: [],
     });
   });
 
@@ -13,13 +31,13 @@ describe(`reducer works correctly`, () => {
       reducer(
         {
           activeCity: `Amsterdam`,
-          listOfCities: []
+          listOfCities: [],
         },
-        {type: `CHANGE_CITY`, payload: `Paris`}
+        { type: `CHANGE_CITY`, payload: `Paris` }
       )
     ).toEqual({
       activeCity: `Paris`,
-      listOfCities: []
+      listOfCities: [],
     });
   });
 
@@ -28,13 +46,13 @@ describe(`reducer works correctly`, () => {
       reducer(
         {
           activeCity: `Amsterdam`,
-          listOfCities: []
+          listOfCities: [],
         },
-        {type: `CREATE_LIST_OF_CITIES`, payload: [`Paris`, `NYC`, `Moscow`]}
+        { type: `CREATE_LIST_OF_CITIES`, payload: [`Paris`, `NYC`, `Moscow`] }
       )
     ).toEqual({
       activeCity: `Amsterdam`,
-      listOfCities: [`Paris`, `NYC`, `Moscow`]
+      listOfCities: [`Paris`, `NYC`, `Moscow`],
     });
   });
 });
@@ -43,14 +61,14 @@ describe(`action creators works correctly`, () => {
   it(`changeCity returns correct value`, () => {
     expect(ActionCreator.changeCity(`Moscow`)).toEqual({
       type: ActionType.CHANGE_CITY,
-      payload: `Moscow`
+      payload: `Moscow`,
     });
   });
 
   it(`createListOfCities returns correct value`, () => {
-    expect(ActionCreator.createListOfCities([`Moscow`, `Kyiv`])).toEqual({
+    expect(ActionCreator.loadCityList([`Moscow`, `Kyiv`])).toEqual({
       type: ActionType.CREATE_LIST_OF_CITIES,
-      payload: [`Moscow`, `Kyiv`]
+      payload: [`Moscow`, `Kyiv`],
     });
   });
 });
