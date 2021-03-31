@@ -318,7 +318,7 @@ OfferPage.propTypes = {
 const mapStateToProps = (state) =>
   Object.assign({}, null, {
     isAuthorizationRequired: state.auth.isAuthorizationRequired,
-    offersInRadius: state.offersInRadius.offersInRadius,
+    offersInRadius: state.offers.offersInRadius,
     card: state.offers.offer,
     user: state.user.user,
     popupModal: state.auth.popupModal,

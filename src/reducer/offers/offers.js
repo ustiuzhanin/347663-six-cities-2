@@ -5,6 +5,7 @@ const initialState = {
   cityOffers: [],
   offers: [],
   offer: null,
+  offersInRadius: [],
 };
 
 const ActionType = {
@@ -13,6 +14,8 @@ const ActionType = {
   LOAD_CITY_OFFERS: "LOAD_CITY_OFFERS",
   LOAD_OFFERS: "LOAD_OFFERS",
   CLEAR_OFFERS: "CLEAR_OFFERS",
+  ADD_OFFERS_IN_RADIUS: "ADD_OFFERS_IN_RADIUS",
+  RESET_OFFERS_IN_RADIUS: "RESET_OFFERS_IN_RADIUS",
 };
 
 const ActionCreator = {
@@ -46,6 +49,20 @@ const ActionCreator = {
 
   clearOffers: () => {
     return { type: ActionType.CLEAR_OFFERS };
+  },
+
+  addOffersInRadius: (offers) => {
+    return {
+      type: `ADD_OFFERS_IN_RADIUS`,
+      payload: offers,
+    };
+  },
+
+  resetOffersInRadius: () => {
+    return {
+      type: "RESET_OFFERS_IN_RADIUS",
+      payload: [],
+    };
   },
 };
 
@@ -97,6 +114,14 @@ const reducer = (state = initialState, action) => {
     case ActionType.CLEAR_OFFERS:
       return Object.assign({}, state, {
         offers: null,
+      });
+    case ActionType.ADD_OFFERS_IN_RADIUS:
+      return Object.assign({}, state, {
+        offersInRadius: [...state.offersInRadius, ...action.payload],
+      });
+    case ActionType.RESET_OFFERS_IN_RADIUS:
+      return Object.assign({}, state, {
+        offersInRadius: action.payload,
       });
   }
   return state;

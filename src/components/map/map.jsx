@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from "react";
 
 import { mapSettings } from "../../mocks/map-settings";
 import { connect } from "react-redux";
-import { ActionCreator } from "../../reducer/offers-in-radius/offers-in-radius";
+import { ActionCreator } from "../../reducer/offers/offers";
 
 import L from "leaflet";
 import PropTypes from "prop-types";

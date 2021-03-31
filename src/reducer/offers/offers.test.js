@@ -68,6 +68,7 @@ describe(`reducer works correctly`, () => {
       cityOffers: [],
       offers: [],
       offer: null,
+      offersInRadius: [],
     });
   });
 
@@ -127,7 +128,7 @@ describe(`reducer works correctly`, () => {
     });
   });
 
-  it(`loads city offers(in radius)`, () => {
+  it(`loads city offers`, () => {
     expect(
       reducer(
         {
@@ -148,6 +149,50 @@ describe(`reducer works correctly`, () => {
         { mockOffer: "offer 2" },
         { mockOffer: "offer 3" },
       ],
+    });
+  });
+
+  it(`adds offers in radius`, () => {
+    expect(
+      reducer(
+        {
+          offersInRadius: [],
+        },
+        {
+          type: ActionType.ADD_OFFERS_IN_RADIUS,
+          payload: [
+            { mockOffer: "offer 1" },
+            { mockOffer: "offer 2" },
+            { mockOffer: "offer 3" },
+          ],
+        }
+      )
+    ).toEqual({
+      offersInRadius: [
+        { mockOffer: "offer 1" },
+        { mockOffer: "offer 2" },
+        { mockOffer: "offer 3" },
+      ],
+    });
+  });
+
+  it(`resets offers in radius`, () => {
+    expect(
+      reducer(
+        {
+          offersInRadius: [
+            { mockOffer: "offer 1" },
+            { mockOffer: "offer 2" },
+            { mockOffer: "offer 3" },
+          ],
+        },
+        {
+          type: ActionType.RESET_OFFERS_IN_RADIUS,
+          payload: [],
+        }
+      )
+    ).toEqual({
+      offersInRadius: [],
     });
   });
 });
@@ -199,6 +244,25 @@ describe(`action creators works correctly`, () => {
   it(`clearOffers returns correct value`, () => {
     expect(ActionCreator.clearOffers()).toEqual({
       type: ActionType.CLEAR_OFFERS,
+    });
+  });
+
+  it(`addOffersInRadius returns correct value`, () => {
+    expect(
+      ActionCreator.addOffersInRadius([
+        { offer: "offer1" },
+        { offer: "offer1" },
+      ])
+    ).toEqual({
+      type: ActionType.ADD_OFFERS_IN_RADIUS,
+      payload: [{ offer: "offer1" }, { offer: "offer1" }],
+    });
+  });
+
+  it(`resetOffersInRadius returns correct value`, () => {
+    expect(ActionCreator.resetOffersInRadius()).toEqual({
+      type: ActionType.RESET_OFFERS_IN_RADIUS,
+      payload: [],
     });
   });
 });
