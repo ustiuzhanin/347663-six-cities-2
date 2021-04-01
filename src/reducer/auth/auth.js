@@ -92,7 +92,7 @@ const Operations = {
         if (response.status === 200) {
           dispatch(ActionCreator.requestLogin(response.data));
           dispatch(ActionCreator.requireAuthorization(false));
-        } else {
+        } else if (response.status === 205) {
           localStorage.removeItem("token");
         }
       });
