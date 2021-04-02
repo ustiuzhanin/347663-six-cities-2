@@ -62,7 +62,7 @@ const Card = (props) => {
             src={preview_image}
             width="260"
             height="200"
-            alt="Place image"
+            alt={title}
           />
         </a>
       </div>

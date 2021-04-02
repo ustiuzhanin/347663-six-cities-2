@@ -1,104 +1,73 @@
-import React from 'react';
-import Enzyme, {shallow} from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
-import {Card} from './card.jsx';
+import React from "react";
+import Enzyme, { shallow } from "enzyme";
+import Adapter from "enzyme-adapter-react-16";
+import { Card } from "./card.jsx";
+import { offer as mockCard } from "../../mocks/single-offer";
+import { user as mockUser } from "../../mocks/user";
 
-Enzyme.configure({adapter: new Adapter()});
+Enzyme.configure({ adapter: new Adapter() });
 
 describe(`Card component testing`, () => {
-  /* eslint-disable camelcase*/
-
-  const mockCard = {
-    city: {
-      name: `Dusseldorf`,
-      location: {latitude: 51.225402, longitude: 6.776314, zoom: 13}
-    },
-    preview_image: `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/9.jpg`,
-    images: [
-      `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/5.jpg`,
-      `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/19.jpg`,
-      `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/1.jpg`,
-      `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/2.jpg`,
-      `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/10.jpg`,
-      `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/13.jpg`,
-      `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/20.jpg`,
-      `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/14.jpg`,
-      `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/4.jpg`,
-      `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/7.jpg`,
-      `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/8.jpg`,
-      `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/9.jpg`,
-      `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/11.jpg`,
-      `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/16.jpg`
-    ],
-    title: `Canal View Prinsengracht`,
-    is_favorite: false,
-    is_premium: false,
-    rating: 3.1,
-    type: `room`,
-    bedrooms: 1,
-    max_adults: 2,
-    price: 101,
-    goods: [`Breakfast`, `Laptop friendly workspace`],
-    host: {
-      id: 25,
-      name: `Angelina`,
-      is_pro: true,
-      avatar_url: `img/avatar-angelina.jpg`
-    },
-    description: `This is a place for dreamers to reset, reflect, and create. Designed with a 'slow' pace in mind, our hope is that you enjoy every part of your stay; from making local coffee by drip in the morning, choosing the perfect record to put on as the sun sets.`,
-    location: {
-      latitude: 51.248402000000006,
-      longitude: 6.763314,
-      zoom: 16
-    },
-    id: 1
-  };
-  /* eslint-enable camelcase*/
-
-  it(`check the information that gets passed to the callback`, () => {
-    const mouseEnter = jest.fn((cardInfo) => {
-      expect(cardInfo).toEqual(mockCard);
-    });
-
+  it(`check the information that gets passed to the changeActiveCard`, () => {
+    const changeActiveCard = jest.fn();
     const card = shallow(
       <Card
+        isAuthorizationRequired
         card={mockCard}
-        cardMouseEnterHandler={mouseEnter}
-        onCardHeaderClick={jest.fn()}
-        cardMouseLeaveHandler={jest.fn()}
-        changeActiveCard={jest.fn()}
+        user={mockUser}
+        changeActiveCard={changeActiveCard}
+        changeBookmark={jest.fn()}
+        openAuthPopup={jest.fn()}
       />
     );
 
     const activeCard = card.find(`.place-card`);
-    activeCard.simulate(`mouseEnter`, {
-      card: {
-        id: 1,
-        src: `img`,
-        price: `10`,
-        rating: `10`,
-        name: `Beautiful`,
-        type: `Private`
-      }
-    });
+
+    activeCard.simulate(`mouseEnter`);
+    expect(changeActiveCard).toHaveBeenCalledTimes(1);
+    expect(changeActiveCard).toHaveBeenCalledWith(mockCard);
+
+    activeCard.simulate(`mouseLeave`);
+    expect(changeActiveCard).toHaveBeenCalledTimes(2);
+    expect(changeActiveCard).toHaveBeenCalledWith({});
   });
 
-  it(`click on card headers`, () => {
-    const clickHandler = jest.fn();
-    const home = shallow(
+  it(`opens auth popup`, () => {
+    const openAuthPopup = jest.fn();
+
+    const card = shallow(
       <Card
+        isAuthorizationRequired
         card={mockCard}
-        cardMouseEnterHandler={jest.fn()}
-        onCardHeaderClick={clickHandler}
-        cardMouseLeaveHandler={jest.fn()}
+        user={mockUser}
         changeActiveCard={jest.fn()}
+        changeBookmark={jest.fn()}
+        openAuthPopup={openAuthPopup}
       />
     );
 
-    const header = home.find(`.place-card__name Link`);
+    const bookmark = card.find(`.place-card__bookmark-button`);
+    bookmark.simulate(`click`);
+    expect(openAuthPopup).toHaveBeenCalledTimes(1);
+  });
 
-    header.at(0).simulate(`click`);
+  it(`adds a bookmark when`, () => {
+    const changeBookmark = jest.fn();
 
-    expect(clickHandler).toHaveBeenCalledTimes(1);
+    const card = shallow(
+      <Card
+        isAuthorizationRequired={false}
+        card={mockCard}
+        user={mockUser}
+        changeActiveCard={jest.fn()}
+        changeBookmark={changeBookmark}
+        openAuthPopup={jest.fn()}
+      />
+    );
+
+    const bookmark = card.find(`.place-card__bookmark-button`);
+    bookmark.simulate(`click`);
+    expect(changeBookmark).toHaveBeenCalledTimes(1);
+    expect(changeBookmark).toHaveBeenCalledWith(mockCard._id);
   });
 });
