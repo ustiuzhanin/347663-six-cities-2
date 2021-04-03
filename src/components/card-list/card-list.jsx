@@ -47,6 +47,8 @@ const CardList = (props) => {
   };
 
   const optionClickHandler = (e) => {
+    /* eslint-disable */
+    console.log(e.target.innerText);
     if (e.target.id !== sorting.type) {
       setIsSortPopupOpen(false);
 
