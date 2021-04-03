@@ -12,7 +12,7 @@ const mockCity = {
 };
 
 describe(`AuthModal component testing`, () => {
-  it(`checks if form submit calls requestLogin`, () => {
+  it(`checks if click on city link calls onCityLinkClick`, () => {
     const onCityLinkClick = jest.fn();
     const cityList = shallow(
       <CityList
