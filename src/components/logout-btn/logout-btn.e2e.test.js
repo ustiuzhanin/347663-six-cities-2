@@ -5,7 +5,7 @@ import { LogoutBtn } from "./logout-btn.jsx";
 
 Enzyme.configure({ adapter: new Adapter() });
 
-describe(`AuthModal component testing`, () => {
+describe(`LogoutBtn component testing`, () => {
   it(`checks if click on btn calls logoutUser`, () => {
     const logoutUser = jest.fn();
     const logoutBtn = shallow(<LogoutBtn logoutUser={logoutUser} />);

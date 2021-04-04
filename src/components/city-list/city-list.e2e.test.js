@@ -11,7 +11,7 @@ const mockCity = {
   location: { latitude: 51.225402, longitude: 6.776314, zoom: 13 },
 };
 
-describe(`AuthModal component testing`, () => {
+describe(`CityList component testing`, () => {
   it(`checks if click on city link calls onCityLinkClick`, () => {
     const onCityLinkClick = jest.fn();
     const cityList = shallow(

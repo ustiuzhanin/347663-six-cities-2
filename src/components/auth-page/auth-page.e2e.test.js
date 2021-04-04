@@ -5,7 +5,7 @@ import { AuthPage } from "./auth-page.jsx";
 
 Enzyme.configure({ adapter: new Adapter() });
 
-describe(`AuthModal component testing`, () => {
+describe(`AuthPage component testing`, () => {
   it(`checks if form submit calls requestLogin`, () => {
     const requestLogin = jest.fn();
     const authPage = shallow(

@@ -6,7 +6,7 @@ import { offer as MockOffer } from "../../mocks/single-offer";
 
 Enzyme.configure({ adapter: new Adapter() });
 
-describe(`AuthModal component testing`, () => {
+describe(`CardList component testing`, () => {
   it(`checks if changeSortingType works as expected `, () => {
     const changeSortingType = jest.fn();
     const cardList = shallow(
