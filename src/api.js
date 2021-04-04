@@ -9,7 +9,8 @@ export const testApi = axios.create({
 export default function createAPI(dispatch) {
   const api = axios.create({
     // baseURL: `https://htmlacademy-react-2.appspot.com/six-cities`,
-    baseURL: `http://localhost:8080/`,
+    // baseURL: `http://localhost:8080/`,
+    baseURL: `https://rest-six-cities.herokuapp.com/`,
     timeout: 1000 * 10,
   });
 
